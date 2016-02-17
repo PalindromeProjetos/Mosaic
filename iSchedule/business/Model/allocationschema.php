@@ -1,0 +1,143 @@
+<?php
+
+namespace iSchedule\Model;
+
+/**
+ * 
+ * @Entity {"name":"allocationschema", "cache":"\\iSchedule\\Cache\\allocationschema", "event":"\\iSchedule\\Event\\allocationschema"}
+ */
+class allocationschema extends \Smart\Data\Model {
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "strategy":"AUTO", "type":"integer", "policy":true}
+     */
+    private $id;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"integer", "policy":true}
+     */
+    private $schedulingperiodid;
+
+    /**
+     * @Policy {"nullable":true, "length":80}
+     * @Column {"description":"", "type":"string", "policy":true}
+     */
+    private $username;
+
+    /**
+     * @Policy {"nullable":true, "length":65535}
+     * @Column {"description":"", "type":"string", "policy":true}
+     */
+    private $schemaweek;
+
+    /**
+     * @Policy {"nullable":true, "length":80}
+     * @Column {"description":"", "type":"string", "policy":true}
+     */
+    private $description;
+
+    /**
+     * @Policy {"nullable":true, "length":65535}
+     * @Column {"description":"", "type":"string", "policy":true}
+     */
+    private $observation;
+
+    /**
+     * @return type integer
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @param type $id
+     * @return \iSchedule\Model\allocationschema
+     */
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return type integer
+     */
+    public function getSchedulingperiodid() {
+        return $this->schedulingperiodid;
+    }
+
+    /**
+     * @param type $schedulingperiodid
+     * @return \iSchedule\Model\allocationschema
+     */
+    public function setSchedulingperiodid($schedulingperiodid) {
+        $this->schedulingperiodid = $schedulingperiodid;
+        return $this;
+    }
+
+    /**
+     * @return type string
+     */
+    public function getUsername() {
+        return $this->username;
+    }
+
+    /**
+     * @param type $username
+     * @return \iSchedule\Model\allocationschema
+     */
+    public function setUsername($username) {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * @return type string
+     */
+    public function getSchemaweek() {
+        return $this->schemaweek;
+    }
+
+    /**
+     * @param type $schemaweek
+     * @return \iSchedule\Model\allocationschema
+     */
+    public function setSchemaweek($schemaweek) {
+        $this->schemaweek = $schemaweek;
+        return $this;
+    }
+
+    /**
+     * @return type string
+     */
+    public function getDescription() {
+        return $this->description;
+    }
+
+    /**
+     * @param type $description
+     * @return \iSchedule\Model\allocationschema
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return type string
+     */
+    public function getObservation() {
+        return $this->observation;
+    }
+
+    /**
+     * @param type $observation
+     * @return \iSchedule\Model\allocationschema
+     */
+    public function setObservation($observation) {
+        $this->observation = $observation;
+        return $this;
+    }
+
+}

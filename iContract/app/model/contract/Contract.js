@@ -1,0 +1,74 @@
+//@charset UTF-8
+Ext.define( 'iContract.model.contract.Contract', {
+    extend: 'Ext.data.Model',
+
+    requires: [
+        'Smart.data.identifier.Auto'
+    ],
+
+    identifier: 'auto',
+
+    fields: [
+        {
+            name: 'id',
+            type: 'int',
+            serializeType: 'auto'
+        }, {
+            name: 'additivelist',
+            type: 'auto'
+        }, {
+            name: 'legalentity',
+            type: 'auto'
+        }, {
+            name: 'contractor',
+            type: 'auto'
+        }, {
+            name: 'contractnumber',
+            type: 'auto'
+        }, {
+            name: 'legalentityid',
+            type: 'int'
+        }, {
+            name: 'contractorid',
+            type: 'int'
+        }, {
+            name: 'cnpjnumber',
+            type: 'auto'
+        }, {
+            name: 'additivestatus',
+            type: 'auto'
+        }, {
+            name: 'additivestatusdescription',
+            type: 'auto'
+        }, {
+            name: 'observation',
+            type: 'auto'
+        }, {
+            name: 'isactive',
+            type: 'bool'
+        }, {
+            name: 'contractdate',
+            type: 'auto'
+        }, {
+            name: 'filedata',
+            type: 'auto'
+        }, {
+            name: 'fileinfo',
+            type: 'auto'
+        }, {
+            name: 'filetype',
+            type: 'auto',
+            convert: function (value,record) {
+                var info = record.get('fileinfo'),
+                    type = (info && info.length !== 0) ? Ext.decode(info) : null;
+                return (type) ? Ext.String.format('data:{0};base64',type.fileType) : type;
+            }
+        }
+    ],
+
+    business: [
+        { type: 'presence', field: 'contractorid' },
+        { type: 'presence', field: 'legalentityid' }
+    ]
+
+});

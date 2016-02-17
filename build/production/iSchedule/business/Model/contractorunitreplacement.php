@@ -1,0 +1,319 @@
+<?php
+
+namespace iSchedule\Model;
+
+/**
+ * 
+ * @Entity {"name":"contractorunitreplacement", "cache":"\\iSchedule\\Cache\\contractorunitreplacement", "event":"\\iSchedule\\Event\\contractorunitreplacement"}
+ */
+class contractorunitreplacement extends \Smart\Data\Model {
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "strategy":"AUTO", "type":"integer", "policy":true}
+     */
+    private $id;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"integer", "policy":true}
+     */
+    private $contractorsubunitid;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"integer", "policy":true}
+     */
+    private $schedulingperiodid;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"integer", "policy":true}
+     */
+    private $naturalpersonidof;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"integer", "policy":true}
+     */
+    private $naturalpersonidto;
+
+    /**
+     * @Policy {"nullable":false, "length":1}
+     * @Column {"description":"", "type":"string", "policy":true}
+     */
+    private $shift;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"boolean", "policy":true}
+     */
+    private $sun;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"boolean", "policy":true}
+     */
+    private $mon;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"boolean", "policy":true}
+     */
+    private $tue;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"boolean", "policy":true}
+     */
+    private $wed;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"boolean", "policy":true}
+     */
+    private $thu;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"boolean", "policy":true}
+     */
+    private $fri;
+
+    /**
+     * @Policy {"nullable":false}
+     * @Column {"description":"", "type":"boolean", "policy":true}
+     */
+    private $sat;
+
+    /**
+     * @Policy {"nullable":true, "length":65535}
+     * @Column {"description":"", "type":"string", "policy":true}
+     */
+    private $observation;
+
+    /**
+     * @return type integer
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * @param type $id
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return type integer
+     */
+    public function getContractorsubunitid() {
+        return $this->contractorsubunitid;
+    }
+
+    /**
+     * @param type $contractorsubunitid
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setContractorsubunitid($contractorsubunitid) {
+        $this->contractorsubunitid = $contractorsubunitid;
+        return $this;
+    }
+
+    /**
+     * @return type integer
+     */
+    public function getSchedulingperiodid() {
+        return $this->schedulingperiodid;
+    }
+
+    /**
+     * @param type $schedulingperiodid
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setSchedulingperiodid($schedulingperiodid) {
+        $this->schedulingperiodid = $schedulingperiodid;
+        return $this;
+    }
+
+    /**
+     * @return type integer
+     */
+    public function getNaturalpersonidof() {
+        return $this->naturalpersonidof;
+    }
+
+    /**
+     * @param type $naturalpersonidof
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setNaturalpersonidof($naturalpersonidof) {
+        $this->naturalpersonidof = $naturalpersonidof;
+        return $this;
+    }
+
+    /**
+     * @return type integer
+     */
+    public function getNaturalpersonidto() {
+        return $this->naturalpersonidto;
+    }
+
+    /**
+     * @param type $naturalpersonidto
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setNaturalpersonidto($naturalpersonidto) {
+        $this->naturalpersonidto = $naturalpersonidto;
+        return $this;
+    }
+
+    /**
+     * @return type string
+     */
+    public function getShift() {
+        return $this->shift;
+    }
+
+    /**
+     * @param type $shift
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setShift($shift) {
+        $this->shift = $shift;
+        return $this;
+    }
+
+    /**
+     * @return type boolean
+     */
+    public function getSun() {
+        return $this->sun;
+    }
+
+    /**
+     * @param type $sun
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setSun($sun) {
+        $this->sun = $sun;
+        return $this;
+    }
+
+    /**
+     * @return type boolean
+     */
+    public function getMon() {
+        return $this->mon;
+    }
+
+    /**
+     * @param type $mon
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setMon($mon) {
+        $this->mon = $mon;
+        return $this;
+    }
+
+    /**
+     * @return type boolean
+     */
+    public function getTue() {
+        return $this->tue;
+    }
+
+    /**
+     * @param type $tue
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setTue($tue) {
+        $this->tue = $tue;
+        return $this;
+    }
+
+    /**
+     * @return type boolean
+     */
+    public function getWed() {
+        return $this->wed;
+    }
+
+    /**
+     * @param type $wed
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setWed($wed) {
+        $this->wed = $wed;
+        return $this;
+    }
+
+    /**
+     * @return type boolean
+     */
+    public function getThu() {
+        return $this->thu;
+    }
+
+    /**
+     * @param type $thu
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setThu($thu) {
+        $this->thu = $thu;
+        return $this;
+    }
+
+    /**
+     * @return type boolean
+     */
+    public function getFri() {
+        return $this->fri;
+    }
+
+    /**
+     * @param type $fri
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setFri($fri) {
+        $this->fri = $fri;
+        return $this;
+    }
+
+    /**
+     * @return type boolean
+     */
+    public function getSat() {
+        return $this->sat;
+    }
+
+    /**
+     * @param type $sat
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setSat($sat) {
+        $this->sat = $sat;
+        return $this;
+    }
+
+    /**
+     * @return type string
+     */
+    public function getObservation() {
+        return $this->observation;
+    }
+
+    /**
+     * @param type $observation
+     * @return \iSchedule\Model\contractorunitreplacement
+     */
+    public function setObservation($observation) {
+        $this->observation = $observation;
+        return $this;
+    }
+
+}

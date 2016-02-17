@@ -1,0 +1,217 @@
+.app-header-logo {
+    background: url(../../resources/images/ico-00.png);
+}
+
+.appanest-tree .x-tree-icon-parent {
+    display: none !important;
+}
+
+.appanest-tree .x-tree-icon-leaf {
+    display: none !important;
+}
+
+.appanest-tree .x-tree-node-text {
+    padding-left: 0px !important;
+}
+
+.appanest-tree .x-tree-elbow-img {
+    width: 9px !important;
+}
+
+.appanest-tree .x-tree-icon-parent-expanded {
+    display: none !important;
+}
+
+.subunit-list .data {
+    float:left;
+    height: 100%;
+    color: #000000;
+    font-family: Monda;
+}
+
+.subunit-list .data span {
+    float:left;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 800000;
+    color: white;
+    width: 30px;
+    padding: 2px;
+    margin: 1px 2px 0 0;
+    position: relative;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    text-align: center;
+    font-family: Monda;
+}
+
+.contractor-subunit-list span {
+    color: white;
+    width: 30px;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 15%;
+    text-align: center;
+    font-family: Monda;
+    padding: 0 3px 0 3px;
+}
+
+.additivetable-edit .x-form-field {
+    height: 28px;
+    font-size: 14px;
+    font-family: Monda;
+    background-color: #FFED4F;
+}
+
+.additivetable-edit .x-grid-cell-inner {
+    height: 37px;
+    line-height: 18px !important;
+}
+
+.additivetable-edit .x-grid-row-editor .x-form-display-field {
+    color: red !important;
+    font-size: 14px !important;
+    font-family: Monda !important;
+}
+
+.additiveshift-edit .x-grid-row-editor .x-form-display-field {
+    padding: 0 !important;
+    color: red !important;
+    font-size: 10px !important;
+    font-family: Monda !important;
+}
+
+.additiveshift-edit .x-form-field {
+    height: 39px;
+    font-size: 16px;
+    font-family: Monda;
+    background-color: #FFED4F;
+}
+
+.additiveshift-edit .x-grid-cell-inner {
+    padding: 2px 10px 6px;
+    height: 36px !important;
+    line-height: 14px !important;
+}
+
+.additiveshift-edit .data {
+    float:left;
+    height: 100%;
+    color: #000000;
+    font-family: Monda;
+}
+
+.additiveshift-edit .data span {
+    float:right;
+    z-index: 800000;
+    color: white;
+    width: 24px;
+    margin: 1px 0 0 0;
+    position: relative;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    text-align: center;
+    font-family: Monda;
+}
+
+.additiveshift-edit .shift-label {
+    height: 39px !important;
+    position: absolute !important;
+}
+
+.additiveshift-edit .x-box-item {
+    top: 0px !important;
+}
+
+.additive-status-a {
+    background: rgba(3, 98, 253, .6);
+}
+
+.additive-status-a:hover {
+    background: rgba(3, 98, 253, 1);
+}
+
+.additive-status-i:hover {
+    background: rgba(222, 29, 42, .6);
+}
+
+.additive-status-i {
+    background: rgba(222, 29, 42, 1);
+}
+
+.additive-status-l {
+    background: rgba(119, 79, 56, .6);
+}
+
+.additive-status-l:hover {
+    background: rgba(119, 79, 56, 1);
+}
+
+.contract-list .x-grid-cell-inner {
+    padding: 0px 0px 0px 0px;
+}
+
+.contract-list .line {
+    height: 45px;
+}
+
+.contract-list .data {
+    float:left;
+    height: 100%;
+    color: #000000;
+    font-family: Monda;
+}
+
+.contract-list .data span {
+    float:left;
+    cursor: pointer;
+    z-index: 800000;
+    color: white;
+    width: 30px;
+    padding: 3px;
+    margin: 1px 2px 0 0;
+    position: relative;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    text-align: center;
+    font-family: Monda;
+}
+
+.contractdata .thumb-wrap img {
+    width: 80px;
+    height: 80px;
+}
+
+.contractdata .thumb-wrap {
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+    padding: 5px;
+}
+
+.contractdata .thumb-wrap span {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    width: 80px;
+    font-family: Monda;
+}
+
+.contractdata .x-item-over {
+    border:1px solid #dddddd;
+    background: #9df39f;
+    padding: 4px;
+}
+
+.contractdata .x-item-selected {
+    background: #96daff;
+    border:1px solid #99bbe8;
+    padding: 4px;
+}
+
+.contractdata .x-item-selected .thumb{
+    background:transparent;
+}

@@ -1,0 +1,35 @@
+{
+
+  "files": [
+
+  ],
+
+  "require" : {
+    "itbz/fpdf": "dev-master",
+    "phpoffice/phpexcel": "dev-master",
+    "phpmailer/phpmailer": "dev-master"
+  },
+
+
+  "autoload": {
+
+    "files": [
+      "vendor/phpmailer/phpmailer/class.phpmailer.php"
+    ],
+
+    "classmap": [
+
+    ],
+
+    "psr-4": {
+      "Smart\\": "../smart",
+      "iContract\\": "./business"
+    }
+
+  },
+
+  "scripts": {
+
+  }
+
+}
