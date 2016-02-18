@@ -6,12 +6,9 @@ Ext.define( 'iContract.view.contract.ContractView', {
 
     requires: [
         'Smart.ux.contract.ContractView',
-        'iContract.store.contractor.Contractor',
-        'iContract.store.contract.ContractData',
-        'iContract.store.contract.AdditiveTable',
-        'iContract.store.contract.AdditiveShift',
+        'iContract.store.contract.*',
+        'iContract.store.contractor.*',
         'iContract.store.legalentity.LegalEntity',
-        'iContract.store.contractor.ContractorSubUnit',
         'iContract.view.contract.ContractController'
     ],
 

@@ -119,7 +119,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreOld', {
                                 }
                             }, {
                                 allowBlank: true,
-                                fieldLabel: 'Observacoes',
+                                fieldLabel: 'Observações',
                                 name: 'observation',
                                 xtype: 'textfield'
                             }, {
@@ -203,7 +203,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreOld', {
                                     }, {
                                         width: 70,
                                         name: 'dutyfraction',
-                                        fieldLabel: 'Fracao',
+                                        fieldLabel: 'Fração',
                                         xtype: 'textfield',
                                         plugins: 'textmask',
                                         money: true,

@@ -10,7 +10,7 @@ Ext.define( 'iContract.store.shifttype.ShiftType', {
 
     storeId: 'shifttype',
 
-    url: 'business/Calls/shifttype.php',
+    url: '../iContract/business/Calls/shifttype.php',
 
     model: 'iContract.model.shifttype.ShiftType'
 

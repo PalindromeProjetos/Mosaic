@@ -42,15 +42,15 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleWeek', {
     _columnText: {
         sundescription: 'Domingo',
         mondescription: 'Segunda',
-        tuedescription: 'Terca',
+        tuedescription: 'Terça',
         weddescription: 'Quarta',
         thudescription: 'Quinta',
         fridescription: 'Sexta',
-        satdescription: 'Sabado'
+        satdescription: 'Sábado'
     },
 
     _monthList: [
-        'Janeiro','Fevereiro','Marco','Abril',
+        'Janeiro','Fevereiro','Março','Abril',
         'Maio','Junho','Julho','Agosto',
         'Setembro','Outubro','Novembro','Dezembro'
     ],

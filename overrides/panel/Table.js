@@ -15,7 +15,7 @@ Ext.define( 'Ext.overrides.panel.Table', {
             loadMask: { msg: 'Carregando...!' },
             emptyText:  [
                 '<div style="text-align: center;">Nenhum dado disponível...</div>',
-                (me.recordsRenderer ? '<div style="text-align: center;"><i style="color: red; cursor: pointer;" onclick="Ext.panel.Table._insertRecord()">Inserir  Registro</i></div>' : '')
+                (me.recordsRenderer ? '<div style="text-align: center;"><i style="color: red; cursor: pointer;" onclick="Ext.panel.Table._insertRecord()">Inserir Registro</i></div>' : '')
             ]
         };
 

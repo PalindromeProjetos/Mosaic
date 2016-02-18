@@ -238,7 +238,7 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchema', {
                                                     {
                                                         flex: 1,
                                                         xtype: 'comboenum',
-                                                        fieldLabel: 'Tipo de Atribuicao',
+                                                        fieldLabel: 'Tipo de Atribuição',
                                                         name: 'allocationtypedescription'
                                                     }, {
                                                         xtype: 'splitter'

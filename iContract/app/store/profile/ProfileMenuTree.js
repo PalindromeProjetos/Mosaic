@@ -10,7 +10,7 @@ Ext.define( 'iContract.store.profile.ProfileMenuTree', {
         'iContract.model.profile.ProfileMenuTree'
     ],
 
-    url: 'business/Calls/profilemodulemenu.php',
+    url: '../iContract/business/Calls/profilemodulemenu.php',
 
     model: 'iContract.model.profile.ProfileMenuTree',
 

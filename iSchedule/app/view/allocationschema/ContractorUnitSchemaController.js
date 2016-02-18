@@ -73,11 +73,11 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchemaController', {
         if (e.ctrlKey === true) {
             if((value)&&(value.length != 0)) {
                 var store = Ext.getStore('contractorunitschema');
-                    //model = Ext.create('iSchedule.store.allocationschema.ContractorUnitSchema');
+                    //model = Ext.create('iSchedule.model.allocationschema.ContractorUnitSchema');
 
                 Ext.Msg.show({
                     title:'Removendo o Socio da lista!',
-                    message: 'Confirma a remocao deste Sócio?',
+                    message: 'Confirma a remoção deste Sócio?',
                     buttons: Ext.Msg.YESNO,
                     icon: Ext.Msg.QUESTION,
                     fn: function(btn) {
@@ -115,7 +115,7 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchemaController', {
 
         if ((e.ctrlKey === true)&&(cellIndex == 0)) {
             Ext.Msg.show({
-                title:'Removendo os Socios da lista!',
+                title:'Removendo os Sócios da lista!',
                 message: 'Confirma a remoção destes Sócios da lista de Substituições?',
                 buttons: Ext.Msg.YESNO,
                 icon: Ext.Msg.QUESTION,

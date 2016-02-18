@@ -159,7 +159,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleEdit', {
                         ]
                     }, {
                         useMondaFont: true,
-                        fieldLabel: 'Observacao',
+                        fieldLabel: 'Observação',
                         allowBlank: false,
                         xtype: 'textfield',
                         name: 'observation'
@@ -167,7 +167,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleEdit', {
                         height: 180,
                         xtype: 'displayfield',
                         name: 'observationlog',
-                        fieldLabel: 'Historico',
+                        fieldLabel: 'Histórico',
                         useMondaFont: true,
                         fieldStyle: {
                             color: '#C02942;',

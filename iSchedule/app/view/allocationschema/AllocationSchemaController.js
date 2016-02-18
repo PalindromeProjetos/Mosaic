@@ -178,10 +178,10 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchemaController', {
             period = view.down('schedulingperiodsearch'),
             record = period.foundRecord(),
             id = view.down('hiddenfield[name=id]').getValue(),
-            warning = 'Todos os dados do processsamento anterior serao perdidos!';
+            warning = 'Todos os dados do processsamento anterior serão perdidos!';
 
         if(record.get('status') != 'A') {
-            Smart.Msg.attention("A escala para este periodo nao esta mais aberta!");
+            Smart.Msg.attention("A escala para este período não está mais aberta!");
             return false;
         }
 
@@ -522,7 +522,7 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchemaController', {
         schemaweekday.reconfigure(store, [
             {
                 cls: 'dark',
-                text: '<a style="font-size: 18px; font-family: Monda;">' + 'U N I D A D E S' + '</a>',
+                text: '<a style="font-size: 18px; font-family: Monda;">U N I D A D E S</a>',
                 align: 'center',
                 columns: [
                     {
@@ -575,7 +575,7 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchemaController', {
             }, {
                 cls: 'ligth',
                 align: 'center',
-                text: '<a style="font-size: 18px; font-family: Monda;">' + 'S E M A N A S' + '</a>',
+                text: '<a style="font-size: 18px; font-family: Monda;">S E M A N A S</a>',
                 columns: getFields()
             }
         ]);

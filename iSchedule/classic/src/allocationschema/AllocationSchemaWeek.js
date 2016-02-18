@@ -46,11 +46,11 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchemaWeek', {
     _columnText: {
         sundescription: 'Domingo',
         mondescription: 'Segunda',
-        tuedescription: 'Terca',
+        tuedescription: 'Terça',
         weddescription: 'Quarta',
         thudescription: 'Quinta',
         fridescription: 'Sexta',
-        satdescription: 'Sabado'
+        satdescription: 'Sábado'
     },
 
     initComponent: function () {
@@ -158,7 +158,7 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchemaWeek', {
         me.columns = [
             {
                 cls: 'dark',
-                text: '<a style="font-size: 18px; font-family: Monda;">' + 'U N I D A D E S' + '</a>',
+                text: '<a style="font-size: 18px; font-family: Monda;">U N I D A D E S</a>',
                 columns: [
                     {
                         width: 200,
