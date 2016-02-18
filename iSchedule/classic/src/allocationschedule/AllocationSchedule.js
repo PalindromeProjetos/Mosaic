@@ -160,7 +160,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationSchedule', {
                                                 handler: 'showFrequencySheet',
                                                 menu: [
                                                     {
-                                                        handler: 'showselectSchedule',
+                                                        handler: 'showSelectSchedule',
                                                         text: 'Gerar arquivo da Escala Mensal'
                                                     }
                                                 ]

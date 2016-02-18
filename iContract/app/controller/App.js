@@ -87,14 +87,6 @@ Ext.define( 'iContract.controller.App', {
         me.onMainPageView({ xtype: 'naturalpersonlist', iconCls: rc.get("iconCls") });
     }
 
-    //
-    //setContractList: function () {
-    //    var me = this,
-    //        rc = me.getMainTree().getSelection();
-    //
-    //    me.onMainPageView({ xtype: 'contractlist', iconCls: rc.get("iconCls") });
-    //}
-
     //routes ========================>
 
 });

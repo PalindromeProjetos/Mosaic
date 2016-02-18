@@ -73,7 +73,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleDirectorShip', 
                         columns: [
                             {
                                 sortable: false,
-                                text: '<span style="font-size: 16px;">Marcar todas as Unidades </span>',
+                                text: '<span style="font-size: 16px;">Marcar todas as Unidades</span>',
                                 dataIndex: 'shortname',
                                 flex: 1
                             }

@@ -10,7 +10,7 @@ Ext.define( 'iContract.store.enums.EnumType', {
 
     storeId: 'enumtype',
 
-    url: 'business/Calls/enumtype.php',
+    url: '../iContract/business/Calls/enumtype.php',
 
     model: 'iContract.model.enums.EnumType'
 

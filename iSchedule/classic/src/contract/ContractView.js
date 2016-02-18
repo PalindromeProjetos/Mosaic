@@ -6,13 +6,9 @@ Ext.define( 'iSchedule.view.contract.ContractView', {
 
     requires: [
         'Smart.ux.contract.ContractView',
-        'iContract.store.contract.Additive',
-        'iContract.store.contractor.Contractor',
-        'iContract.store.contract.ContractData',
-        'iContract.store.contract.AdditiveTable',
-        'iContract.store.contract.AdditiveShift',
+        'iContract.store.contract.*',
+        'iContract.store.contractor.*',
         'iContract.store.legalentity.LegalEntity',
-        'iContract.store.contractor.ContractorSubUnit',
         'iSchedule.view.contract.ContractController'
     ],
 

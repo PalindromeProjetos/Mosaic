@@ -10,7 +10,7 @@ Ext.define( 'iContract.store.module.ModuleMenu', {
 
     storeId: 'modulemenu',
 
-    url: 'business/Calls/modulemenu.php',
+    url: '../iContract/business/Calls/modulemenu.php',
 
     model: 'iContract.model.module.ModuleMenu'
 

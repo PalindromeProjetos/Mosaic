@@ -111,12 +111,12 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
             view = me.getView(),
             form = view.down('form'),
             params = form.getValues(),
-            warning = 'Após a confirmação os dados da Escala nao poderão mais ser editados!';
+            warning = 'Após a confirmação os dados da Escala não poderão mais ser editados!';
 
         params.action ='select';
         params.method ='setPublishSchedule';
 
-        Smart.Msg.question("Confirma a publicacao desta escala? <br/> <br/>" + warning, function(btn) {
+        Smart.Msg.question("Confirma a publicação desta escala? <br/> <br/>" + warning, function(btn) {
             if (btn === 'yes') {
 
                 view.setLoading('Publicando Escala Mensal ...');
@@ -220,7 +220,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         if(period.status == 'P') {
             Ext.Msg.show({
                 title:'Publicando Escala!',
-                message: 'A escala atual ja esta no status de publicada!',
+                message: 'A escala atual já está no status de publicada!',
                 buttons: Ext.Msg.CANCEL,
                 icon: Ext.Msg.WARNING
             });
@@ -234,7 +234,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         }
     },
 
-    showselectSchedule: function () {
+    showSelectSchedule: function () {
         var me = this,
             view = me.getView(),
             period = view.down('schedulingperiodsearch'),

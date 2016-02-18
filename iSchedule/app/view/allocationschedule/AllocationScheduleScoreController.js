@@ -27,9 +27,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     onSelect: function (field, value, eOpts) {
         var me = this,
             view = me.getView(),
-            label = view.down('label[name=labelperiod]');
+            labelperiod = view.down('label[name=labelperiod]');
 
-        label.setText(me.getDateFormated(value,'DAY_NAME'));
+        labelperiod.setText(me.getDateFormated(value,'DAY_NAME'));
         view.down('combosearch[name=contractorunit]').setDisabled(false);
         view.down('comboenum[name=subunitdescription]').setDisabled(false);
     }

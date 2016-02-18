@@ -10,7 +10,7 @@ Ext.define( 'iContract.store.users.UsersMenuAction', {
         'iContract.model.users.UsersMenuAction'
     ],
 
-    url: 'business/Calls/usersmenuaction.php',
+    url: '../iContract/business/Calls/usersmenuaction.php',
 
     model: 'iContract.model.users.UsersMenuAction',
 
