@@ -7,6 +7,8 @@
       <excludeFolder url="file://$MODULE_DIR$/ext" />
       <excludeFolder url="file://$MODULE_DIR$/iContract/.sencha" />
       <excludeFolder url="file://$MODULE_DIR$/iSchedule/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/iSterilization/.sencha" />
+      <excludeFolder url="file://$MODULE_DIR$/iSterilization/overrides" />
       <excludeFolder url="file://$MODULE_DIR$/overrides" />
     </content>
     <orderEntry type="inheritedJdk" />
