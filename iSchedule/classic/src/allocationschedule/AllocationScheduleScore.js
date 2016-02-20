@@ -85,11 +85,12 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 defaults: {
                                     flex: 1,
                                     startDay: 1,
+                                    editable: false,
                                     allowBlank: false,
                                     hideTrigger: false,
                                     labelStyle: 'color: blue; font-size: 14px;',
                                     listeners: {
-                                        validitychange: 'onValidityChange'
+                                        select: 'onSelectDate'
                                     }
                                 },
                                 items: [
@@ -112,9 +113,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 xtype: 'datefield',
                                 fieldLabel: 'Data',
                                 hideTrigger: false,
+                                plugins: 'textmask',
                                 name: 'datescore',
                                 listeners: {
-                                    select: 'onSelect'
+                                    select: 'onPeriodDate'
                                 }
                             }, {
                                 pageSize: 0,
