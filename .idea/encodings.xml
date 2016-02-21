@@ -140,6 +140,7 @@
     <file url="file://$PROJECT_DIR$/library/plugins/FormEnter.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/plugins/SmartRegion.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/plugins/TreeFilter.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/overrides/form/field/ComboBox.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/overrides/panel/Panel.js" charset="UTF-8" />
   </component>
 </project>

@@ -23,34 +23,35 @@ Ext.define( 'Ext.overrides.form.field.ComboBox', {
 
         me.callParent();
 
-        me.on({
-            focus: { fn: 'fnFocus', scope: me },
-            select: { fn: 'fnSelect', scope: me },
-            afterrender: { fn: 'fnAfterRender', scope: me }
-        });
+        me.onAfter( 'focus', me.fnFocus, me);
+        me.onBefore( 'select', me.fnSelect, me);
+        me.onAfter( 'afterrender', me.fnAfterRender, me);
 
     },
 
     fnFocus: function () {
-        this.getEl().frame("yellowgreen");
+        var me = this;
+
+        me.getEl().frame("yellowgreen");
     },
 
-    fnSelect: function (combo, records, eOpts) {
-        var ct = combo.ownerCt,
+    fnSelect: function (combo, record, eOpts) {
+        var comp = combo.up('component'),
             name = combo.hiddenNameId;
 
         if (name) {
-            ct.down('hiddenfield[name=' + name + ']').setValue(combo.getValue());
+            comp.down('hiddenfield[name=' + name + ']').setValue(combo.getValue());
         }
+
     },
 
     fnAfterRender: function (combo, eOpts) {
         var me = this,
-            ct = me.ownerCt,
+            comp = combo.up('component'),
             name = me.hiddenNameId;
 
         if (name) {
-            ct.add(Ext.widget('hiddenfield', { name: name, itemId: name }));
+            comp.add(Ext.widget('hiddenfield', { name: name }));
         }
 
     },
