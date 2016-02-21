@@ -60,7 +60,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         if(dateof.isValid() && dateto.isValid()) {
             datescore.reset();
             datescore.setDisabled(false);
-            datescore.setValue(dateto.getSubmitData().dateof);
+            datescore.setValue(dateof.getSubmitData().dateof);
             Ext.getStore('allocationschedulescore').removeAll();
             datescore.setMinValue(dateof.getSubmitData().dateof);
             datescore.setMaxValue(dateto.getSubmitData().dateto);
