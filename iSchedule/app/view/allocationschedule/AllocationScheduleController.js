@@ -492,7 +492,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         form.loadRecord(view.xdata);
 
         Ext.each(fields,function (field) {
-            form.getForm().findField(field).setUseReadColor(true);
+            form.getForm().findField(field).setReadColor(true);
         });
 
         form.down('hiddenfield[name=releasetype]').setValue('M');
@@ -509,7 +509,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         form.loadRecord(view.xdata);
 
         Ext.each(fields,function (field) {
-            form.getForm().findField(field).setUseReadColor(true);
+            form.getForm().findField(field).setReadColor(true);
         });
 
         form.down('hiddenfield[name=id]').setValue(null);

@@ -72,7 +72,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleEdit', {
                         anchor: '',
                         width: 150,
                         useMondaFont: true,
-                        readOnlyColor: false,
+                        useReadColor: false,
                         fieldStyle: {
                             textAlign: 'center',
                             color: 'blue;',
@@ -87,7 +87,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleEdit', {
                         layout: 'hbox',
                         defaults: {
                             useMondaFont: true,
-                            readOnlyColor: false,
+                            useReadColor: false,
                             fieldStyle: {
                                 color: 'blue;',
                                 fontSize: '16px;'
@@ -95,28 +95,27 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleEdit', {
                         },
                         items: [
                             {
-                                flex: 2,
+                                flex: 1,
                                 pageSize: 0,
                                 hiddenNameId: 'contractorunitid',
                                 name:  'contractorunit',
                                 fieldLabel: 'Unidade',
                                 xtype: 'naturalpersonsearch',
                                 store: 'iContract.store.contractor.ContractorUnit',
-                                displayField: 'shortname'
-                            }, {
-                                xtype: 'splitter'
+                                displayField: 'shortname',
+                                margin: '0 5 0 0'
                             }, {
                                 width: 250,
                                 xtype: 'comboenum',
                                 fieldLabel: 'SubUnidade',
-                                name: 'subunitdescription'
-                            }, {
-                                xtype: 'splitter'
+                                name: 'subunitdescription',
+                                margin: '0 5 0 5'
                             }, {
                                 width: 90,
                                 xtype: 'comboenum',
                                 fieldLabel: 'Turno',
-                                name: 'shiftdescription'
+                                name: 'shiftdescription',
+                                margin: '0 0 0 5'
                             }
                         ]
                     }, {
@@ -124,7 +123,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleEdit', {
                         layout: 'hbox',
                         defaults: {
                             useMondaFont: true,
-                            readOnlyColor: false,
+                            useReadColor: false,
                             fieldStyle: {
                                 color: 'blue;',
                                 fontSize: '16px;'
@@ -139,22 +138,21 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleEdit', {
                                 name: 'naturalperson',
                                 hiddenNameId: 'naturalpersonid',
                                 xtype: 'naturalpersonsearch',
-                                displayField: 'shortname'
-                            }, {
-                                xtype: 'splitter'
+                                displayField: 'shortname',
+                                margin: '0 5 0 0'
                             }, {
                                 allowBlank: false,
                                 width: 250,
                                 fieldLabel: 'Atribuição',
                                 xtype: 'comboenum',
-                                name: 'allocationschemadescription'
-                            }, {
-                                xtype: 'splitter'
+                                name: 'allocationschemadescription',
+                                margin: '0 5 0 5'
                             }, {
                                 width: 90,
                                 name: 'position',
                                 fieldLabel: 'Posição',
-                                xtype: 'numberfield'
+                                xtype: 'numberfield',
+                                margin: '0 0 0 5'
                             }
                         ]
                     }, {

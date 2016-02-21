@@ -4,7 +4,9 @@ Ext.define( 'Smart.ux.naturalperson.NaturalPersonSearch', {
 
     requires: [
         'Smart.form.field.ComboSearch'
-    ]
+    ],
+
+    displayField: 'shortname'
 
 });
 

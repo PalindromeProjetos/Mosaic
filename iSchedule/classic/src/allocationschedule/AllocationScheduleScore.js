@@ -34,6 +34,36 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         var me = this;
         me.buildItems();
         me.callParent();
+
+        me.on('render', me.onFormRender, me);
+    },
+
+    onFormRender: function() {
+        var me = this;
+        me.getEl().on('keydown', me.onFormElKeyDown, me);
+    },
+
+    onFormElKeyDown: function(e, el) {
+        var me = this,
+            dateof = me.down('datefield[name=dateof]'),
+            dateto = me.down('datefield[name=dateto]'),
+            datescore = me.down('datefield[name=datescore]');
+
+        if (e.ctrlKey == true) {
+            switch(parseInt(e.keyCode)) {
+                case 37:
+                    me.fireEvent('datefore',me,datescore,dateof,dateto);
+                    break;
+                case 39:
+                    me.fireEvent('datenext',me,datescore,dateof,dateto);
+                    break;
+            }
+        }
+    },
+
+    listeners: {
+        datefore: 'onDateFore',
+        datenext: 'onDateNext'
     },
 
     buildScore: function () {
