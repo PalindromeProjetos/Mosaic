@@ -21,24 +21,13 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
     width: 400,
 
     modal: true,
+    resizable: false,
+    showAnimate: true,
+    cls: 'panel-frame',
 
     layout: {
         type: 'fit'
     },
-
-    buttons: [
-        {
-            text: 'Fechar',
-            showSmartTheme: 'green',
-            handler: function (btn) {
-                btn.up('window').close();
-            }
-        }, {
-            text: 'Imprimir',
-            showSmartTheme: 'sky',
-            handler: 'showScoreReport'
-        }
-    ],
 
     initComponent: function () {
         var me = this;
@@ -57,6 +46,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                 xtype: 'form',
                 layout: 'anchor',
                 defaults: {
+                    pageSize: 0,
                     anchor: '100%'
                 },
                 items: [
@@ -65,6 +55,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                         name: 'id'
                     }, {
                         xtype: 'fieldcontainer',
+                        fieldLabel: 'Intervalo',
                         layout: 'hbox',
                         defaults: {
                             allowBlank: false
@@ -74,7 +65,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                                 flex: 1,
                                 plugins: 'textmask',
                                 name:  'periodof',
-                                fieldLabel: 'Periodo Inicial',
+                                fieldLabel: 'De',
                                 xtype: 'datefield'
                             }, {
                                 xtype: 'splitter'
@@ -82,12 +73,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                                 flex: 1,
                                 plugins: 'textmask',
                                 name:  'periodto',
-                                fieldLabel: 'Periodo Final',
+                                fieldLabel: 'Até',
                                 xtype: 'datefield'
                             }
                         ]
                     }, {
-                        pageSize: 0,
                         fieldLabel: 'Entidade Legal',
                         allowBlank: true,
                         name: 'naturalperson',
@@ -106,7 +96,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                             }
                         }
                     }, {
-                        flex: 1,
                         submitValue: false,
                         hiddenNameId: 'contractorunitid',
                         fieldLabel: 'Unidade',
@@ -126,7 +115,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                             }
                         }
                     }, {
-                        flex: 1,
                         xtype: 'comboenum',
                         hiddenNameId: 'subunit',
                         multiSelect: true,
@@ -148,7 +136,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                         height: 300,
                         items: [
                             {
-                                title: 'Exclusão Unidade(s)',
+                                title: 'Unidades',
                                 xtype: 'gridpanel',
                                 hideHeaders: false,
                                 store: 'contractorunitexclud',
@@ -160,13 +148,13 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                                 columns: [
                                     {
                                         sortable: false,
-                                        text: '<span style="font-size: 16px;">Marcar todas as Unidades </span>',
+                                        text: '<span style="font-size: 16px;">Excluir todas</span>',
                                         dataIndex: 'shortname',
                                         flex: 1
                                     }
                                 ]
                             }, {
-                                title: 'Exclusão SubUnidade(s)',
+                                title: 'SubUnidades',
                                 xtype: 'gridpanel',
                                 hideHeaders: false,
                                 store: 'contractorsubunitexclud',
@@ -178,7 +166,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                                 columns: [
                                     {
                                         sortable: false,
-                                        text: '<span style="font-size: 16px;">Marcar todas as SubUnidades </span>',
+                                        text: '<span style="font-size: 16px;">Excluir todas</span>',
                                         dataIndex: 'subunitdescription',
                                         flex: 1
                                     }
@@ -189,9 +177,22 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                 ]
             }
         ]
-    }
+    },
+
+    buttonAlign: 'center',
+
+    buttons: [
+        {
+            text: 'Fechar',
+            showSmartTheme: 'green',
+            handler: function (btn) {
+                btn.up('window').close();
+            }
+        }, {
+            text: 'Imprimir',
+            showSmartTheme: 'sky',
+            handler: 'showScoreReport'
+        }
+    ]
 
 });
-
-
-

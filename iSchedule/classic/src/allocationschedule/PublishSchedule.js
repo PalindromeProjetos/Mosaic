@@ -81,6 +81,8 @@ Ext.define( 'iSchedule.view.allocationschedule.PublishSchedule', {
         ]
     },
 
+    buttonAlign: 'center',
+
     buttons: [
         {
             text: 'Confirmar',

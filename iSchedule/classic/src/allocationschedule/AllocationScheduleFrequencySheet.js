@@ -98,6 +98,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleFrequencySheet'
         ]
     },
 
+    buttonAlign: 'center',
+
     buttons: [
         {
             text: 'Imprimir',

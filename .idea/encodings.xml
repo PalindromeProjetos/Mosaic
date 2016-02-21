@@ -37,7 +37,9 @@
     <file url="file://$PROJECT_DIR$/iContract/app/store/contract/ContractData.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iContract/app/store/contractor/Contractor.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iContract/app/store/contractor/ContractorSubUnit.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iContract/app/store/contractor/ContractorSubUnitExclud.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iContract/app/store/contractor/ContractorUnit.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iContract/app/store/contractor/ContractorUnitExclud.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iContract/app/store/enums/EnumType.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iContract/app/store/enums/EnumTypeList.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iContract/app/store/legalentity/LegalEntity.js" charset="UTF-8" />
@@ -122,6 +124,7 @@
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/contract/ContractView.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/login/Login.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/main/Main.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iSterilization/app.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/address/SearchAddress.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/address/TextAddress.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/address/TextFieldSearch.js" charset="UTF-8" />

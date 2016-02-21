@@ -62,7 +62,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleDirectorShip', 
                         name: 'status',
                         xtype: 'hiddenfield'
                     }, {
-                        height: 320,
+                        height: 280,
                         rowLines: false,
                         xtype: 'gridpanel',
                         hideHeaders: false,
@@ -73,7 +73,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleDirectorShip', 
                         columns: [
                             {
                                 sortable: false,
-                                text: '<span style="font-size: 16px;">Marcar todas as Unidades</span>',
+                                text: '<span style="font-size: 16px;">Marcar todas</span>',
                                 dataIndex: 'shortname',
                                 flex: 1
                             }
@@ -87,6 +87,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleDirectorShip', 
     listeners: {
         show: 'onShowDirectorShip'
     },
+
+    buttonAlign: 'center',
 
     buttons: [
         {

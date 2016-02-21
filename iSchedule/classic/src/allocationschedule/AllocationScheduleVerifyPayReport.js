@@ -16,27 +16,16 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleVerifyPayReport
 
     title: 'Conferência - Pagar Para',
 
-    width: 400,
+    width: 300,
 
     modal: true,
+    resizable: false,
+    showAnimate: true,
+    cls: 'panel-frame',
 
     layout: {
         type: 'fit'
     },
-
-    buttons: [
-        {
-            text: 'Fechar',
-            showSmartTheme: 'green',
-            handler: function (btn) {
-                btn.up('window').close();
-            }
-        }, {
-            text: 'Imprimir',
-            showSmartTheme: 'sky',
-            handler: 'showVerifyPayReport'
-        }
-    ],
 
     initComponent: function () {
         var me = this;
@@ -64,6 +53,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleVerifyPayReport
                     }, {
                         xtype: 'fieldcontainer',
                         layout: 'hbox',
+                        fieldLabel: 'Intervalo',
                         defaults: {
                             allowBlank: false
                         },
@@ -72,7 +62,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleVerifyPayReport
                                 flex: 1,
                                 plugins: 'textmask',
                                 name:  'periodof',
-                                fieldLabel: 'Perido Inicial',
+                                fieldLabel: 'De',
                                 xtype: 'datefield'
                             }, {
                                 xtype: 'splitter'
@@ -80,12 +70,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleVerifyPayReport
                                 flex: 1,
                                 plugins: 'textmask',
                                 name:  'periodto',
-                                fieldLabel: 'Perido Final',
+                                fieldLabel: 'Até',
                                 xtype: 'datefield'
                             }
                         ]
                     }, {
-                        flex: 1,
                         submitValue: false,
                         hiddenNameId: 'contractorunitid',
                         fieldLabel: 'Unidade',
@@ -105,33 +94,43 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleVerifyPayReport
                             }
                         }
                     }, {
-                        xtype: 'tabpanel',
-                        height: 300,
-                        items: [
+                        height: 290,
+                        xtype: 'gridpanel',
+                        hideHeaders: false,
+                        store: 'contractorunitexclud',
+                        name: 'contractorunitexclud',
+                        rowLines: false,
+                        selModel: {
+                            selType: 'checkboxmodel'
+                        },
+                        columns: [
                             {
-                                title: 'Exclusão Unidade(s)',
-                                xtype: 'gridpanel',
-                                hideHeaders: false,
-                                store: 'contractorunitexclud',
-                                name: 'contractorunitexclud',
-                                rowLines: false,
-                                selModel: {
-                                    selType: 'checkboxmodel'
-                                },
-                                columns: [
-                                    {
-                                        sortable: false,
-                                        text: '<span style="font-size: 16px;">Marcar todas as Unidades </span>',
-                                        dataIndex: 'shortname',
-                                        flex: 1
-                                    }
-                                ]
+                                sortable: false,
+                                text: '<span style="font-size: 16px;">Excluir todas unidades</span>',
+                                dataIndex: 'shortname',
+                                flex: 1
                             }
                         ]
                     }
                 ]
             }
         ]
-    }
+    },
+
+    buttonAlign: 'center',
+
+    buttons: [
+        {
+            text: 'Fechar',
+            showSmartTheme: 'green',
+            handler: function (btn) {
+                btn.up('window').close();
+            }
+        }, {
+            text: 'Imprimir',
+            showSmartTheme: 'sky',
+            handler: 'showVerifyPayReport'
+        }
+    ]
 
 });
