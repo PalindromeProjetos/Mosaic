@@ -141,7 +141,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 disabled: true,
                                 editable: false,
                                 xtype: 'datefield',
-                                fieldLabel: 'Data <i class="fa fa-chevron-left"></i> <i class="fa fa-chevron-right"></i>',
+                                fieldLabel: 'Data <i class="fa fa-arrow-left"></i> <i class="fa fa-arrow-right"></i>',
                                 hideTrigger: false,
                                 plugins: 'textmask',
                                 name: 'datescore',
