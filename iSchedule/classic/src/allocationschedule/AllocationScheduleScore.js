@@ -128,12 +128,18 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 xtype: 'combosearch',
                                 store: 'iContract.store.contractor.ContractorUnit',
                                 valueField: 'id',
-                                displayField: 'shortname'
+                                displayField: 'shortname',
+                                listeners: {
+                                    select: 'onUnitSubUnit'
+                                }
                             }, {
                                 disabled: true,
                                 xtype: 'comboenum',
                                 fieldLabel: 'SubUnidade',
-                                name: 'subunitdescription'
+                                name: 'subunitdescription',
+                                listeners: {
+                                    select: 'onUnitSubUnit'
+                                }
                             }, {
                                 xtype: 'button',
                                 scale: 'medium',

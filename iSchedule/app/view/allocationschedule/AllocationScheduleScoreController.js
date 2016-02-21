@@ -18,7 +18,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
         if(dateof.isValid() && dateto.isValid()) {
             datescore.reset();
-            labelperiod.setText('');
+            labelperiod.setText('...');
             datescore.setDisabled(false);
             Ext.getStore('allocationschedulescore').removeAll();
             datescore.setMinValue(dateof.getSubmitData().dateof);
@@ -35,6 +35,20 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         labelperiod.setText(me.getDateFormated(value,'DAY_NAME'));
         view.down('combosearch[name=contractorunit]').setDisabled(false);
         view.down('comboenum[name=subunitdescription]').setDisabled(false);
+    },
+
+    onUnitSubUnit: function (combo, record, eOpts) {
+        var me = this,
+            view = me.getView(),
+            form = view.down('form[name=period]'),
+            contractorunit = view.down('combosearch[name=contractorunit]'),
+            subunitdescription = view.down('comboenum[name=subunitdescription]');
+
+        if(contractorunit.isValid() && subunitdescription.isValid()) {
+            if(form.isValid()) {
+               console.info(form.getValues());
+            }
+        }
     }
 
 });

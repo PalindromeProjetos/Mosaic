@@ -12,7 +12,7 @@ Ext.define( 'Smart.form.field.ComboEnum', {
 
     pageSize: 0,
     editable: false,
-    //fieldLabel: null,
+    fieldLabel: null,
     submitValue: true,
 
     config: {
