@@ -52,7 +52,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         if (e.ctrlKey == true) {
             switch(parseInt(e.keyCode)) {
                 case 37:
-                    me.fireEvent('datefore',me,datescore,dateof,dateto);
+                    me.fireEvent('dateprev',me,datescore,dateof,dateto);
                     break;
                 case 39:
                     me.fireEvent('datenext',me,datescore,dateof,dateto);
@@ -62,7 +62,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
     },
 
     listeners: {
-        datefore: 'onDateFore',
+        dateprev: 'onDatePrev',
         datenext: 'onDateNext'
     },
 
@@ -141,7 +141,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 disabled: true,
                                 editable: false,
                                 xtype: 'datefield',
-                                fieldLabel: 'Data',
+                                fieldLabel: 'Data <i class="fa fa-chevron-left"></i> <i class="fa fa-chevron-right"></i>',
                                 hideTrigger: false,
                                 plugins: 'textmask',
                                 name: 'datescore',

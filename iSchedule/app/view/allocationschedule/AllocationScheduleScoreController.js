@@ -8,7 +8,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         'Smart.util.Message'
     ],
 
-    onDateFore: function (panel,datescore,dateof,dateto) {
+    onDatePrev: function (panel,datescore,dateof,dateto) {
         var me = this,
             view = me.getView(),
             form = view.down('form[name=period]');
