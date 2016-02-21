@@ -64,7 +64,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             Ext.getStore('allocationschedulescore').removeAll();
             datescore.setMinValue(dateof.getSubmitData().dateof);
             datescore.setMaxValue(dateto.getSubmitData().dateto);
-            me.onPeriodDate(datescore,Ext.Date.parse(dateto.getSubmitData().dateto, "Y-m-d"));
+            me.onPeriodDate(datescore,Ext.Date.parse(dateof.getSubmitData().dateof, "Y-m-d"));
         }
     },
 
