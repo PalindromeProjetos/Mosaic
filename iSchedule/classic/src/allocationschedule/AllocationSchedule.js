@@ -162,6 +162,15 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationSchedule', {
                                                     {
                                                         handler: 'showSelectSchedule',
                                                         text: 'Gerar arquivo da Escala Mensal'
+                                                    }, {
+                                                        handler: 'showSelectScheduleContagem',
+                                                        text: 'Contagem - Relatorio'
+                                                    }, {
+                                                        handler: 'showSelectScheduleExtrato',
+                                                        text: 'Extrato Individual - Relatorio'
+                                                    }, {
+                                                        handler: 'showSelectScheduleVerifyPay',
+                                                        text: 'Conferencia Pagar Para - Relatorio'
                                                     }
                                                 ]
                                             }, {

@@ -243,6 +243,58 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         window.open('business/Calls/Report/Schedule.php?action=selectSchedule&period='+record.get('id'));
     },
 
+    showSelectScheduleContagem: function () {
+        var me = this,
+            view = me.getView(),
+            period = view.down('schedulingperiodsearch'),
+            record = period.getSelectedRecord(),
+            params = { limit: 1000 },
+            win = Ext.widget('allocationschedulescorereport');
+
+        win.show(null,function(){
+            Ext.getStore('contractorunitexclud').setParams(params).load({
+
+            });
+            Ext.getStore('contractorsubunitexclud').setParams(params).load({
+
+            });
+        });
+    },
+
+    showSelectScheduleExtrato: function () {
+        var me = this,
+            view = me.getView(),
+            period = view.down('schedulingperiodsearch'),
+            record = period.getSelectedRecord(),
+            params = { limit: 1000 },
+            win = Ext.widget('allocationscheduleextractreport');
+
+        win.show(null,function(){
+            Ext.getStore('contractorunitexclud').setParams(params).load({
+
+            });
+            //Ext.getStore('contractorsubunitexclud').setParams(params).load({
+            //});
+        });
+    },
+
+    showSelectScheduleVerifyPay: function () {
+        var me = this,
+            view = me.getView(),
+            period = view.down('schedulingperiodsearch'),
+            record = period.getSelectedRecord(),
+            params = { limit: 1000 },
+            win = Ext.widget('allocationscheduleverifypayreport');
+
+        win.show(null,function(){
+            Ext.getStore('contractorunitexclud').setParams(params).load({
+
+            });
+            //Ext.getStore('contractorsubunitexclud').setParams(params).load({
+            //});
+        });
+    },
+
     showFrequencySheet: function () {
         var me = this,
             view = me.getView(),
