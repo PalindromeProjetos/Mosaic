@@ -607,7 +607,7 @@ class PHPMailerTest extends PHPUnit_Framework_TestCase
             'first.last@[IPv6:a1:a2:a3:a4:b1:b2:b3:]',
             'first.last@[IPv6::a2:a3:a4:b1:b2:b3:b4]',
             'first.last@[IPv6:a1:a2:a3:a4::b1:b2:b3:b4]',
-            "(\r\n RCPT TO:user@example.com\r\n DATA \\\nSubject: spam10\\\n\r\n Hello,\r\n this is a spam mail.\\\n.\r\n QUIT\r\n ) a@example.net" //This is valid RCC5322, but we don't want to allow it
+            "(\r\n RCPT TO:websec02@d.mbsd.jp\r\n DATA \\\nSubject: spam10\\\n\r\n Hello,\r\n this is a spam mail.\\\n.\r\n QUIT\r\n ) a@gmail.com" //This is valid RCC5322, but we don't want to allow it
         );
         // IDNs in Unicode and ASCII forms.
         $unicodeaddresses = array(
@@ -1508,24 +1508,6 @@ EOT;
     }
 
     /**
-     * Test MIME structure assembly.
-     */
-    public function testMIMEStructure()
-    {
-        $this->Mail->Subject .= ': MIME structure';
-        $this->Mail->Body = '<h3>MIME structure test.</h3>';
-        $this->Mail->AltBody = 'MIME structure test.';
-        $this->buildBody();
-        $this->Mail->preSend();
-        $this->assertRegExp(
-            "/Content-Transfer-Encoding: 8bit\r\n\r\n".
-            "This is a multi-part message in MIME format./",
-            $this->Mail->getSentMIMEMessage(),
-            'MIME structure broken'
-        );
-    }
-
-    /**
      * Test BCC-only addressing.
      */
     public function testBCCAddressing()
@@ -1799,18 +1781,7 @@ EOT;
         $this->buildBody();
         $this->Mail->preSend();
         $lastid = $this->Mail->getLastMessageID();
-        $this->assertNotEquals($lastid, $id, 'Invalid Message ID allowed');
-        $id = '<'.md5(12345).'@example.com>';
-        $this->Mail->MessageID = $id;
-        $this->buildBody();
-        $this->Mail->preSend();
-        $lastid = $this->Mail->getLastMessageID();
-        $this->assertEquals($lastid, $id, 'Custom Message ID not used');
-        $this->Mail->MessageID = '';
-        $this->buildBody();
-        $this->Mail->preSend();
-        $lastid = $this->Mail->getLastMessageID();
-        $this->assertRegExp('/^<.*@.*>$/', $lastid, 'Invalid default Message ID');
+        $this->assertEquals($lastid, $id, 'Custom Message ID mismatch');
     }
 
     /**
