@@ -2,7 +2,9 @@
 
 namespace iSchedule\Quick\schedule;
 
+use Smart\Data\Proxy;
 use Smart\Setup\Start;
+use Smart\Utils\Report;
 use Smart\Utils\Session;
 
 use PHPExcel;
@@ -20,6 +22,12 @@ use PHPExcel_Style_Conditional;
 use PHPExcel_Worksheet_MemoryDrawing;
 use PHPExcel_Worksheet_ColumnDimension;
 use PHPExcel_CachedObjectStorage_Memory;
+use PHPExcel_Worksheet_PageSetup;
+use PHPExcel_Worksheet_PageMargins;
+use PHPExcel_Worksheet_HeaderFooter;
+
+//use PHPExcel_Worksheet_HeaderFooterDrawing;
+
 
 class Schedule extends \Smart\Data\Proxy {
     /**
@@ -53,7 +61,7 @@ class Schedule extends \Smart\Data\Proxy {
             inner join contractorunit cu on ( cu.id = sm.contractorunitid )
             inner join schedulingperiod sp on ( sp.id = sm.schedulingperiodid )
             inner join _tablename_ tp on ( tp.schedulingmonthlyid = sm.id )
-            inner join person c on ( c.id = sm.contractorunitid )
+            inner join person c on ( c.id = sm.contractorunitid and c.isactive = 1)
             left join person n on ( n.id = tp.naturalpersonid )
         where sp.id = :period
           and sm.dutydate between :dateof and :dateto
@@ -78,7 +86,7 @@ class Schedule extends \Smart\Data\Proxy {
                 inner join contractorunit cu on ( cu.id = sm.contractorunitid )
                 inner join schedulingperiod sp on ( sp.id = sm.schedulingperiodid )
                 inner join _tablename_ tp on ( tp.schedulingmonthlyid = sm.id )
-                inner join person c on ( c.id = sm.contractorunitid )
+                inner join person c on ( c.id = sm.contractorunitid and c.isactive = 1)
                 left join person n on ( n.id = tp.naturalpersonid )
             where sp.id = :period
               and sm.dutydate between :dateof and :dateto
@@ -126,7 +134,7 @@ class Schedule extends \Smart\Data\Proxy {
                 $unique[$i]['id'] = $n;
                 $unique[$i]['bordertop'] = $b;
                 $unique[$i]['rownumber'] = $j;
-                $unique[$i][$d.'description'] = '...';
+                $unique[$i][$d.'description'] = '   ';
 
                 if(isset($search[0])) {
                     $unique[$i][$d] = $search[0]['id'];
@@ -212,6 +220,8 @@ class Schedule extends \Smart\Data\Proxy {
 
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, "Excel2007");
 
+        // $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, "OOCalc");
+
         header("Content-Type: application/vnd.ms-excel");
         header("Content-Disposition: attachment;filename=EscalaMensal.xlsx");
         header("Cache-Control: max-age=0");
@@ -226,7 +236,8 @@ class Schedule extends \Smart\Data\Proxy {
     }
 
     private function setScheduleWeek (&$objPHPExcel,$rows,$week,$dateof) {
-        $featured = array('010','012','013');
+
+        $featured = array('010','012','013','014');
         $daysname = $this->daysweek['daysname'];
         $index = str_pad(($week+1),2,"0",STR_PAD_LEFT);
         $colls = array(
@@ -250,7 +261,7 @@ class Schedule extends \Smart\Data\Proxy {
         $sharedStyle1->applyFromArray(
             array('fill' 	=> array(
                 'type'		=> PHPExcel_Style_Fill::FILL_SOLID,
-                'color'		=> array('argb' => 'FFD700')
+                'color'		=> array('argb' => '006661') //array('argb' => 'FFD700')
             ),
                 'borders' => array(
                     'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
@@ -266,7 +277,7 @@ class Schedule extends \Smart\Data\Proxy {
                 'color'		=> array('argb' => 'FFFFFF')
             ),
                 'borders' => array(
-                    'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                    'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_NONE),
                     'right'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN)
                 )
             )
@@ -287,33 +298,7 @@ class Schedule extends \Smart\Data\Proxy {
         $sharedStyle4->applyFromArray(
             array('fill' 	=> array(
                 'type'		=> PHPExcel_Style_Fill::FILL_SOLID,
-                'color'		=> array('argb' => 'feddae')
-            ),
-                'borders' => array(
-                    'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'right'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'left'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'top'       => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-                )
-            )
-        );
-        $sharedStyle5->applyFromArray(
-            array('fill' 	=> array(
-                'type'		=> PHPExcel_Style_Fill::FILL_SOLID,
-                'color'		=> array('argb' => 'FFFAF0')
-            ),
-                'borders' => array(
-                    'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'right'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'left'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                    'top'       => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-                )
-            )
-        );
-        $sharedStyle6->applyFromArray(
-            array('fill' 	=> array(
-                'type'		=> PHPExcel_Style_Fill::FILL_SOLID,
-                'color'		=> array('argb' => 'F0E68C')
+                'color'		=> array('argb' => '009963')//array('argb' => 'feddae')
             ),
                 'borders' => array(
                     'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
@@ -324,12 +309,40 @@ class Schedule extends \Smart\Data\Proxy {
             )
         );
 
+        $sharedStyle5->applyFromArray(
+            array('fill' 	=> array(
+                'type'		=> PHPExcel_Style_Fill::FILL_SOLID,
+                'color'		=> array('argb' => '68FFCC') //array('argb' => 'FFFAF0')
+            ),
+                'borders' => array(
+                    'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                    'right'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                    'left'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                    'top'       => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+                )
+            )
+        );
+
+        $sharedStyle6->applyFromArray(
+            array('fill' 	=> array(
+                'type'		=> PHPExcel_Style_Fill::FILL_SOLID,
+                'color'		=> array('argb' => 'E5E5E5')//array('argb' => 'F0E68C')
+            ),
+                'borders' => array(
+                    'bottom'	=> array('style' => PHPExcel_Style_Border::BORDER_NONE),
+                    'right'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN) //,
+                    //'left'		=> array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                    //'top'       => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+                )
+            )
+        );
+
         $fontStyle1 = array(
             'font'  => array(
                 'bold'  => true,
-                'color' => array('rgb' => '033649'),
-                'size'  => 8,
-                'name'  => 'Calibri'
+                'color' => array('rgb' => 'FFFFFF'),//array('rgb' => '033649'),
+                'size'  => 8, //8,
+                'name'  => 'Humnst777 Cn BT'
             ),
             'alignment' => array(
                 'vertical'      => PHPExcel_Style_Alignment::VERTICAL_CENTER,
@@ -340,8 +353,8 @@ class Schedule extends \Smart\Data\Proxy {
             'font'  => array(
                 'bold'  => false,
                 'color' => array('rgb' => '033649'),
-                'size'  => 7,
-                'name'  => 'Calibri'
+                'size'  => 8, //7,
+                'name'  => 'Humnst777 Cn BT'
             ),
             'alignment' => array(
                 'vertical'      => PHPExcel_Style_Alignment::VERTICAL_CENTER,
@@ -352,8 +365,8 @@ class Schedule extends \Smart\Data\Proxy {
             'font'  => array(
                 'bold'  => true,
                 'color' => array('rgb' => '033649'),
-                'size'  => 9,
-                'name'  => 'Calibri'
+                'size'  => 8, //9,
+                'name'  => 'Humnst777 Cn BT'
             ),
             'alignment' => array(
                 'vertical'      => PHPExcel_Style_Alignment::VERTICAL_CENTER,
@@ -364,8 +377,8 @@ class Schedule extends \Smart\Data\Proxy {
             'font'  => array(
                 'bold'  => true,
                 'color' => array('rgb' => '033649'),
-                'size'  => 10,
-                'name'  => 'Calibri'
+                'size'  => 7,
+                'name'  => 'Humnst777 Cn BT'
             ),
             'alignment' => array(
                 'vertical'      => PHPExcel_Style_Alignment::VERTICAL_CENTER,
@@ -374,11 +387,11 @@ class Schedule extends \Smart\Data\Proxy {
         );
 
         // Colunas Unidades, Ajustando Tamanho
-        $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(14);
+        $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(9);
 
-        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(18);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(1.8);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(1.8);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(8.23);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(2);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(2);
 
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(12);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(12);
@@ -409,6 +422,11 @@ class Schedule extends \Smart\Data\Proxy {
         $day->modify('+ 1 days');
         $sun = $day->format("d");
 
+//        $objPHPExcel->getActiveSheet()
+//            ->setCellValue('A1','ESCALA DE NOVEMBRO/2015')
+//            ->mergeCells('A1:J1');
+
+
         $objPHPExcel->getActiveSheet()
             ->setCellValue("A1","LOCAL")
             ->setCellValue("D1","SEGUNDA - $mon")
@@ -419,9 +437,9 @@ class Schedule extends \Smart\Data\Proxy {
             ->setCellValue("I1","SABADO - $sat")
             ->setCellValue("J1","DOMINGO - $sun");
 
-        $objPHPExcel->getActiveSheet()
-            ->setCellValue('B1','LG')
-            ->mergeCells('B1:C1');
+//        $objPHPExcel->getActiveSheet()
+//            ->setCellValue('B1','LG')
+//            ->mergeCells('B1:C1');
 
         $i = 1;
 
@@ -445,12 +463,13 @@ class Schedule extends \Smart\Data\Proxy {
         imagealphablending($schedule_brain, false);
         imagesavealpha($schedule_brain, true);
 
+        $no = 0;
         foreach($rows as $record) {
             $j = $i+1;
             $phonenumber = $record['phonenumber'];
             $contractorunit = $record['contractorunit'];
 
-            $objPHPExcel->getActiveSheet()->getRowDimension($j)->setRowHeight(10);
+            $objPHPExcel->getActiveSheet()->getRowDimension($j)->setRowHeight(7.5);
 
             $contractorunitLabel = strlen($phonenumber) != 0 ? "$contractorunit\n$phonenumber" : $contractorunit;
 
@@ -487,12 +506,12 @@ class Schedule extends \Smart\Data\Proxy {
 
             // Turno
             $objPHPExcel->getActiveSheet()
-                ->setSharedStyle($sharedStyle5, "B$j:C$j");
+                ->setSharedStyle($sharedStyle5, "B$j:B$j");
 
             // Noturnos
             if($record['shift'] == 'N') {
                 $objPHPExcel->getActiveSheet()
-                    ->setSharedStyle($sharedStyle5, "A$j:J$j")
+                    ->setSharedStyle($sharedStyle6, "A$j:J$j")
                     ->setSharedStyle($sharedStyle4, "B$j")
                     ->getStyle("D$j:J$j")->applyFromArray($fontStyle2);
 
@@ -507,6 +526,7 @@ class Schedule extends \Smart\Data\Proxy {
                 $objDrawing->setCoordinates("B$j");
 
                 unset($objDrawing);
+                $no += 1;
             }
 
             if($record['subunit'] == '003') {
@@ -541,21 +561,114 @@ class Schedule extends \Smart\Data\Proxy {
             if($contractorunit !== $tmp) {
 
                 $cells = "A" . ($old+1) . ":A" . ($i+1);
+                $cellsOutline = "C" . ($old+1) . ":J" . ($i+1);
+                $cellsNoturno = "C" . ((($i+1)-$no)+1) . ":J" . ($i+1);
+                $cellsNoturnoTop = "B" . ((($i+1)-$no)+1) . ":J" . ((($i+1)-$no)+1);
+
+                $cellsBaseBottom = "A" . ($i+1) . ":J" . ($i+1);
+
+
+//                print_r('['.$no.']');
+//                print_r('['.$cellsNoturno.']');
+//                exit;
+
 
                 // Alternando cores das linhas
-                if($new % 2 == 0) {
-                    $objPHPExcel->getActiveSheet()->setSharedStyle($sharedStyle5, $cells);
+//                if($new % 2 == 0) {
+//                    $objPHPExcel->getActiveSheet()->setSharedStyle($sharedStyle5, $cells);
+//                }
+
+                //if (strlen($contractorunit) > 8) {
+                if ($i - $old > 1) {
+                    $objPHPExcel->getActiveSheet()
+                        ->mergeCells($cells)
+                        ->getStyle($cells)
+                        ->applyFromArray($fontStyle4)
+                        ->getAlignment()->setTextRotation(90)
+                        ->setWrapText(true);
+                } else {
+                    $objPHPExcel->getActiveSheet()
+                        ->mergeCells($cells)
+                        ->getStyle($cells)
+                        ->applyFromArray($fontStyle4)
+                        ->getAlignment()
+                        ->setWrapText(true);
                 }
 
                 $objPHPExcel->getActiveSheet()
-                    ->mergeCells($cells)
                     ->getStyle($cells)
-                    ->applyFromArray($fontStyle4)
-                    ->getAlignment()
-                    ->setWrapText(true);
+                    ->applyFromArray(array(
+                            'borders' => array(
+                                'outline' => array(
+                                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                                )
+                            )
+                        )
+                    );
+
+                $objPHPExcel->getActiveSheet()
+                    ->getStyle($cellsOutline)
+                    ->applyFromArray(array(
+                            'borders' => array(
+                                'outline' => array(
+                                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                                )
+                            )
+                        )
+                    );
+
+                $objPHPExcel->getActiveSheet()
+                    ->getStyle($cellsNoturno)
+                    ->applyFromArray(array(
+                            'borders' => array(
+                                'outline' => array(
+                                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                                )
+                            )
+                        )
+                    );
+
+                $objPHPExcel->getActiveSheet()
+                    ->getStyle($cellsNoturnoTop)
+                    ->applyFromArray(array(
+                            'borders' => array(
+                                'top' => array(
+                                    'style' => PHPExcel_Style_Border::BORDER_MEDIUM
+                                )
+                            )
+                        )
+                    );
+
+                $objPHPExcel->getActiveSheet()
+                    ->getStyle($cellsBaseBottom)
+                    ->applyFromArray(array(
+                            'borders' => array(
+                                'bottom' => array(
+                                    'style' => PHPExcel_Style_Border::BORDER_DOUBLE
+                                )
+                            )
+                        )
+                    );
+
+
+
+
+                //Merge Diurno
+                if ($no > 0) {
+                    $objPHPExcel->getActiveSheet()
+                        ->mergeCells("B" . ($old + 1) . ":B" . ((($i + 1) - $no)));
+                }
+
+                //Merge Noturno
+                if ($no > 0) {
+                    $objPHPExcel->getActiveSheet()
+                        ->mergeCells("B" . ((($i+1)-$no)+1) . ":B" . ($i+1));
+                }
 
                 $new++;
                 $old = $i+1;
+
+                $no = 0;
 
             }
 
@@ -567,6 +680,11 @@ class Schedule extends \Smart\Data\Proxy {
                     $objPHPExcel->getActiveSheet()
                         ->setCellValue($coll . $j,$record[$d . "description"] . '*');
                 }
+                if(isset($record[$schema]) && ($record[$schema] == '014')) {
+                    $coll = $colls[$d];
+                    $objPHPExcel->getActiveSheet()
+                        ->setCellValue($coll . $j, '(' . $record[$d . "description"] . ')');
+                }
                 if(isset($record[$schema]) && in_array($record[$schema], $featured)) {
                     $coll = $colls[$d];
                     $objPHPExcel->getActiveSheet()
@@ -575,17 +693,41 @@ class Schedule extends \Smart\Data\Proxy {
             }
 
             // Merge Colunas LG
-            $objPHPExcel->getActiveSheet()
-                ->mergeCells("B$j:C$j");
+//            $objPHPExcel->getActiveSheet()
+//                ->mergeCells("B$j:C$j");
 
             $i++;
         }
+
+        //exit;
 
         // Estilos
         $objPHPExcel->getActiveSheet()
             ->setSharedStyle($sharedStyle1, "A$j")
             ->setSharedStyle($sharedStyle1, "A1:J1")
             ->getStyle("A1:J1")->applyFromArray($fontStyle1);
+
+        $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
+        //$objPHPExcel->getActiveSheet()->getPageSetup()->setFitToWidth(1);
+        //$objPHPExcel->getActiveSheet()->getPageSetup()->setFitToHeight(0);
+        $objPHPExcel->getActiveSheet()->getPageSetup()->setHorizontalCentered(true);
+        $objPHPExcel->getActiveSheet()->getPageSetup()->setVerticalCentered(true);
+
+        $objPHPExcel->getActiveSheet()->getPageMargins()->setBottom(0.1);
+        $objPHPExcel->getActiveSheet()->getPageMargins()->setTop(0.1);
+        $objPHPExcel->getActiveSheet()->getPageMargins()->setLeft(0.1);
+        $objPHPExcel->getActiveSheet()->getPageMargins()->setRight(0.1);
+//        $objPHPExcel->getActiveSheet()->getPageMargins()->setHeader(0.1);
+        $objPHPExcel->getActiveSheet()->getPageSetup()->setPrintArea("A1:J$i");
+        $objPHPExcel->getActiveSheet()->getPageSetup()->setFitToPage(false);
+        $objPHPExcel->getActiveSheet()->getPageSetup()->setScale(97);
+
+        $objPHPExcel->getActiveSheet()
+            ->getHeaderFooter()
+            ->setOddHeader('ESCALA DE NOVEMBRO/2015')
+        ;
+
+
     }
 
 }

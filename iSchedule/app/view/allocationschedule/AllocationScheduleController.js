@@ -252,12 +252,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
             win = Ext.widget('allocationschedulescorereport');
 
         win.show(null,function(){
-            Ext.getStore('contractorunitexclud').setParams(params).load({
-
-            });
-            Ext.getStore('contractorsubunitexclud').setParams(params).load({
-
-            });
+            Ext.getStore('contractorunitexclud').setParams(params).load();
+            Ext.getStore('contractorsubunitexclud').setParams(params).load();
         });
     },
 
@@ -316,6 +312,91 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
             win.down('hiddenfield[name=periodid]').setValue(period.getValue());
             win.down('textfield[name=period]').setValue(period.getDisplayValue());
         },me);
+    },
+
+    showScoreReport: function () {
+        var me = this,
+            view = me.getView(),
+            contractorunitlist = [],
+            contractorsublist = [],
+            form = view.down('form'),
+            data = form.getValues(),
+            list = view.down('gridpanel[name=contractorunitexclud]').getSelectionModel().getSelection(),
+            listSub = view.down('gridpanel[name=contractorsubunitexclud]').getSelectionModel().getSelection(),
+            url = 'business/Calls/Report/ScheduleScore.php?',
+            qrp = 'legalentityid={0}&periodof={1}&periodto={2}&contractorunitid={3}&subunit={4}&unitexclud={5}&subexclud={6}',
+            unitexclud = '',
+            subexclud = '';
+
+        if(form.isValid()) {
+            if(list.length) {
+                Ext.each(list,function(record, index) {
+                    contractorunitlist.push(parseInt(record.get('id')));
+                },me);
+                unitexclud = Ext.encode(contractorunitlist);
+            }
+
+            if(listSub.length) {
+                Ext.each(listSub,function(record, index) {
+                    contractorsublist.push(record.get('subunit'));
+                },me);
+                subexclud = Ext.encode(contractorsublist);
+            }
+
+            window.open(Ext.String.format(url + qrp,data.legalentityid,data.periodof,data.periodto,data.contractorunitid,data.subunit, unitexclud, subexclud));
+        }
+    },
+
+    showExtractReport: function () {
+        var me = this,
+            view = me.getView(),
+            contractorunitlist = [],
+            contractorsublist = [],
+            form = view.down('form'),
+            data = form.getValues(),
+            list = view.down('gridpanel[name=contractorunitexclud]').getSelectionModel().getSelection(),
+            url = 'business/Calls/Report/ScheduleExtract.php?',
+            qrp = 'periodof={0}&periodto={1}&naturalperson={2}&unitexclud={3}',
+            unitexclud = '';
+
+        if(form.isValid()) {
+
+            if(list.length) {
+                Ext.each(list,function(record, index) {
+                    contractorunitlist.push(parseInt(record.get('id')));
+                },me);
+                unitexclud = Ext.encode(contractorunitlist);
+            }
+
+            window.open(Ext.String.format(url + qrp,data.periodof,data.periodto,data.naturalperson, unitexclud));
+        }
+    },
+
+    showVerifyPayReport: function () {
+        var me = this,
+            view = me.getView(),
+            contractorunitlist = [],
+            contractorsublist = [],
+            form = view.down('form'),
+            data = form.getValues(),
+            list = view.down('gridpanel[name=contractorunitexclud]').getSelectionModel().getSelection(), //        listSub = view.down('gridpanel[name=contractorsubunitexclud]').getSelectionModel().getSelection(),
+            url = 'business/Calls/Report/ScheduleVerifyPay.php?',
+            qrp = 'periodof={0}&periodto={1}&contractorunitid={2}&unitexclud={3}',
+            unitexclud = '',
+            subexclud = '';
+
+        console.info(data);
+
+        if(form.isValid()) {
+
+            if(list.length) {
+                Ext.each(list,function(record, index) {
+                    contractorunitlist.push(parseInt(record.get('id')));
+                },me);
+                unitexclud = Ext.encode(contractorunitlist);
+            }
+            window.open(Ext.String.format(url + qrp,data.periodof,data.periodto, data.contractorunitid, unitexclud));
+        }
     },
 
     showReportDirectorShip: function (btn) {

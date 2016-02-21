@@ -156,7 +156,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationSchedule', {
                                                 scale: 'medium',
                                                 xtype: 'splitbutton',
                                                 glyph: 0xe887,
-                                                text: 'Folha',
+                                                text: 'Frequ.',
                                                 handler: 'showFrequencySheet',
                                                 menu: [
                                                     {
