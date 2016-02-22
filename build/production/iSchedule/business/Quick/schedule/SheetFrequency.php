@@ -95,7 +95,7 @@ class SheetFrequency extends Report {
         $this->SetLineWidth(0.4);
         $this->SetFont('Arial', 'B', 22);
 
-        $this->Cell(190,4, utf8_decode('Observações'),0,1,'C',false);
+        $this->Cell(190,4, utf8_decode('ObservaÃ§Ãµes'),0,1,'C',false);
         $this->Cell($this->totalSizeColums,6,'','B',1,'C',0);
 
         $this->configStyleDetail();
@@ -115,7 +115,7 @@ class SheetFrequency extends Report {
         $this->SetFont('Arial', 'B', 28);
         $this->Cell(190,36, 'FAVOR CARIMBAR E ASSINAR',0,1,'C',false);
         $this->SetFont('Arial', 'B', 24);
-        $this->Cell(190,24, utf8_decode('Folha de Frequência'),0,1,'C',false);
+        $this->Cell(190,24, utf8_decode('Folha de FrequÃªncia'),0,1,'C',false);
 
         switch ($this->rows[0]['unit_shortname']) {
             case "CECON":
@@ -217,7 +217,7 @@ class SheetFrequency extends Report {
             $this->SetFont('Arial', 'B', 14);
 
             $month = $this->translate['monthly'][ strtolower($periodof->format( "M" ))];
-            $this->Cell(190,4, utf8_decode('Folha de Frequência - ') . $month . $periodof->format( "/Y" ),0,1,'C',false);
+            $this->Cell(190,4, utf8_decode('Folha de FrequÃªncia - ') . $month . $periodof->format( "/Y" ),0,1,'C',false);
 
             $this->Ln(2);
             $this->SetFont('Arial', '', 10);

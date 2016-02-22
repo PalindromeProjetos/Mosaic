@@ -66,21 +66,21 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         datenext: 'onDateNext'
     },
 
-    buildScore: function () {
-        var build = function (text) {
+    buildScore: function (shift) {
+        var build = function (text,dataIndex) {
                 var header = {
                         cls: 'ligth',
                         sortable: false,
                         width: 220,
-                        dataIndex: 'shiftd',
+                        dataIndex: dataIndex,
                         text: text
                     };
                 return header;
             },
             field = [
-                build('Planejado'),
-                build('Realizado'),
-                build('Reembolso')
+                build('Planejado','shift' + shift),
+                build('Realizado','shift' + shift + 'r'),
+                build('Reembolso','shift' + shift + 'p')
             ];
 
         return field;
@@ -225,11 +225,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                             {
                                                 cls: 'dark',
                                                 text: '<a style="font-size: 18px; font-family: Monda;">PLANTÕES DIURNOS</a>',
-                                                columns: me.buildScore()
+                                                columns: me.buildScore('d')
                                             }, {
                                                 cls: 'dark',
                                                 text: '<a style="font-size: 18px; font-family: Monda;">PLANTÕES NOTURNOS</a>',
-                                                columns: me.buildScore()
+                                                columns: me.buildScore('n')
                                             }
                                         ]
                                     }

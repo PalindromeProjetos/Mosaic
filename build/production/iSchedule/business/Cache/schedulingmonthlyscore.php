@@ -6,7 +6,79 @@ use iSchedule\Model\schedulingmonthlyscore as Model;
 
 class schedulingmonthlyscore extends \Smart\Data\Cache {
 
-    public function selectCode(array $data) {
+    private $tblMaster;
+
+    private $tblDetail;
+
+    private $sqlMaster = "
+        select
+            tp.id,
+            n.shortname as naturalperson,
+            tp.shift
+        from
+            schedulingmonthly sm
+            inner join schedulingmonthlypartners tp on ( tp.schedulingmonthlyid = sm.id )
+            inner join person n on ( n.id = tp.naturalpersonid )
+        where sm.dutydate = :datescore
+          and tp.subunit = :subunit
+          and sm.contractorunitid = :contractorunitid
+        order by tp.shift, tp.position";
+
+    private $sqlDetail = "
+        select
+            s.id,
+            n.shortname as naturalperson,
+            tp.shift,
+            s.scoretype,
+            s.schedulingmonthlypartnersid
+        from
+            schedulingmonthlyscore s
+            inner join person n on ( n.id = s.naturalpersonid )
+            inner join schedulingmonthlypartners tp on ( tp.id = s.schedulingmonthlypartnersid )
+            inner join schedulingmonthly sm on ( sm.id = tp.schedulingmonthlyid )
+        where sm.dutydate = :datescore
+          and tp.subunit = :subunit
+          and sm.contractorunitid = :contractorunitid
+        order by s.schedulingmonthlypartnersid, tp.shift, tp.position";
+
+    public function createData (array $data) {
+
+        $proxy = $this->getStore()->getProxy();
+
+        $contractorunitid = $data['contractorunitid'];
+        $datescore = $data['datescore'];
+        $subunit = $data['subunit'];
+
+        try {
+
+            // tblMaster
+            $pdo = $proxy->prepare($this->sqlMaster);
+            $pdo->bindValue(":contractorunitid", $contractorunitid, \PDO::PARAM_INT);
+            $pdo->bindValue(":datescore", $datescore, \PDO::PARAM_STR);
+            $pdo->bindValue(":subunit", $subunit, \PDO::PARAM_STR);
+
+            $pdo->execute();
+            $this->tblMaster = self::encodeUTF8($pdo->fetchAll());
+
+            // tblDetail
+            $pdo = $proxy->prepare($this->sqlDetail);
+            $pdo->bindValue(":contractorunitid", $contractorunitid, \PDO::PARAM_INT);
+            $pdo->bindValue(":datescore", $datescore, \PDO::PARAM_STR);
+            $pdo->bindValue(":subunit", $subunit, \PDO::PARAM_STR);
+
+            $pdo->execute();
+            $this->tblDetail = self::encodeUTF8($pdo->fetchAll());
+
+        } catch ( \PDOException $e ) {
+            self::_setSuccess(false);
+            self::_setText($e->getMessage());
+        }
+
+        return self::getResult();
+
+    }
+
+    public function selectCode (array $data) {
         $query = $data['query'];
         $scoretype = $data['scoretype'];
         $proxy = $this->getStore()->getProxy();
@@ -47,38 +119,50 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
         return self::getResultToJson();
     }
 
-    public function selectDate(array $data) {
-        $query = $data['query'];
-        $scoretype = $data['scoretype'];
-        $proxy = $this->getStore()->getProxy();
+    public function selectDate (array $data) {
+        $i = 1;
+        $j = 0;
+        $d = 0;
+        $n = 0;
+        $k = 0;
+        $list = array();
 
-        $sql = "
-            select
-                smc.id,
-                smc.schedulingmonthlypartnersid,
-                smc.naturalpersonid,
-                p.shortname as naturalperson,
-                smc.scoretype,
-                smc.changedate,
-                smc.username,
-                smc.observation,
-                smc.dutyfraction
-            from
-                schedulingmonthlyscore smc
-                inner join person p on ( p.id = smc.naturalpersonid )
-            where smc.schedulingmonthlypartnersid = :id
-              and smc.scoretype = :scoretype";
+        $this->createData($data);
 
         try {
-            $pdo = $proxy->prepare($sql);
 
-            $pdo->bindValue(":id", $query, \PDO::PARAM_INT);
-            $pdo->bindValue(":scoretype", $scoretype, \PDO::PARAM_STR);
+            $rows = $this->tblMaster;
 
-            $pdo->execute();
-            $rows = $pdo->fetchAll();
+            foreach($rows as $item) {
+                if($item['shift'] == 'D') {
+                    $k = $d;
+                }
+                if($item['shift'] == 'N') {
+                    $k = $n;
+                }
 
-            self::_setRows($rows);
+                $shift = strtolower($item['shift']);
+
+                $list[$k]["idshift$shift"] = $item['id'];
+                $list[$k]["shift$shift"] = $item['naturalperson'];
+                $list[$k]["shift$shift".'r'] = $this->selectList($item,'R');
+                $list[$k]["shift$shift".'p'] = $this->selectList($item,'P');
+                $k++;
+
+                if($item['shift'] == 'D') {
+                    $d = $k;
+                }
+                if($item['shift'] == 'N') {
+                    $n = $k;
+                }
+
+                $list[$j]['id'] = $i;
+
+                $j++;
+                $i++;
+            }
+
+            self::_setRows($list);
 
         } catch ( \PDOException $e ) {
             self::_setSuccess(false);
@@ -86,6 +170,19 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
         }
 
         return self::getResultToJson();
+    }
+
+    public function selectList ($item,$type) {
+        $id = $item['id'];
+        $shift = $item['shift'];
+        $detail = $this->tblDetail;
+
+        $detail = self::searchArray($detail,'shift',$shift);
+        $detail = self::searchArray($detail,'scoretype',$type);
+        $detail = self::searchArray($detail,'schedulingmonthlypartnersid',$id);
+        $detail = self::selectArray($detail,"naturalperson");
+
+        return trim(implode(', ', $detail));
     }
 
 }
