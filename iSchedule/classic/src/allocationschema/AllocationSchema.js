@@ -286,7 +286,8 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchema', {
                                         style: {
                                             color: '#457EC5;',
                                             fontSize: '25px;',
-                                            fontFamily: 'Open Sans'
+                                            fontWeight: 'bold;',
+                                            fontFamily: 'Open Sans;'
                                         }
                                     }
                                 ]

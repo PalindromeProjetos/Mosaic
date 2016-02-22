@@ -141,7 +141,13 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 disabled: true,
                                 editable: false,
                                 xtype: 'datefield',
-                                fieldLabel: 'Data <i class="fa fa-arrow-left"></i> <i class="fa fa-arrow-right"></i>',
+                                afterLabelTextTpl: [
+                                    '<i style="font-style: italic;"> ...navegação, ctrl + </i>',
+                                    '<i class="fa fa-arrow-left"></i>',
+                                    ' ',
+                                    '<i class="fa fa-arrow-right"></i>'
+                                ],
+                                fieldLabel: 'Data',
                                 hideTrigger: false,
                                 plugins: 'textmask',
                                 name: 'datescore',
@@ -172,7 +178,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 }
                             }, {
                                 xtype: 'button',
-                                scale: 'medium',
+                                scale: 'large',
                                 iconCls: "fa fa-print",
                                 text: 'Imprimir Contagem'
                             }
@@ -195,7 +201,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                         style: {
                                             color: '#457EC5;',
                                             fontSize: '25px;',
-                                            fontFamily: 'Open Sans'
+                                            fontWeight: 'bold;',
+                                            fontFamily: 'Open Sans;'
                                         }
                                     }
                                 ]

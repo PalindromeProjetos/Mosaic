@@ -235,7 +235,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationSchedule', {
                                         style: {
                                             color: '#457EC5;',
                                             fontSize: '25px;',
-                                            fontFamily: 'Open Sans'
+                                            fontWeight: 'bold;',
+                                            fontFamily: 'Open Sans;'
                                         }
                                     }
                                 ]
