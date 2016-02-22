@@ -93,7 +93,33 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         if(contractorunit.isValid() && subunitdescription.isValid()) {
             if(form.isValid()) {
                 var params = form.getValues();
-                score.setParams(params).load();
+                score.setParams(params).load({
+                    callback: function (records, operation, success) {
+                        if((records.length != 0) && (success == true)) {
+                            view.down('gridpanel').focus();
+                            view.down('gridpanel').getSelectionModel().select(0);
+                        }
+                    }
+                });
+            }
+        }
+    },
+
+    onCellKeyDown: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+        var me = this,
+            view = me.getView(),
+            dateof = view.down('datefield[name=dateof]'),
+            dateto = view.down('datefield[name=dateto]'),
+            datescore = view.down('datefield[name=datescore]');
+
+        if (e.ctrlKey == true) {
+            switch(e.keyCode) {
+                case 37:
+                    me.onDatePrev(view,datescore,dateof,dateto);
+                    break;
+                case 39:
+                    me.onDateNext(view,datescore,dateof,dateto);
+                    break;
             }
         }
     }

@@ -43,7 +43,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         me.getEl().on('keydown', me.onFormElKeyDown, me);
     },
 
-    onFormElKeyDown: function(e, el) {
+    onFormElKeyDown: function(e) {
         var me = this,
             dateof = me.down('datefield[name=dateof]'),
             dateto = me.down('datefield[name=dateto]'),
@@ -67,12 +67,12 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
     },
 
     buildScore: function (shift) {
-        var build = function (text,dataIndex) {
+        var build = function (text,scoreType) {
                 var header = {
                         cls: 'ligth',
                         sortable: false,
                         width: 220,
-                        dataIndex: dataIndex,
+                        dataIndex: scoreType,
                         text: text
                     };
                 return header;
@@ -231,7 +231,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                                 text: '<a style="font-size: 18px; font-family: Monda;">PLANTÕES NOTURNOS</a>',
                                                 columns: me.buildScore('n')
                                             }
-                                        ]
+                                        ],
+                                        listeners: {
+                                            cellkeydown: 'onCellKeyDown'
+                                        }
                                     }
                                 ]
                             }
