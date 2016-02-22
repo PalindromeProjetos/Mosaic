@@ -2,6 +2,10 @@
 Ext.define( 'iSchedule.store.allocationschedule.SchedulingMonthlyScore', {
     extend: 'Smart.data.StoreBase',
 
+    alias: 'store.SchedulingMonthlyScore',
+
+    storeId: 'schedulingmonthlyscore',
+
     url: 'business/Calls/schedulingmonthlyscore.php',
 
     requires: [

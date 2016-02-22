@@ -50,7 +50,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
             datescore = me.down('datefield[name=datescore]');
 
         if (e.ctrlKey == true) {
-            switch(parseInt(e.keyCode)) {
+            switch(e.keyCode) {
                 case 37:
                     me.fireEvent('dateprev',me,datescore,dateof,dateto);
                     break;
@@ -72,6 +72,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                         cls: 'ligth',
                         sortable: false,
                         width: 220,
+                        dataIndex: 'shiftd',
                         text: text
                     };
                 return header;
@@ -216,7 +217,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                         xtype: 'gridpanel',
                                         store: 'allocationschedulescore',
                                         cls: 'allocationschemaweek',
-                                        bodyStyle: 'padding: 0 0 0 10px;',
                                         rowLines: false,
                                         autoScroll: true,
                                         columnLines: true,

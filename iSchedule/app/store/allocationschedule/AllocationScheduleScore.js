@@ -6,12 +6,32 @@ Ext.define( 'iSchedule.store.allocationschedule.AllocationScheduleScore', {
 
     storeId: 'allocationschedulescore',
 
-    requires: [
-        'iSchedule.model.allocationschedule.AllocationScheduleScore'
-    ],
-
     url: 'business/Calls/schedulingmonthlyscore.php',
 
-    model: 'iSchedule.model.allocationschedule.AllocationScheduleScore'
+    fields: [
+        {
+            name: 'id',
+            type: 'int'
+        }, {
+            name: 'idshiftd',
+            type: 'int'
+        }, {
+            name: 'shiftd',
+            type: 'auto'
+        }, {
+            name: 'idshiftn',
+            type: 'int'
+        }, {
+            name: 'shiftn',
+            type: 'auto'
+        }
+    ],
+
+    config: {
+        extraParams: {
+            action: 'select',
+            method: 'selectDate'
+        }
+    }
 
 });

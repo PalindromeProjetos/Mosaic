@@ -43,7 +43,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                 break;
         }
 
-        if( Ext.Date.between(localDateScore,localDateOf,localDateTo) == true) {
+        if(Ext.Date.between(localDateScore,localDateOf,localDateTo) == true) {
             datescore.setValue(localDateScore);
             me.onPeriodDate(datescore,Ext.Date.parse(datescore.getSubmitData().datescore, "Y-m-d"));
         }
@@ -71,24 +71,29 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     onPeriodDate: function (field, value, eOpts) {
         var me = this,
             view = me.getView(),
+            form = view.down('form[name=period]'),
+            score = Ext.getStore('allocationschedulescore'),
             labelperiod = view.down('label[name=labelperiod]');
 
-        Ext.getStore('allocationschedulescore').removeAll();
+        score.removeAll();
         labelperiod.setText(me.getDateFormated(value,'DAY_NAME'));
         view.down('combosearch[name=contractorunit]').setDisabled(false);
         view.down('comboenum[name=subunitdescription]').setDisabled(false);
+        me.onUnitSubUnit();
     },
 
     onUnitSubUnit: function (combo, record, eOpts) {
         var me = this,
             view = me.getView(),
             form = view.down('form[name=period]'),
+            score = Ext.getStore('allocationschedulescore'),
             contractorunit = view.down('combosearch[name=contractorunit]'),
             subunitdescription = view.down('comboenum[name=subunitdescription]');
 
         if(contractorunit.isValid() && subunitdescription.isValid()) {
             if(form.isValid()) {
-               console.info(form.getValues());
+                var params = form.getValues();
+                score.setParams(params).load();
             }
         }
     }
