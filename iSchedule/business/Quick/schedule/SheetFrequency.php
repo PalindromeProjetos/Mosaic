@@ -30,14 +30,15 @@ class SheetFrequency extends Report {
 
         $dateof = $this->post->dateof;
         $dateto = $this->post->dateto;
-        $status = $this->post->status;
+
+        $this->showlabel = $this->post->showlabel;
+
+        //   $status = $this->post->status;
         $periodid = $this->post->periodid;
         $contractorunitid = $this->post->contractorunitid;
         $subunit = isset($this->post->subunit) ? $this->post->subunit : 'P';
 
-        $link = array(Start::getConnnect(), Start::getUserName(), Start::getPassWord());
-
-        $this->proxy = new Proxy($link);
+        $this->proxy = new Proxy(array(Start::getConnnect(), Start::getUserName(), Start::getPassWord()));
 
         $this->sizeColumns = self::scaleCalc(array_sum($this->sizeColumns),190,$this->sizeColumns);
         $this->setTotalSizeColums();
@@ -48,13 +49,14 @@ class SheetFrequency extends Report {
                 sp.periodto,
                 sm.dutydate,
                 c.name as contractorunit,
+                c.shortname as unit_shortname,
                 n.shortname as naturalperson,
                 tp.shift,
                 tp.subunit
             from
                 schedulingmonthly sm
                 inner join schedulingperiod sp on ( sp.id = sm.schedulingperiodid )
-                inner join _tablename_ tp on ( tp.schedulingmonthlyid = sm.id )
+                inner join _tablename_ tp on ( tp.schedulingmonthlyid = sm.id  and tp.allocationschema not in ('014'))
                 inner join person c on ( c.id = sm.contractorunitid )
                 left join person n on ( n.id = tp.naturalpersonid )
             where sp.id = :periodid
@@ -87,13 +89,13 @@ class SheetFrequency extends Report {
         $this->Output("SheetFrequency.pdf", "I");
     }
 
-    public function SetObservation () {
+    function SetObservation () {
         $this->configStyleHeader();
 
         $this->SetLineWidth(0.4);
         $this->SetFont('Arial', 'B', 22);
 
-        $this->Cell(190,4, 'Observações',0,1,'C',false);
+        $this->Cell(190,4, utf8_decode('ObservaÃ§Ãµes'),0,1,'C',false);
         $this->Cell($this->totalSizeColums,6,'','B',1,'C',0);
 
         $this->configStyleDetail();
@@ -103,36 +105,74 @@ class SheetFrequency extends Report {
         }
     }
 
-    public function SetCoverPage () {
+    function SetCoverPage () {
 
         $subunittext = $this->post->subunittext;
+
+        $this->Rect(4, 4, 202, 280, 'D');
 
         $this->Ln(60);
         $this->SetFont('Arial', 'B', 28);
         $this->Cell(190,36, 'FAVOR CARIMBAR E ASSINAR',0,1,'C',false);
         $this->SetFont('Arial', 'B', 24);
-        $this->Cell(190,24, 'Folha de Frequência',0,1,'C',false);
-        $this->Image("../../../../resources/images/appanest/logo-text.png",60,30,80,20,"PNG");
+        $this->Cell(190,24, utf8_decode('Folha de FrequÃªncia'),0,1,'C',false);
+
+        switch ($this->rows[0]['unit_shortname']) {
+            case "CECON":
+            case "HEMOAM":
+            case "Moura":
+            case "Ambulatorio de Dor":
+            case "Moura Tapajoz";
+                $this->Image("../../../../resources/images/appanest/logo-text.png",60,30,80,20,"PNG");
+                break;
+            default :
+                $this->Image("../../../../resources/images/appanest/logoIAA.png",60,30,80,20,"PNG");
+        };
+
 
         $periodof = new \DateTime($this->post->dateof);
         $periodto = new \DateTime($this->post->dateto);
 
         $this->Ln(10);
-        $this->SetFont('Arial', 'B', 16);
-        $this->Cell(190,6, $this->rows[0]['contractorunit'],0,1,'C',false);
+        $this->SetFont('Arial', 'B', 14);
+
+        $this->Cell(190,6, $this->rows[0]['contractorunit'] ,0,1,'C',false);
+        $this->Ln(1);
+        $this->Cell(190,6, '# '.$this->rows[0]['unit_shortname'] .' #' ,0,1,'C',false);
+        $this->Ln(1);
+
+        switch ($this->rows[0]['unit_shortname']) {
+            case "Francisca Mendes":
+                if ( substr($this->post->subunittext,0,5) == 'PLANT') {
+                    $this->Cell(190, 6, 'GERAL E VASCULAR', 0, 1, 'C', false);
+                } else {
+                    $this->Cell(190,6, $this->post->subunittext,0,1,'C',false);
+                };
+                break;
+            default :
+                $this->Cell(190,6, $this->post->subunittext,0,1,'C',false);
+        };
 
         $month = $this->translate['monthly'][ strtolower($periodof->format( "M" ))];
         $this->Cell(190,6, $month . $periodof->format( "/Y" ),0,1,'C',false);
 
-        $this->SetFont('Arial', '', 12);
-        $this->Cell(190,6, $periodof->format( "d/m/Y" ) . ' - ' . $periodto->format( "d/m/Y" ) . ' - ' . $subunittext,0,1,'C',false);
+        $this->Ln(8);
+        $this->SetFont('Arial', 'B', 14);
+        $this->Cell(190,6, $periodof->format( "d/m/Y" ) . ' - ' . $periodto->format( "d/m/Y" ),0,1,'C',false);
+
+        if ($this->showlabel == 'true') {
+            $this->Ln(16);
+            $this->SetFont('Arial', 'B', 22);
+            $this->Cell(190,6, 'UNIDADE',0,1,'C',false);
+        }
+
     }
 
-    public function setTotalSizeColums() {
+    function setTotalSizeColums() {
         $this->totalSizeColums = array_sum($this->sizeColumns);
     }
 
-    public function getHeaderColumns() {
+    function getHeaderColumns() {
 
         $columns = array(
             array($this->sizeColumns[0],'Cooperado','L'),
@@ -148,61 +188,26 @@ class SheetFrequency extends Report {
         return $columns;
     }
 
-    public function configHeaderDutyDate () {
-        $this->SetFont('Arial', 'B', 9);
-        $this->Cell($this->sizeColumns[0],6,'Diurnos','B',0,'C',0);
-        $this->Cell($this->sizeColumns[1],6,'Plantonista','B',0,'L',0);
-        $this->Cell($this->sizeColumns[2],6,'','B',0,'C',0);
-        $this->Cell($this->sizeColumns[3],6,'Pagar para','B',0,'L',0);
-        $this->Cell($this->sizeColumns[4],6,'Noturnos','B',0,'C',0);
-        $this->Cell($this->sizeColumns[5],6,'Plantonista','B',0,'L',0);
-        $this->Cell($this->sizeColumns[6],6,'','B',0,'C',0);
-        $this->Cell($this->sizeColumns[7],6,'Pagar para','B',1,'L',0);
-    }
-
-    public function setDutyDateShift (array $rows) {
-        $d = 0;
-        $n = 0;
-        $list = array();
-        $temp = array();
-        $uniq = array();
-
-        foreach($rows as $record) {
-            $list[]['dutydate'] = $record['dutydate'];
-        }
-
-        $list = self::uniqueArray($list);
-
-        foreach($list as $key=>$val) {
-            $data = self::searchArray($rows,'dutydate',$val['dutydate']);
-
-            foreach($data as $item) {
-                if($item['shift'] == 'D') {
-                    $uniq[$d]['dutydate'] = $item['dutydate'];
-                    $uniq[$d]['shiftd'] = $item['naturalperson'];
-                    $d++;
-                }
-                if($item['shift'] == 'N') {
-                    $uniq[$n]['dutydate'] = $item['dutydate'];
-                    $uniq[$n]['shiftn'] = $item['naturalperson'];
-                    $n++;
-                }
-            }
-
-            $temp = array_merge($temp,$uniq);
-        }
-
-        return self::uniqueArray($temp);
-    }
-
-    public function Header(){
+    function Header(){
 
         if($this->PageNo() == 1) {
             $this->SetCoverPage();
             $this->AddPage();
         } else {
             $subunittext = $this->post->subunittext;
-            $contractorunit = $this->rows[0]['contractorunit'];
+
+            switch ($this->rows[0]['unit_shortname']) {
+                case "Francisca Mendes":
+                    if ( substr($this->post->subunittext,0,5) == 'PLANT') {
+                        $contractorunit = $this->rows[0]['contractorunit'] .' - '.'GERAL E VASCULAR';
+                    } else {
+                        $contractorunit = $this->rows[0]['contractorunit'] .' - '.$this->post->subunittext;
+                    };
+                    break;
+                default :
+                    $contractorunit = $this->rows[0]['contractorunit'] .' - '.$this->post->subunittext;
+            };
+
             $periodof = new \DateTime($this->post->dateof);
             $periodto = new \DateTime($this->post->dateto);
 
@@ -212,22 +217,108 @@ class SheetFrequency extends Report {
             $this->SetFont('Arial', 'B', 14);
 
             $month = $this->translate['monthly'][ strtolower($periodof->format( "M" ))];
-            $this->Cell(190,4, 'Folha de Frequência - ' . $month . $periodof->format( "/Y" ),0,1,'C',false);
+            $this->Cell(190,4, utf8_decode('Folha de FrequÃªncia - ') . $month . $periodof->format( "/Y" ),0,1,'C',false);
 
             $this->Ln(2);
             $this->SetFont('Arial', '', 10);
             $this->Cell(190,4, $contractorunit,0,1,'C',false);
             $this->SetFont('Arial', '', 10);
-            $this->Cell(190,6, $periodof->format( "d/m/Y" ) . ' - ' . $periodto->format( "d/m/Y" ) .' - '. $subunittext,0,1,'C',false);
+            $this->Cell(190,6, $periodof->format( "d/m/Y" ) . ' - ' . $periodto->format( "d/m/Y" ),0,1,'C',false);
 
             $this->configStyleLabelHeader();
 
-            $this->SetFillColor(240, 220, 142);
-            $this->loadLabel($this->getHeaderColumns(),12);
         }
     }
 
-    public function Detail() {
+    function configHeaderDutyDate () {
+        $titleColumn = $this->sizeColumns[0]+$this->sizeColumns[1]+$this->sizeColumns[2]+$this->sizeColumns[3];
+
+        $this->AddFont('Tahoma','B','tahomabd.php');
+        //$this->AddFont('Tahoma','');
+        $this->SetFont('Tahoma', 'B', 10);
+        $this->Cell($this->sizeColumns[0],6,'DIURNO','',0,'C',0);
+        $this->Cell($this->sizeColumns[1],6,'PLANTONISTA','',0,'L',0);
+        $this->Cell($this->sizeColumns[2],6,'','',0,'C',0);
+        $this->Cell($this->sizeColumns[3],6,'PAGAR PARA','',0,'L',0);
+        $this->Cell($this->sizeColumns[4],6,'NOTURNO','',0,'C',0);
+        $this->Cell($this->sizeColumns[5],6,'PLANTONISTA','',0,'L',0);
+        $this->Cell($this->sizeColumns[6],6,'','',0,'C',0);
+        $this->Cell($this->sizeColumns[7],6,'PAGAR PARA','',1,'L',0);
+    }
+
+    function setDutyDateShift (array $rows) {
+
+        $data = array();
+        $temp = array();
+        $uniq = array();
+
+        $i = 0;
+        $d = 0;
+        $n = 0;
+        $j = 0;
+
+        $k = count($rows);
+
+        $rows[$k]['periodof'] = '2015-10-01';
+        $rows[$k]['periodto'] = '2015-10-31';
+        $datenew = new \DateTime($rows[$k-1]['dutydate']);
+        $datenew->modify('+1 day');
+        $datetonew = $datenew->format('Y-m-d');
+        $rows[$k]['dutydate'] = $datetonew; //'2015-11-01'; //$rows[$k-1]['dutydate'];
+        $rows[$k]['contractorunit'] = '';
+        $rows[$k]['naturalperson'] = '';
+        $rows[$k]['shift'] = 'N';
+        $rows[$k]['subunit'] = '000';
+
+        foreach($rows as $record) {
+
+            $data[$i]['shift'] = $record['shift'];
+            $data[$i]['dutydate'] = $record['dutydate'];
+            $data[$i]['naturalperson'] = $record['naturalperson'];
+
+            $i++;
+            $j++;
+
+            if($j < count($rows)) {
+
+                if( ($record['dutydate'] != $rows[$j]['dutydate'])  ) {
+
+                    foreach($data as $item) {
+                        if($item['shift'] == 'D') {
+                            $uniq[$d]['dutydate'] = $item['dutydate'];
+                            $uniq[$d]['shiftd'] = $item['naturalperson'];
+                            $d++;
+                        }
+                        if($item['shift'] == 'N') {
+                            $uniq[$n]['dutydate'] = $item['dutydate'];
+                            $uniq[$n]['shiftn'] = $item['naturalperson'];
+                            $n++;
+                        };
+                    }
+
+                    $temp = array_merge($temp,$uniq);
+                    $i = 0;
+                    $d = 0;
+                    $n = 0;
+                    $data = array();
+                    $uniq = array();
+                };
+
+            };
+
+        }
+
+//        $d = count($temp);
+//
+//        $temp[$d]['dutydate'] = $GLOBALS['datetonew'] ;
+//        $temp[$d]['shiftd'] = '';
+
+        #print_r($temp);
+
+        return $temp;
+    }
+
+    function Detail() {
         $data = $this->setDutyDateShift($this->rows);
 
         $this->configStyleDetail();
@@ -235,37 +326,85 @@ class SheetFrequency extends Report {
         $dutydate = '';
 
         foreach($data as $record) {
-            $lineColor = 0;
+            $lineColor = 0;//($lineColor == 0) ? 1 : 0;
 
-            if($dutydate != $record['dutydate'] && $dutydate != '') {
-                $this->Ln(6);
-            }
+            if (isset($record['shiftd'])) {
+                if ($record['shiftd'] != '') {
 
-            if($dutydate != $record['dutydate']) {
-                $this->SetFont('Arial', 'B', 9);
-                $dutydateName = new \DateTime($record['dutydate']);
-                $month = $this->translate['monthly'][strtolower($dutydateName->format( "M" ))];
-                $day = $dutydateName->format( "d" );
-                $week = $this->translate['dayweek'][strtolower($dutydateName->format( "D" ))];
-                $this->Cell($this->sizeColumns[0],4,$week . ', '. $day. ' de ' . $month .  $dutydateName->format( "/Y" ),0,1,'L',0);
-                $this->configHeaderDutyDate();
-            }
+                    if ($dutydate != $record['dutydate'] && $dutydate != '') {
+                        $this->Ln(6);
+                    };
 
-            $this->configStyleDetail(9);
-            $this->Cell($this->sizeColumns[0],8,isset($record['shiftd']) ? $record['shiftd'] : '',0,0,'C',$lineColor);
-            $this->Cell($this->sizeColumns[1],8,'','B',0,'L',$lineColor);
-            $this->Cell($this->sizeColumns[2],8,'',0,0,'C',$lineColor);
-            $this->Cell($this->sizeColumns[3],8,'','B',0,'L',$lineColor);
-            $this->Cell($this->sizeColumns[4],8,isset($record['shiftn']) ? $record['shiftn'] : '',0,0,'C',$lineColor);
-            $this->Cell($this->sizeColumns[5],8,'','B',0,'L',$lineColor);
-            $this->Cell($this->sizeColumns[6],8,'',0,0,'C',$lineColor);
-            $this->Cell($this->sizeColumns[7],8,'','B',1,'L',$lineColor);
+
+                    if ($dutydate != $record['dutydate']) {
+//                $this->configStyleDetail(9);
+
+                        // $this->AddFont('Tahoma','B','tahoma.php');
+                        //$this->SetFont('Arial', 'B', 9);
+
+                        // $this->Cell(0,4,$this->getY());
+
+
+                        switch ($this->rows[0]['unit_shortname']) {
+                            case "Adriano Jorge":
+                            case "HUGV":
+                                $aa = 35;
+                                break;
+                            default :
+                                $aa = 10;
+                        };
+
+
+                        if ($this->getY() + $aa > 240) {
+                            $this->AddPage();
+                        }
+
+                        $this->AddFont('Tahoma', 'B', 'tahomabd.php');
+                        $this->SetFont('Tahoma', 'B', 10);
+
+                        $dutydateName = new \DateTime($record['dutydate']);
+                        $month = $this->translate['monthly'][strtolower($dutydateName->format("M"))];
+                        $day = $dutydateName->format("d");
+                        $week = $this->translate['dayweek'][strtolower($dutydateName->format("D"))];
+
+                        $this->Cell(0, 0, '_____________________________________________________________________________________');
+                        $this->Ln(4);
+                        $this->Cell($this->sizeColumns[0], 4, utf8_decode(mb_strtoupper($week, 'UTF-8')) . ', ' . $day . ' DE ' . utf8_decode(mb_strtoupper($month, 'UTF-8')) . ' DE ' . $dutydateName->format("Y"), 0, 1, 'L', 0);
+//                $this->Ln(2);
+                        $this->configHeaderDutyDate();
+                    }
+
+                    $this->configStyleDetail(4);
+
+
+                    $this->AddFont('Tahoma', '');
+                    $this->SetFont('Tahoma', '', 10);
+                    $this->Ln(4);
+                    $this->Cell($this->sizeColumns[0], 6, isset($record['shiftd']) ? $record['shiftd'] : '', 0, 0, 'C', $lineColor);
+                    $this->Cell($this->sizeColumns[1], 6, '..............................', '', 0, 'L', $lineColor);
+                    $this->Cell($this->sizeColumns[2], 6, '', 0, 0, 'C', $lineColor);
+                    $this->Cell($this->sizeColumns[3], 6, '..............................', '', 0, 'L', $lineColor);
+                    if (isset($record['shiftn'])) {
+                        if ($record['shiftn'] != '') {
+                            $this->Cell($this->sizeColumns[4], 6, isset($record['shiftn']) ? $record['shiftn'] : '', 0, 0, 'C', $lineColor);
+                            $this->Cell($this->sizeColumns[5], 6, '..............................', '', 0, 'L', $lineColor);
+                            $this->Cell($this->sizeColumns[6], 6, '', 0, 0, 'C', $lineColor);
+                            $this->Cell($this->sizeColumns[7], 6, '..............................', '', 1, 'L', $lineColor);
+                        };
+                    } else {
+                        #$this->Ln(6);
+                        $this->Cell($this->sizeColumns[4], 6, '', '', 1, 'L', $lineColor);
+                    };
+                };
+            };
 
             $dutydate = $record['dutydate'];
-        }
+
+        };
+
     }
 
-    public function Footer(){
+    function Footer(){
         $this->configStyleFooter();
         $this->loadFooter($this->totalSizeColums);
     }

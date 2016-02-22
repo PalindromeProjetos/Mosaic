@@ -429,7 +429,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
             form = view.down('form'),
             data = form.getValues(),
             url = 'business/Calls/Report/SheetFrequency.php?',
-            qrp = 'periodid={0}&contractorunitid={1}&subunit={2}&subunittext={3}&dateof={4}&dateto={5}&status={2}';
+            qrp = 'periodid={0}&contractorunitid={1}&subunit={2}&subunittext={3}&dateof={4}&dateto={5}&status={6}&showlabel={7}';
 
         data.subunittext = form.down('comboenum[name=subunitdescription]').getRawValue();
 
@@ -439,8 +439,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
                 contractorunitid = data.contractorunitid,
                 subunit = data.subunit,
                 dateof = data.dateof,
-                dateto = data.dateto;
-            window.open(Ext.String.format(url + qrp,periodid,contractorunitid,subunit,data.subunittext,dateof,dateto,status));
+                dateto = data.dateto,
+                showlabel = data.showlabel;
+            window.open(Ext.String.format(url + qrp,periodid,contractorunitid,subunit,data.subunittext,dateof,dateto,status,showlabel));
         }
     },
 

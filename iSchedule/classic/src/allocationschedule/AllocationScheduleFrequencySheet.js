@@ -5,20 +5,22 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleFrequencySheet'
     xtype: 'allocationschedulefrequencysheet',
 
     requires: [
+        'Smart.form.field.ComboSearch',
         'iContract.store.contractor.ContractorUnit',
-        'iSchedule.view.allocationschedule.AllocationScheduleController'
+        'iSchedule.store.allocationschedule.SchedulingPeriod',
+        //'iSchedule.view.allocationschedule.PeriodSearch',
+        'iSchedule.view.allocationschedule.AllocationScheduleController',
+        'iSchedule.view.allocationschedule.SchedulingPeriodSearch'
+
     ],
 
     controller: 'allocationschedule',
 
-    width: 300,
+    width: 360,
 
-    title: 'Imprimir Folha de Frequência',
+    title: 'Imprimir Folha de Frequencia',
 
     modal: true,
-    resizable: false,
-    showAnimate: true,
-    cls: 'panel-frame',
 
     layout: {
         type: 'fit'
@@ -45,9 +47,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleFrequencySheet'
                 items: [
                     {
                         name: 'period',
-                        fieldLabel: 'Competência',
+                        fieldLabel: 'Competencia',
                         xtype: 'textfield',
-                        useReadColor: true,
+                        readOnlyColor: true,
                         useMondaFont: true,
                         fieldStyle: {
                             color: 'blue;',
@@ -75,12 +77,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleFrequencySheet'
                             }, {
                                 flex: 1,
                                 plugins: 'textmask',
-                                fieldLabel: 'Até',
+                                fieldLabel: 'Ate',
                                 name: 'dateto'
                             }
                         ]
                     }, {
-                        pageSize: 0,
                         submitValue: false,
                         hiddenNameId: 'contractorunitid',
                         fieldLabel: 'Unidade',
@@ -92,13 +93,16 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleFrequencySheet'
                         xtype: 'comboenum',
                         fieldLabel: 'SubUnidade',
                         name: 'subunitdescription'
+                    }, {
+                        xtype: 'checkboxfield',
+                        boxLabel: 'Exibir label UNIDADE',
+                        name: 'showlabel',
+                        checked: false
                     }
                 ]
             }
         ]
     },
-
-    buttonAlign: 'center',
 
     buttons: [
         {
@@ -111,5 +115,5 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleFrequencySheet'
             }
         }
     ]
-
 });
+
