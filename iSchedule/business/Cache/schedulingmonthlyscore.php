@@ -121,7 +121,6 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
 
     public function selectDate (array $data) {
         $i = 1;
-        $j = 0;
         $d = 0;
         $n = 0;
         $k = 0;
@@ -131,9 +130,9 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
 
         try {
 
-            $rows = $this->tblMaster;
+            $master = $this->tblMaster;
 
-            foreach($rows as $item) {
+            foreach($master as $item) {
                 if($item['shift'] == 'D') {
                     $k = $d;
                 }
@@ -156,9 +155,8 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
                     $n = $k;
                 }
 
-                $list[$j]['id'] = $i;
+                $list[count($list)-1]['id'] = $i;
 
-                $j++;
                 $i++;
             }
 

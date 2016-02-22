@@ -96,8 +96,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                 score.setParams(params).load({
                     callback: function (records, operation, success) {
                         if((records.length != 0) && (success == true)) {
-                            view.down('gridpanel').focus();
                             view.down('gridpanel').getSelectionModel().select(0);
+                            view.down('gridpanel').focus();
+                            //https://www.sencha.com/forum/showthread.php?294911-How-to-move-focus-to-a-specific-grid-cell
                         }
                     }
                 });
