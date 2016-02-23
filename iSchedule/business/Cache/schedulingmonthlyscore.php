@@ -41,6 +41,44 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
           and sm.contractorunitid = :contractorunitid
         order by s.schedulingmonthlypartnersid, tp.shift, tp.position";
 
+    public function selectItem (array $data) {
+        $query = $data['query'];
+        $proxy = $this->getStore()->getProxy();
+
+        $sql = "
+            select
+                tp.id,
+                tp.naturalpersonid,
+                n.shortname as naturalperson,
+                tp.shift,
+                tp.shifthours,
+                tp.releasetype,
+                tp.observation,
+                tp.id as schedulingmonthlypartnersid,
+                tp.username
+            from
+                schedulingmonthlypartners tp
+                inner join person n on ( n.id = tp.naturalpersonid )
+            where tp.id = :id";
+
+        try {
+            $pdo = $proxy->prepare($sql);
+
+            $pdo->bindValue(":id", $query, \PDO::PARAM_INT);
+
+            $pdo->execute();
+            $rows = self::encodeUTF8($pdo->fetchAll());
+
+            self::_setRows($rows);
+
+        } catch ( \PDOException $e ) {
+            self::_setSuccess(false);
+            self::_setText($e->getMessage());
+        }
+
+        return self::getResultToJson();
+    }
+
     public function createData (array $data) {
 
         $proxy = $this->getStore()->getProxy();
@@ -107,7 +145,7 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
             $pdo->bindValue(":scoretype", $scoretype, \PDO::PARAM_STR);
 
             $pdo->execute();
-            $rows = $pdo->fetchAll();
+            $rows = self::encodeUTF8($pdo->fetchAll());
 
             self::_setRows($rows);
 
@@ -178,7 +216,7 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
         $detail = self::searchArray($detail,'shift',$shift);
         $detail = self::searchArray($detail,'scoretype',$type);
         $detail = self::searchArray($detail,'schedulingmonthlypartnersid',$id);
-        $detail = self::selectArray($detail,"naturalperson");
+        $detail = self::selectArray($detail,'naturalperson');
 
         return trim(implode(', ', $detail));
     }

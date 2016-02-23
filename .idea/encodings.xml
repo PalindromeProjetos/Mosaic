@@ -116,6 +116,8 @@
     <file url="file://$PROJECT_DIR$/iSchedule/app/view/naturalperson/NaturalPersonSearch.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/business/Quick/schedule/SheetFrequency.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/allocationschedule/AllocationSchedulePicker.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iSchedule/classic/src/allocationschedule/AllocationScheduleScoreDone.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iSchedule/classic/src/allocationschedule/AllocationScheduleScorePaid.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/allocationschema/AllocationSchemaMap.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/allocationschema/AllocationSchemaShift.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/contract/AdditiveLog.js" charset="UTF-8" />

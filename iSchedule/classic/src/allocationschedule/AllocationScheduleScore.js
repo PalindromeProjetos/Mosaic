@@ -7,7 +7,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
     requires: [
         'Smart.form.field.*',
         'Ext.form.RadioGroup',
+        'Ext.form.field.Picker',
         'Smart.form.field.ComboEnum',
+        'Ext.grid.plugin.CellEditing',
         'Smart.form.field.ComboSearch',
         'Ext.layout.container.SegmentedButton',
         'iContract.store.contractor.ContractorUnit',
@@ -73,14 +75,33 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                         sortable: false,
                         width: 220,
                         dataIndex: scoreType,
-                        text: text
+                        text: text,
+                        editor: {
+                            xtype: 'pickerfield',
+                            createPicker: function() {
+                                return Ext.create('Ext.tree.Panel', {
+                                    hidden: true,
+                                    floating: true,
+                                    minHeight: 300,
+                                    root: {
+                                        expanded: true,
+                                        text: 'Root',
+                                        children: [
+                                            {text: 'Child 1', children: []},
+                                            {text: 'Child 2', children: []},
+                                            {text: 'Child 3', children: []}
+                                        ]
+                                    }
+                                });
+                            }
+                        }
                     };
                 return header;
             },
             field = [
-                build('Planejado','shift' + shift),
-                build('Realizado','shift' + shift + 'r'),
-                build('Reembolso','shift' + shift + 'p')
+                build('Planejado','shift' + shift.toLowerCase()),
+                build('Realizado','shift' + shift.toLowerCase() + 'r'),
+                build('Reembolso','shift' + shift.toLowerCase() + 'p')
             ];
 
         return field;
@@ -221,19 +242,26 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                         autoScroll: true,
                                         columnLines: true,
                                         hideHeaders: false,
+                                        selType: 'cellmodel',
+                                        selModel: 'cellmodel',
+                                        plugins: {
+                                            ptype: 'cellediting',
+                                            clicksToEdit: 1
+                                        },
                                         columns: [
                                             {
                                                 cls: 'dark',
                                                 text: '<a style="font-size: 18px; font-family: Monda;">PLANTÕES DIURNOS</a>',
-                                                columns: me.buildScore('d')
+                                                columns: me.buildScore('D')
                                             }, {
                                                 cls: 'dark',
                                                 text: '<a style="font-size: 18px; font-family: Monda;">PLANTÕES NOTURNOS</a>',
-                                                columns: me.buildScore('n')
+                                                columns: me.buildScore('N')
                                             }
                                         ],
                                         listeners: {
-                                            cellkeydown: 'onCellKeyDown'
+                                            cellkeydown: 'onCellKeyDown',
+                                            celldblclick: 'onCelldDlclick'
                                         }
                                     }
                                 ]

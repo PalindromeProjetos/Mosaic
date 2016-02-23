@@ -93,11 +93,15 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         if(contractorunit.isValid() && subunitdescription.isValid()) {
             if(form.isValid()) {
                 var params = form.getValues();
+
                 score.setParams(params).load({
                     callback: function (records, operation, success) {
                         if((records.length != 0) && (success == true)) {
-                            view.down('gridpanel').getSelectionModel().select(0);
-                            view.down('gridpanel').focus();
+                            var grid = view.down('gridpanel'),
+                                selModel = grid.getSelectionModel();
+
+                            selModel.setPosition({ row: 0, column: 0 }, false);
+                            grid.getView().focusCell( selModel.getPosition() );
                             //https://www.sencha.com/forum/showthread.php?294911-How-to-move-focus-to-a-specific-grid-cell
                         }
                     }
@@ -113,6 +117,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             dateto = view.down('datefield[name=dateto]'),
             datescore = view.down('datefield[name=datescore]');
 
+        if (e.getKey() === e.ENTER) {
+            me.onCelldDlclick(viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts);
+            return false;
+        }
+
         if (e.ctrlKey == true) {
             switch(e.keyCode) {
                 case 37:
@@ -123,6 +132,107 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     break;
             }
         }
-    }
+    },
+
+    onCelldDlclick: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
+        var me = this,
+            show = false,
+            view = me.getView(),
+            params = record.data;
+
+        switch(cellIndex) {
+            case 1:
+                show = true;
+                params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'R' } );
+                break;
+            case 2:
+                show = true;
+                params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'P' } );
+                break;
+            case 4:
+                show = true;
+                params = Ext.merge( params, { query: params.idshiftn, shift: 'N', scoretype: 'R' } );
+                break;
+            case 5:
+                show = true;
+                params = Ext.merge( params, { query: params.idshiftn, shift: 'N', scoretype: 'P' } );
+                break;
+        }
+
+        if(show) {
+            params.action = 'select';
+            params.method = 'selectItem';
+            view.setLoading('Carregando Contagem ...');
+
+            Ext.Ajax.request({
+                scope: me,
+                url: 'business/Calls/schedulingmonthlyscore.php',
+                params: params,
+                success: function(response) {
+                    var result = Ext.decode(response.responseText),
+                        record = Ext.create('Ext.data.Model', result.rows[0]);
+
+                    view.setLoading(false);
+                    params.method = 'selectCode';
+                    Ext.widget('allocationschedulescoredone').show(null,
+                        function() {
+                            this.down('form').loadRecord(record);
+                            Ext.getStore('schedulingmonthlyscore').setParams(params).load();
+                        }
+                    );
+                }
+            });
+
+            //Ext.Ajax.request({
+            //    scope: me,
+            //    url: 'business/Calls/schedulingmonthlyscore.php',
+            //    params: params,
+            //    success: function(response) {
+            //        var result = Ext.decode(response.responseText);
+            //        view.setLoading(false);
+            //
+            //        //var record = Ext.create('Ext.data.Model', { fields: [{name: 'personid', defaultValue: id }] });
+            //        var record = Ext.create('Ext.data.Model', { fields: result.rows[0] });
+            //
+            //        console.info(record);
+            //
+            //        //Ext.widget('allocationschedulescoredone').show(null,function(){
+            //        //});
+            //    }
+            //});
+        }
+
+    },
+
+    onSelectNaturalPerson: function (combo, record, eOpts) {
+        var me = this;
+        me.onUpdateScore(combo);
+    },
+
+    onUpdateScore: function () {
+        var me = this,
+            //view = me.getView().down('allocationschedulescoreold'),
+            //data = view.xdata,
+            //form = view.getActiveItem(),
+            view = me.getView(),
+            form = view.down('form'),
+            grid = form.down('gridpanel');
+            //schedulingmonthlypartnersid = form.down('hiddenfield[name=schedulingmonthlypartnersid]');
+
+        //schedulingmonthlypartnersid.setValue(data.get('id'));
+
+        me._success = function (form, action) {
+            form.reset();
+            grid.store.load();
+        }
+
+        me._failure = function (form, action) {
+            grid.store.rejectChanges();
+        }
+
+        me.setModuleData(grid.store);
+        me.setModuleForm(form);
+        me.updateModule();
+    },
 
 });

@@ -81,7 +81,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreReport', {
                         fieldLabel: 'Entidade Legal',
                         allowBlank: true,
                         name: 'naturalperson',
-                        displayField: 'shortname',
                         hiddenNameId: 'legalentityid',
                         xtype: 'naturalpersonsearch',
                         store: 'iContract.store.legalentity.LegalEntity',

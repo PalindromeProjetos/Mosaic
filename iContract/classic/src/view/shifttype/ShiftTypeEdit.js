@@ -19,7 +19,7 @@ Ext.define( 'iContract.view.shifttype.ShiftTypeEdit', {
     cls: 'panel-frame',
     iconCls: "fa fa-pencil",
 
-    title: 'Editar Plant&#227o',
+    title: 'Editar Plantão',
 
     initComponent: function () {
         var me = this;
@@ -61,7 +61,7 @@ Ext.define( 'iContract.view.shifttype.ShiftTypeEdit', {
                                     change: 'onChangeDutyType'
                                 }
                             }, {
-                                boxLabel  : 'Fra&#231&#227o',
+                                boxLabel  : 'Fração',
                                 name      : 'dutytype',
                                 inputValue: 'F'
                             }
@@ -107,13 +107,13 @@ Ext.define( 'iContract.view.shifttype.ShiftTypeEdit', {
                                 flex: 1,
                                 xtype: 'smarttimefield',
                                 name: 'validityto',
-                                fieldLabel: 'at&#233'
+                                fieldLabel: 'até'
                             }
                         ]
                     }, {
                         useMondaFont: true,
                         xtype: 'textareafield',
-                        fieldLabel: 'Observa&#231&#245es',
+                        fieldLabel: 'Observações',
                         name: 'observation',
                         fieldStyle: {
                             color: '#C02942;',
