@@ -1,6 +1,6 @@
 //@charset UTF-8
 Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
-    extend: 'Ext.window.Window',
+    extend: 'Ext.form.Panel',
 
     xtype: 'allocationschedulescoredone',
 
@@ -17,22 +17,41 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
 
     controller: 'allocationschedulescore',
 
-    title: 'Plantões Realizados',
+    frame: true,
+    shadow: false,
+    cls: 'panel-frame',
 
-    width: 300,
+    hidden: true,
+    floating: true,
+    bodyPadding: 10,
+    layout: 'anchor',
+    defaults: {
+        anchor: '100%'
+    },
 
-    modal: true,
-    resizable: false,
-    showAnimate: true,
-
-    layout: {
-        type: 'fit'
+    listeners: {
+        show: 'showScoreDone'
     },
 
     initComponent: function () {
         var me = this;
         me.buildItems();
         me.callParent();
+
+        me.on('render', me.onFormRender, me);
+    },
+
+    onFormRender: function() {
+        var me = this;
+        me.getEl().on('keydown', me.onFormElKeyDown, me);
+    },
+
+    onFormElKeyDown: function(e) {
+        var me = this;
+        if (e.getKey() === e.ESC) {
+            me.hide();
+            me.xview.down('gridpanel').getView().focusCell( me.xview.hasPosition );
+        }
     },
 
     buildItems: function () {
@@ -42,150 +61,43 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
 
         me.items = [
             {
-                xtype: 'form',
-                bodyPadding: 10,
-                layout: 'anchor',
-                defaults: {
-                    anchor: '100%'
+                xtype: 'displayfield',
+                name: 'naturalperson',
+                fieldLabel: 'Plantonista',
+                fieldStyle: 'font-size: 22px; font-weight: bold;'
+            }, {
+                pageSize: 0,
+                fieldLabel: 'Lançar sócio',
+                hiddenNameId: 'naturalpersonid',
+                xtype: 'naturalpersonsearch',
+                listeners: {
+                    //select: 'onSelectNaturalPerson'
+                }
+            }, {
+                height: 100,
+                xtype: 'gridpanel',
+                columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
+                    meta.style = "font-size: 16px; line-height: 18px; font-family: Monda; color: rgba(252, 24, 36,.6);";
+                    return value;
                 },
-                items_: [
+                store: 'schedulingmonthlyscore',
+                columns: [
                     {
-                        allowBlank: true,
-                        xtype: 'hiddenfield',
-                        name: 'id'
+                        flex: 1,
+                        dataIndex: 'naturalperson'
                     }, {
-                        xtype: 'hiddenfield',
-                        name: 'schedulingmonthlypartnersid'
-                    }, {
-                        xtype: 'displayfield',
-                        name: 'naturalperson',
-                        fieldLabel: 'Plantonista',
-                        fieldStyle: 'font-size: 22px; font-weight: bold;'
-                    }, {
-                        allowBlank: true,
-                        fieldLabel: 'Observações',
-                        name: 'observation',
-                        xtype: 'textfield'
-                    }, {
-                        xtype: 'displayfield',
-                        name: 'username'
-                    }, {
-                        width: 70,
-                        name: 'dutyfraction',
-                        fieldLabel: 'Fração',
-                        xtype: 'textfield',
-                        plugins: 'textmask',
-                        money: true,
-                        mask: '0,00',
-                        value: 1
-                    }, {
-                        pageSize: 0,
-                        fieldLabel: 'Sócio',
-                        hiddenNameId: 'naturalpersonid',
-                        xtype: 'naturalpersonsearch',
-                        listeners: {
-                            select: 'onSelectNaturalPerson'
-                        }
-                    }, {
-                        xtype: 'gridpanel',
-                        columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
-                            meta.style = "font-size: 16px; line-height: 18px; font-family: Monda; color: rgba(252, 24, 36,.6);";
-                            return value;
-                        },
-                        store: 'schedulingmonthlyscore',
-                        columns: [
-                            {
-                                text: 'Plantonista',
-                                dataIndex: 'naturalperson',
-                                flex: 1
-                            }, {
-                                align: 'center',
-                                width: 50,
-                                dataIndex: '',
-                                renderer: function (value, meta, rec) {
-                                    return '<div class="delete-item" style="color: rgba(252, 24, 36,1); font-size: 17px;"><i class="icon-cancel-circle"></i></div>';
-                                }
-                            }
-                        ],
-                        listeners: {
-                            select: 'onSelectScore',
-                            cellclick: 'onCellClickScore'
+                        align: 'center',
+                        width: 50,
+                        dataIndex: '',
+                        renderer: function (value, meta, rec) {
+                            return '<div class="delete-item" style="color: rgba(252, 24, 36,1); font-size: 17px;"><i class="icon-cancel-circle"></i></div>';
                         }
                     }
                 ],
-                items: [
-                    {
-                        allowBlank: true,
-                        xtype: 'hiddenfield',
-                        name: 'id'
-                    }, {
-                        xtype: 'hiddenfield',
-                        name: 'scoretype',
-                        value: 'R'
-                    }, {
-                        xtype: 'hiddenfield',
-                        name: 'schedulingmonthlypartnersid'
-                    }, {
-                        xtype: 'displayfield',
-                        name: 'naturalperson',
-                        fieldLabel: 'Plantonista',
-                        fieldStyle: 'font-size: 22px; font-weight: bold;'
-                    }, {
-                        allowBlank: true,
-                        fieldLabel: 'Observações',
-                        name: 'observation',
-                        xtype: 'textfield'
-                    }, {
-                        pageSize: 0,
-                        fieldLabel: 'Sócio',
-                        hiddenNameId: 'naturalpersonid',
-                        xtype: 'naturalpersonsearch',
-                        listeners: {
-                            select: 'onSelectNaturalPerson'
-                        }
-                    }, {
-                        xtype: 'gridpanel',
-                        height: 200,
-                        name: 'schedulingmonthlyscoreR',
-                        columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
-                            meta.style = "font-size: 16px; line-height: 18px; font-family: Monda; color: rgba(252, 24, 36,.6);";
-                            return value;
-                        },
-                        store: 'schedulingmonthlyscore',
-                        columns: [
-                            {
-                                text: 'Plantonista',
-                                dataIndex: 'naturalperson',
-                                flex: 1
-                            }, {
-                                align: 'center',
-                                width: 50,
-                                dataIndex: '',
-                                renderer: function (value, meta, rec) {
-                                    return '<div class="delete-item" style="color: rgba(252, 24, 36,1); font-size: 17px;"><i class="icon-cancel-circle"></i></div>';
-                                }
-                            }
-                        ],
-                        listeners: {
-                            select: 'onSelectScore',
-                            cellclick: 'onCellClickScore'
-                        }
-                    }, {
-                        xtype: 'container',
-                        layout: 'hbox',
-                        items: [
-                            {
-                                xtype: 'displayfield',
-                                name: 'username'
-                            }, {
-                                xtype: 'splitter'
-                            }, {
-                                xtype: 'displayfield',
-                                name: 'changedate'
-                            }
-                        ]
-                    }
-                ]
+                listeners: {
+                    //select: 'onSelectScore',
+                    //cellclick: 'onCellClickScore'
+                }
             }
         ]
     }

@@ -14,7 +14,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         'Ext.layout.container.SegmentedButton',
         'iContract.store.contractor.ContractorUnit',
         'iSchedule.store.allocationschedule.AllocationScheduleScore',
-        'iSchedule.view.allocationschedule.AllocationScheduleScoreController'
+        'iSchedule.view.allocationschedule.AllocationScheduleScoreDone',
+        'iSchedule.view.allocationschedule.AllocationScheduleScoreController',
     ],
 
     controller: 'allocationschedulescore',
@@ -69,30 +70,21 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
     },
 
     buildScore: function (shift) {
-        var build = function (text,scoreType) {
+        var me = this,
+            build = function (text,scoreType) {
                 var header = {
                         cls: 'ligth',
-                        sortable: false,
                         width: 220,
+                        sortable: false,
                         dataIndex: scoreType,
                         text: text,
                         editor: {
                             xtype: 'pickerfield',
-                            createPicker: function() {
-                                return Ext.create('Ext.tree.Panel', {
-                                    hidden: true,
-                                    floating: true,
-                                    minHeight: 300,
-                                    root: {
-                                        expanded: true,
-                                        text: 'Root',
-                                        children: [
-                                            {text: 'Child 1', children: []},
-                                            {text: 'Child 2', children: []},
-                                            {text: 'Child 3', children: []}
-                                        ]
-                                    }
-                                });
+                            createPicker: function () {
+                                var sm = me.down('gridpanel').getSelectionModel(),
+                                    record = sm.getSelection()[0],
+                                    hasPosition = sm.getPosition();
+                                return  Ext.widget('allocationschedulescoredone', { xview: me, xdata: record, hasPosition: hasPosition });
                             }
                         }
                     };
@@ -110,6 +102,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
     buildItems: function () {
         var me = this;
 
+        Ext.create('iSchedule.store.allocationschedule.SchedulingMonthlyScore');
         Ext.create('iSchedule.store.allocationschedule.AllocationScheduleScore');
 
         me.items = [

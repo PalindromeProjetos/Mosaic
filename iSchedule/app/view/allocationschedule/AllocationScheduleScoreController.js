@@ -117,10 +117,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             dateto = view.down('datefield[name=dateto]'),
             datescore = view.down('datefield[name=datescore]');
 
-        if (e.getKey() === e.ENTER) {
-            me.onCelldDlclick(viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts);
-            return false;
-        }
+        //if (e.getKey() === e.ENTER) {
+        //    me.onCelldDlclick(viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts);
+        //    return false;
+        //}
 
         if (e.ctrlKey == true) {
             switch(e.keyCode) {
@@ -132,6 +132,58 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     break;
             }
         }
+    },
+
+    showScoreDone: function (form, eOpts) {
+        var me = this,
+            show = false,
+            params = form.xdata.data;
+
+        form.down('naturalpersonsearch').focus(false, 200);
+
+        switch(cellIndex) {
+            case 1:
+                show = true;
+                params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'R' } );
+                break;
+            case 2:
+                show = true;
+                params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'P' } );
+                break;
+            case 4:
+                show = true;
+                params = Ext.merge( params, { query: params.idshiftn, shift: 'N', scoretype: 'R' } );
+                break;
+            case 5:
+                show = true;
+                params = Ext.merge( params, { query: params.idshiftn, shift: 'N', scoretype: 'P' } );
+                break;
+        }
+
+        if(!show) {
+            params.action = 'select';
+            params.method = 'selectItem';
+
+            Ext.Ajax.request({
+                scope: me,
+                url: 'business/Calls/schedulingmonthlyscore.php',
+                params: params,
+                success: function(response) {
+                    var result = Ext.decode(response.responseText),
+                        record = Ext.create('Ext.data.Model', result.rows[0]);
+
+                    params.method = 'selectCode';
+                    Ext.widget('allocationschedulescoredone').show(null,
+                        function() {
+                            this.down('form').loadRecord(record);
+                            Ext.getStore('schedulingmonthlyscore').setParams(params).load();
+                        }
+                    );
+                }
+            });
+
+        }
+
     },
 
     onCelldDlclick: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
@@ -159,7 +211,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                 break;
         }
 
-        if(show) {
+        if(!show) {
             params.action = 'select';
             params.method = 'selectItem';
             view.setLoading('Carregando Contagem ...');
@@ -233,6 +285,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         me.setModuleData(grid.store);
         me.setModuleForm(form);
         me.updateModule();
-    },
+    }
 
 });
