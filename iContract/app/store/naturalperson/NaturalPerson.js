@@ -6,6 +6,8 @@ Ext.define( 'iContract.store.naturalperson.NaturalPerson', {
 
     storeId: 'naturalperson',
 
+    pageSize: 5,
+
     requires: [
         'iContract.model.naturalperson.NaturalPerson'
     ],

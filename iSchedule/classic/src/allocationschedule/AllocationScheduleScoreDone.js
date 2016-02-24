@@ -58,10 +58,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
             {
                 xtype: 'displayfield',
                 name: 'naturalperson',
-                fieldLabel: 'Plantonista',
+                fieldLabel: 'Planejado',
                 fieldStyle: 'font-size: 22px; font-weight: bold;'
             }, {
                 pageSize: 0,
+                hideTrigger: true,
                 fieldLabel: 'Lançar sócio',
                 hiddenNameId: 'naturalpersonid',
                 xtype: 'naturalpersonsearch',

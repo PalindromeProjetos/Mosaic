@@ -110,17 +110,18 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
     },
 
+    onBeforeEdit: function ( editor, context, eOpts ) {
+        var cl = [0,3];
+
+        context.cancel = !cl.indexOf(context.colIdx);
+    },
+
     onCellKeyDown: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts) {
         var me = this,
             view = me.getView(),
             dateof = view.down('datefield[name=dateof]'),
             dateto = view.down('datefield[name=dateto]'),
             datescore = view.down('datefield[name=datescore]');
-
-        //if (e.getKey() === e.ENTER) {
-        //    me.onCelldDlclick(viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts);
-        //    return false;
-        //}
 
         if (e.ctrlKey == true) {
             switch(e.keyCode) {
@@ -132,6 +133,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     break;
             }
         }
+
     },
 
     showScoreDone: function (form, eOpts) {
@@ -176,82 +178,12 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     var result = Ext.decode(response.responseText),
                         record = Ext.create('Ext.data.Model', result.rows[0]);
 
-                    params.method = 'selectCode';
                     form.loadRecord(record);
+                    params.method = 'selectCode';
                     Ext.getStore('schedulingmonthlyscore').setParams(params).load();
                 }
             });
 
-        }
-
-    },
-
-    onCelldDlclick: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
-        var me = this,
-            show = false,
-            view = me.getView(),
-            params = record.data;
-
-        switch(cellIndex) {
-            case 1:
-                show = true;
-                params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'R' } );
-                break;
-            case 2:
-                show = true;
-                params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'P' } );
-                break;
-            case 4:
-                show = true;
-                params = Ext.merge( params, { query: params.idshiftn, shift: 'N', scoretype: 'R' } );
-                break;
-            case 5:
-                show = true;
-                params = Ext.merge( params, { query: params.idshiftn, shift: 'N', scoretype: 'P' } );
-                break;
-        }
-
-        if(!show) {
-            params.action = 'select';
-            params.method = 'selectItem';
-            view.setLoading('Carregando Contagem ...');
-
-            Ext.Ajax.request({
-                scope: me,
-                url: 'business/Calls/schedulingmonthlyscore.php',
-                params: params,
-                success: function(response) {
-                    var result = Ext.decode(response.responseText),
-                        record = Ext.create('Ext.data.Model', result.rows[0]);
-
-                    view.setLoading(false);
-                    params.method = 'selectCode';
-                    Ext.widget('allocationschedulescoredone').show(null,
-                        function() {
-                            this.down('form').loadRecord(record);
-                            Ext.getStore('schedulingmonthlyscore').setParams(params).load();
-                        }
-                    );
-                }
-            });
-
-            //Ext.Ajax.request({
-            //    scope: me,
-            //    url: 'business/Calls/schedulingmonthlyscore.php',
-            //    params: params,
-            //    success: function(response) {
-            //        var result = Ext.decode(response.responseText);
-            //        view.setLoading(false);
-            //
-            //        //var record = Ext.create('Ext.data.Model', { fields: [{name: 'personid', defaultValue: id }] });
-            //        var record = Ext.create('Ext.data.Model', { fields: result.rows[0] });
-            //
-            //        console.info(record);
-            //
-            //        //Ext.widget('allocationschedulescoredone').show(null,function(){
-            //        //});
-            //    }
-            //});
         }
 
     },

@@ -15,6 +15,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         'iContract.store.contractor.ContractorUnit',
         'iSchedule.store.allocationschedule.AllocationScheduleScore',
         'iSchedule.view.allocationschedule.AllocationScheduleScoreDone',
+        'iSchedule.view.allocationschedule.AllocationScheduleScorePaid',
         'iSchedule.view.allocationschedule.AllocationScheduleScoreController',
     ],
 
@@ -81,15 +82,18 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                         editor: {
                             xtype: 'pickerfield',
                             createPicker: function () {
-                                var gd = me.down('gridpanel'),
+                                var cl = [1,4],
+                                    gd = me.down('gridpanel'),
                                     sm = gd.getSelectionModel(),
                                     hasPosition = sm.getPosition(),
-                                    cellIndex = gd.view.getCellByPosition(sm.getCurrentPosition()).dom.cellIndex;
+                                    cellIndex = gd.view.getCellByPosition(sm.getCurrentPosition()).dom.cellIndex,
+                                    scoreView = cl.indexOf(cellIndex) ? 'allocationschedulescorepaid' : 'allocationschedulescoredone';
 
-                                return Ext.widget('allocationschedulescoredone', { xview: me, hasPosition: hasPosition, cellIndex: cellIndex });
+                                return Ext.widget(scoreView, { xview: me, hasPosition: hasPosition, cellIndex: cellIndex });
                             }
                         }
                     };
+
                 return header;
             },
             field = [
@@ -255,8 +259,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                             }
                                         ],
                                         listeners: {
-                                            cellkeydown: 'onCellKeyDown',
-                                            celldblclick: 'onCelldDlclick'
+                                            beforeedit: 'onBeforeEdit',
+                                            cellkeydown: 'onCellKeyDown'
                                         }
                                     }
                                 ]
