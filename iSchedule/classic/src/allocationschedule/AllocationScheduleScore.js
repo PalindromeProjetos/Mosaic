@@ -73,18 +73,21 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         var me = this,
             build = function (text,scoreType) {
                 var header = {
-                        cls: 'ligth',
                         width: 220,
+                        text: text,
+                        cls: 'ligth',
                         sortable: false,
                         dataIndex: scoreType,
-                        text: text,
                         editor: {
                             xtype: 'pickerfield',
                             createPicker: function () {
-                                var sm = me.down('gridpanel').getSelectionModel(),
+                                var gd = me.down('gridpanel'),
+                                    sm = gd.getSelectionModel(),
                                     record = sm.getSelection()[0],
-                                    hasPosition = sm.getPosition();
-                                return  Ext.widget('allocationschedulescoredone', { xview: me, xdata: record, hasPosition: hasPosition });
+                                    hasPosition = sm.getPosition(),
+                                    cellIndex = gd.view.getCellByPosition(sm.getCurrentPosition()).dom.cellIndex;
+
+                                return Ext.widget('allocationschedulescoredone', { xview: me, xdata: record, hasPosition: hasPosition, cellIndex: cellIndex });
                             }
                         }
                     };

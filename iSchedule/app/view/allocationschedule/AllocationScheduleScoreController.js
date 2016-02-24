@@ -141,7 +141,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
         form.down('naturalpersonsearch').focus(false, 200);
 
-        switch(cellIndex) {
+        switch(form.cellIndex) {
             case 1:
                 show = true;
                 params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'R' } );
@@ -160,7 +160,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                 break;
         }
 
-        if(!show) {
+        if(show) {
             params.action = 'select';
             params.method = 'selectItem';
 
@@ -173,12 +173,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                         record = Ext.create('Ext.data.Model', result.rows[0]);
 
                     params.method = 'selectCode';
-                    Ext.widget('allocationschedulescoredone').show(null,
-                        function() {
-                            this.down('form').loadRecord(record);
-                            Ext.getStore('schedulingmonthlyscore').setParams(params).load();
-                        }
-                    );
+                    form.loadRecord(record);
+                    Ext.getStore('schedulingmonthlyscore').setParams(params).load();
                 }
             });
 
