@@ -137,7 +137,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     showScoreDone: function (form, eOpts) {
         var me = this,
             show = false,
-            gd = me.xview.down('gridpanel'),
+            gd = form.xview.down('gridpanel'),
             sm = gd.getSelectionModel();
 
         form.xdata = sm.getSelection()[0];
