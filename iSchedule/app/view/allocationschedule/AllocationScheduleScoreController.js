@@ -111,9 +111,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     },
 
     onBeforeEdit: function ( editor, context, eOpts ) {
-        var cl = [0,3];
-
-        context.cancel = !cl.indexOf(context.colIdx);
+        context.cancel = [0,3].indexOf(context.colIdx) != -1;
     },
 
     onCellKeyDown: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts) {
@@ -135,17 +133,31 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
 
     },
+	
+	onCellKeyDownScore: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+        var me = this,
+            view = me.getView();
 
-    showScoreDone: function (form, eOpts) {
+        if (e.getKey() === e.ESC) {
+            view.hide();
+            view.xview.down('gridpanel').getView().focusCell( view.xview.hasPosition );
+        }
+
+    },
+
+    showScoreView: function (form, eOpts) {
         var me = this,
             show = false,
+			search = form.down('naturalpersonsearch'),
             gd = form.xview.down('gridpanel'),
             sm = gd.getSelectionModel();
-
+		
         form.xdata = sm.getSelection()[0];
         var params = form.xdata.data;
 
-        form.down('naturalpersonsearch').focus(false, 200);
+		search.reset();
+        search.focus(false, 200);
+		search.getStore().removeAll();
 
         switch(form.cellIndex) {
             case 1:
@@ -188,35 +200,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     },
 
-    onSelectNaturalPerson: function (combo, record, eOpts) {
-        var me = this;
-        me.onUpdateScore(combo);
-    },
-
-    onUpdateScore: function () {
+    onUpdateScore: function (combo, record, eOpts) {
         var me = this,
-            //view = me.getView().down('allocationschedulescoreold'),
-            //data = view.xdata,
-            //form = view.getActiveItem(),
-            view = me.getView(),
-            form = view.down('form'),
-            grid = form.down('gridpanel');
-            //schedulingmonthlypartnersid = form.down('hiddenfield[name=schedulingmonthlypartnersid]');
-
-        //schedulingmonthlypartnersid.setValue(data.get('id'));
-
-        me._success = function (form, action) {
-            form.reset();
-            grid.store.load();
-        }
-
-        me._failure = function (form, action) {
-            grid.store.rejectChanges();
-        }
-
-        me.setModuleData(grid.store);
-        me.setModuleForm(form);
-        me.updateModule();
+            view = me.getView();
+			
+		console.info(view);
     }
 
 });

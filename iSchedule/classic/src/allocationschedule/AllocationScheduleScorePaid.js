@@ -25,7 +25,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
     },
 
     listeners: {
-        show: 'showScoreDone'
+        show: 'showScoreView'
     },
 
     initComponent: function () {
@@ -56,21 +56,18 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
 
         me.items = [
             {
+                xtype: 'hiddenfield',
+                name: 'id'
+            }, {
                 xtype: 'displayfield',
                 name: 'naturalperson',
                 fieldLabel: 'Planejado',
                 fieldStyle: 'font-size: 22px; font-weight: bold;'
             }, {
-                //pageSize: 0,
-                //fieldLabel: 'Lançar sócio',
-                //hiddenNameId: 'naturalpersonid',
-                //xtype: 'naturalpersonsearch',
-                //listeners: {
-                //    //select: 'onSelectNaturalPerson'
-                //}
                 xtype: 'fieldcontainer',
                 layout: 'hbox',
-                defaults: {
+                fieldLabel: 'Reembolso',
+				defaults: {
                     allowBlank: false
                 },
                 items: [
@@ -81,6 +78,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
                         fieldLabel: 'Lançar sócio',
                         hiddenNameId: 'naturalpersonid',
                         xtype: 'naturalpersonsearch',
+						listeners: {
+							select: 'onUpdateScore'
+						},
                         margin: '0 5 0 0'
                     }, {
                         width: 70,
@@ -97,26 +97,30 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
             }, {
                 height: 100,
                 xtype: 'gridpanel',
-                columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
-                    meta.style = "font-size: 16px; line-height: 18px; font-family: Monda; color: rgba(252, 24, 36,.6);";
-                    return value;
-                },
                 store: 'schedulingmonthlyscore',
-                columns: [
-                    {
-                        flex: 1,
-                        dataIndex: 'naturalperson'
-                    }, {
-                        align: 'center',
-                        width: 50,
-                        dataIndex: '',
-                        renderer: function (value, meta, rec) {
-                            return '<div class="delete-item" style="color: rgba(252, 24, 36,1); font-size: 17px;"><i class="icon-cancel-circle"></i></div>';
-                        }
-                    }
-                ],
+				columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
+					meta.style = "font-size: 16px; line-height: 18px; font-family: Monda; color: rgba(3, 98, 253, 1);";
+					return ( colIndex == 1 ) ? Smart.maskRenderer('0,00',true)(value) : value;
+				},
+				columns: [
+					{
+						flex: 1,
+						dataIndex: 'naturalperson'
+					}, {
+						width: 60,
+						align: 'right',
+						dataIndex: 'dutyfraction'
+					}, {
+						width: 50,
+						align: 'center',
+						renderer: function (value, meta, rec) {
+							return '<div class="delete-item" style="color: rgba(3, 98, 253, 1); font-size: 17px;"><i class="icon-cancel-circle"></i></div>';
+						}
+					}
+				],
                 listeners: {
-                    //select: 'onSelectScore',
+                    cellkeydown: 'onCellKeyDownScore'
+					//select: 'onSelectScore',
                     //cellclick: 'onCellClickScore'
                 }
             }

@@ -25,7 +25,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
     },
 
     listeners: {
-        show: 'showScoreDone'
+        show: 'showScoreView'
     },
 
     initComponent: function () {
@@ -56,41 +56,55 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
 
         me.items = [
             {
+                xtype: 'hiddenfield',
+                name: 'id'
+            }, {
                 xtype: 'displayfield',
                 name: 'naturalperson',
                 fieldLabel: 'Planejado',
                 fieldStyle: 'font-size: 22px; font-weight: bold;'
             }, {
-                pageSize: 0,
-                hideTrigger: true,
-                fieldLabel: 'Lançar sócio',
-                hiddenNameId: 'naturalpersonid',
-                xtype: 'naturalpersonsearch',
-                listeners: {
-                    //select: 'onSelectNaturalPerson'
-                }
+                xtype: 'fieldcontainer',
+                layout: 'hbox',
+                fieldLabel: 'Realizado',
+				defaults: {
+                    allowBlank: false
+                },
+				items: [
+					{
+						flex: 1,
+						pageSize: 0,
+						hideTrigger: true,
+						fieldLabel: 'Lançar sócio',
+						hiddenNameId: 'naturalpersonid',
+						xtype: 'naturalpersonsearch',
+						listeners: {
+							select: 'onUpdateScore'
+						}
+					}
+				]
             }, {
                 height: 100,
                 xtype: 'gridpanel',
+                store: 'schedulingmonthlyscore',
                 columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
                     meta.style = "font-size: 16px; line-height: 18px; font-family: Monda; color: rgba(252, 24, 36,.6);";
                     return value;
                 },
-                store: 'schedulingmonthlyscore',
                 columns: [
                     {
                         flex: 1,
                         dataIndex: 'naturalperson'
                     }, {
-                        align: 'center',
                         width: 50,
-                        dataIndex: '',
+                        align: 'center',
                         renderer: function (value, meta, rec) {
                             return '<div class="delete-item" style="color: rgba(252, 24, 36,1); font-size: 17px;"><i class="icon-cancel-circle"></i></div>';
                         }
                     }
                 ],
                 listeners: {
+					cellkeydown: 'onCellKeyDownScore'
                     //select: 'onSelectScore',
                     //cellclick: 'onCellClickScore'
                 }

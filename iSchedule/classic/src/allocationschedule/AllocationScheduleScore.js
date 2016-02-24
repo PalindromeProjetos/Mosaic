@@ -6,12 +6,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
 
     requires: [
         'Smart.form.field.*',
-        'Ext.form.RadioGroup',
         'Ext.form.field.Picker',
         'Smart.form.field.ComboEnum',
         'Ext.grid.plugin.CellEditing',
         'Smart.form.field.ComboSearch',
-        'Ext.layout.container.SegmentedButton',
         'iContract.store.contractor.ContractorUnit',
         'iSchedule.store.allocationschedule.AllocationScheduleScore',
         'iSchedule.view.allocationschedule.AllocationScheduleScoreDone',
@@ -82,12 +80,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                         editor: {
                             xtype: 'pickerfield',
                             createPicker: function () {
-                                var cl = [1,4],
-                                    gd = me.down('gridpanel'),
+                                var gd = me.down('gridpanel'),
                                     sm = gd.getSelectionModel(),
                                     hasPosition = sm.getPosition(),
                                     cellIndex = gd.view.getCellByPosition(sm.getCurrentPosition()).dom.cellIndex,
-                                    scoreView = cl.indexOf(cellIndex) ? 'allocationschedulescorepaid' : 'allocationschedulescoredone';
+                                    scoreView = ( [1,4].indexOf(cellIndex) != -1 ) ? 'allocationschedulescoredone' : 'allocationschedulescorepaid';
 
                                 return Ext.widget(scoreView, { xview: me, hasPosition: hasPosition, cellIndex: cellIndex });
                             }
@@ -164,9 +161,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 xtype: 'datefield',
                                 afterLabelTextTpl: [
                                     '<i style="font-style: italic;"> ...navegação, ctrl + </i>',
-                                    '<i class="fa fa-arrow-left"></i>',
-                                    ' ',
-                                    '<i class="fa fa-arrow-right"></i>'
+                                    '<i class="fa fa-arrow-left"></i> <i class="fa fa-arrow-right"></i>'
                                 ],
                                 fieldLabel: 'Data',
                                 hideTrigger: false,
