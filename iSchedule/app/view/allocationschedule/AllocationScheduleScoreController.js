@@ -137,7 +137,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     showScoreDone: function (form, eOpts) {
         var me = this,
             show = false,
-            params = form.xdata.data;
+            gd = me.xview.down('gridpanel'),
+            sm = gd.getSelectionModel();
+
+        form.xdata = sm.getSelection()[0];
+        var params = form.xdata.data;
 
         form.down('naturalpersonsearch').focus(false, 200);
 

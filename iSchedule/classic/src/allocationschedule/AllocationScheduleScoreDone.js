@@ -5,13 +5,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
     xtype: 'allocationschedulescoredone',
 
     requires: [
-        'Ext.selection.CheckboxModel',
-        'iContract.store.contractor.*',
-        'iContract.store.legalentity.LegalEntity',
-        'iContract.store.naturalperson.NaturalPerson',
         'iSchedule.store.allocationschedule.SchedulingMonthlyScore',
         'iSchedule.view.naturalperson.NaturalPersonSearch',
-        'iSchedule.view.contractor.ContractorUnitSearch',
         'iSchedule.view.allocationschedule.AllocationScheduleScoreController'
     ],
 

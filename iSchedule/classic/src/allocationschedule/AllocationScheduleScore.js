@@ -83,11 +83,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                             createPicker: function () {
                                 var gd = me.down('gridpanel'),
                                     sm = gd.getSelectionModel(),
-                                    record = sm.getSelection()[0],
                                     hasPosition = sm.getPosition(),
                                     cellIndex = gd.view.getCellByPosition(sm.getCurrentPosition()).dom.cellIndex;
 
-                                return Ext.widget('allocationschedulescoredone', { xview: me, xdata: record, hasPosition: hasPosition, cellIndex: cellIndex });
+                                return Ext.widget('allocationschedulescoredone', { xview: me, hasPosition: hasPosition, cellIndex: cellIndex });
                             }
                         }
                     };
