@@ -203,8 +203,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     onUpdateScore: function (combo, record, eOpts) {
         var me = this,
             view = me.getView();
-			
-		console.info(view);
+
     }
 
 });

@@ -99,7 +99,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
                 xtype: 'gridpanel',
                 store: 'schedulingmonthlyscore',
 				columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
-					meta.style = "font-size: 16px; line-height: 18px; font-family: Monda; color: rgba(3, 98, 253, 1);";
+					meta.style = "font-size: 14px; line-height: 20px; font-family: Monda; color: rgba(3, 98, 253, 1);";
 					return ( colIndex == 1 ) ? Smart.maskRenderer('0,00',true)(value) : value;
 				},
 				columns: [
@@ -111,10 +111,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
 						align: 'right',
 						dataIndex: 'dutyfraction'
 					}, {
-						width: 50,
+						width: 40,
 						align: 'center',
 						renderer: function (value, meta, rec) {
-							return '<div class="delete-item" style="color: rgba(3, 98, 253, 1); font-size: 17px;"><i class="icon-cancel-circle"></i></div>';
+							return '<div class="delete-item" style="color: rgba(3, 98, 253, 1); font-size: 14px;"><i class="icon-cancel-circle"></i></div>';
 						}
 					}
 				],
