@@ -25,7 +25,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
     },
 
     listeners: {
-        show: 'showScoreView'
+        show: 'showScoreView',
+        beforehide: 'onBeforeHide'
     },
 
     initComponent: function () {
@@ -59,14 +60,20 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
                 xtype: 'hiddenfield',
                 name: 'id'
             }, {
+                xtype: 'hiddenfield',
+                name: 'schedulingmonthlypartnersid'
+            }, {
+                xtype: 'hiddenfield',
+                name: 'scoretype',
+                value: 'R'
+            }, {
                 xtype: 'displayfield',
-                name: 'naturalperson',
+                name: 'naturalpersonshift',
                 fieldLabel: 'Planejado',
                 fieldStyle: 'font-size: 22px; font-weight: bold;'
             }, {
-                xtype: 'fieldcontainer',
+                xtype: 'container',
                 layout: 'hbox',
-                fieldLabel: 'Realizado',
 				defaults: {
                     allowBlank: false
                 },
@@ -74,9 +81,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
 					{
 						flex: 1,
 						pageSize: 0,
+                        submitValue: false,
 						hideTrigger: true,
 						fieldLabel: 'Lançar sócio',
 						hiddenNameId: 'naturalpersonid',
+                        name: 'naturalperson',
 						xtype: 'naturalpersonsearch',
 						listeners: {
 							select: 'onUpdateScore'
@@ -84,7 +93,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
 					}
 				]
             }, {
-                height: 100,
+                height: 150,
                 xtype: 'gridpanel',
                 store: 'schedulingmonthlyscore',
                 columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
@@ -104,9 +113,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
                     }
                 ],
                 listeners: {
-					cellkeydown: 'onCellKeyDownScore'
-                    //select: 'onSelectScore',
-                    //cellclick: 'onCellClickScore'
+                    select: 'onSelectScore',
+                    cellclick: 'onCellClickScore',
+                    cellkeydown: 'onCellKeyDownScore'
                 }
             }
         ]

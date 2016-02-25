@@ -34,7 +34,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         schedulingmonthlypartnersid.setValue(data.get('id'));
 
         me._success = function (form, action) {
-            form.reset();
             grid.store.load();
         }
 

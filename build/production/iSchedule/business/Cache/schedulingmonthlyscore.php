@@ -47,9 +47,8 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
 
         $sql = "
             select
-                tp.id,
                 tp.naturalpersonid,
-                n.shortname as naturalperson,
+                n.shortname as naturalpersonshift,
                 tp.shift,
                 tp.shifthours,
                 tp.releasetype,

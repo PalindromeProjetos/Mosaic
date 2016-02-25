@@ -2,8 +2,8 @@
 
 namespace iSchedule\Event;
 
+use Smart\Setup\Start;
 use Smart\Utils\Session;
-use iSchedule\Setup\Start;
 
 class schedulingmonthlyscore extends \Smart\Data\Event {
 

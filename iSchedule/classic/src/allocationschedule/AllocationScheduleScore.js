@@ -14,7 +14,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         'iSchedule.store.allocationschedule.AllocationScheduleScore',
         'iSchedule.view.allocationschedule.AllocationScheduleScoreDone',
         'iSchedule.view.allocationschedule.AllocationScheduleScorePaid',
-        'iSchedule.view.allocationschedule.AllocationScheduleScoreController',
+        'iSchedule.view.allocationschedule.AllocationScheduleScoreController'
     ],
 
     controller: 'allocationschedulescore',

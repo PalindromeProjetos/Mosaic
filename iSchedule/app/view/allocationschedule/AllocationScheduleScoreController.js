@@ -150,10 +150,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             show = false,
 			search = form.down('naturalpersonsearch'),
             gd = form.xview.down('gridpanel'),
-            sm = gd.getSelectionModel();
-		
-        form.xdata = sm.getSelection()[0];
-        var params = form.xdata.data;
+            sm = gd.getSelectionModel(),
+            record = sm.getSelection()[0],
+            params = record.data;
 
 		search.reset();
         search.focus(false, 200);
@@ -190,6 +189,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     var result = Ext.decode(response.responseText),
                         record = Ext.create('Ext.data.Model', result.rows[0]);
 
+                    record.set('id','');
+                    form.xdata = record;
                     form.loadRecord(record);
                     params.method = 'selectCode';
                     Ext.getStore('schedulingmonthlyscore').setParams(params).load();
@@ -200,10 +201,64 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     },
 
+    onBeforeHide: function (form, eOpts) {
+        var list = [],
+            gd = form.xview.down('gridpanel'),
+            sm = gd.getSelectionModel(),
+            record = sm.getSelection()[0],
+            score = Ext.getStore('schedulingmonthlyscore'),
+            dataIndex = gd.getColumnManager().getHeaderAtIndex(form.cellIndex).dataIndex;
+
+        score.each( function (r,i) {
+            list.push(r.get('naturalperson'));
+        });
+
+        var fieldValue = list.join(", ");
+
+        record.set(dataIndex,fieldValue);
+
+    },
+
     onUpdateScore: function (combo, record, eOpts) {
+        var me = this,
+            view = me.getView(),
+            grid = view.down('gridpanel');
+
+        me._success = function (form, action) {
+            grid.store.load();
+        }
+
+        me._failure = function (form, action) {
+            grid.store.rejectChanges();
+        }
+
+        me.setModuleForm(view);
+        me.setModuleData(grid.store);
+
+        me.updateRecord();
+
+    },
+
+    onSelectScore: function (rowModel, record, index, eOpts) {
         var me = this,
             view = me.getView();
 
+        view.loadRecord(record);
+    },
+
+    onCellClickScore: function ( viewTable, td, cellIndex, record, tr, rowIndex, e ) {
+        var columns = viewTable.getColumnManager().columns.length;
+
+        if(cellIndex != columns-1) {
+            return false;
+        }
+
+        viewTable.store.remove(record);
+        viewTable.store.sync({
+            success: function (batch, options) {
+                viewTable.store.load();
+            }
+        });
     }
 
 });
