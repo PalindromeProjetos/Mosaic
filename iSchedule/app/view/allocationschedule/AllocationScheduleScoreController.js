@@ -219,7 +219,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     },
 
-    onUpdateScore: function (combo, record, eOpts) {
+    onUpdateScore: function (panel, eOpts) {
         var me = this,
             view = me.getView(),
             grid = view.down('gridpanel');

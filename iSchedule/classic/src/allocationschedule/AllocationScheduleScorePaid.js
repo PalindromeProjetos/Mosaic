@@ -25,7 +25,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
     },
 
     listeners: {
-        show: 'showScoreView'
+        show: 'showScoreView',
+        beforehide: 'onBeforeHide',
+        updatescore: 'onUpdateScore'
     },
 
     initComponent: function () {
@@ -43,10 +45,18 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
 
     onFormElKeyDown: function(e) {
         var me = this;
+
         if (e.getKey() === e.ESC) {
             me.hide();
             me.xview.down('gridpanel').getView().focusCell( me.xview.hasPosition );
         }
+
+        if (e.altKey == true) {
+            if([83,115].indexOf(e.keyCode) != -1) {
+                me.fireEvent('updatescore', me, {});
+            }
+        }
+
     },
 
     buildItems: function () {
@@ -86,9 +96,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
                         hiddenNameId: 'naturalpersonid',
                         name: 'naturalperson',
                         xtype: 'naturalpersonsearch',
-						listeners: {
-							select: 'onUpdateScore'
-						},
                         margin: '0 5 0 0'
                     }, {
                         width: 70,
