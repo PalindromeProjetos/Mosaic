@@ -8,7 +8,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         'Smart.util.Message'
     ],
 
-    onDatePrev: function (panel,datescore,dateof,dateto) {
+    onDatePrev: function ( panel,datescore,dateof,dateto ) {
         var me = this,
             view = me.getView(),
             form = view.down('form[name=period]');
@@ -18,7 +18,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
     },
 
-    onDateNext: function (panel,datescore,dateof,dateto) {
+    onDateNext: function ( panel,datescore,dateof,dateto ) {
         var me = this,
             view = me.getView(),
             form = view.down('form[name=period]');
@@ -28,7 +28,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
     },
 
-    newScoreDate: function (datescore,dateof,dateto,signal) {
+    newScoreDate: function ( datescore,dateof,dateto,signal ) {
         var me = this,
             localDateOf = Ext.Date.parse(dateof.getSubmitData().dateof, "Y-m-d"),
             localDateTo = Ext.Date.parse(dateto.getSubmitData().dateto, "Y-m-d"),
@@ -50,7 +50,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     },
 
-    onSelectDate: function (field, value, eOpts) {
+    onSelectDate: function ( field, value, eOpts ) {
         var me = this,
             view = me.getView(),
             dateof = view.down('datefield[name=dateof]'),
@@ -68,7 +68,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
     },
 
-    onPeriodDate: function (field, value, eOpts) {
+    onPeriodDate: function ( field, value, eOpts ) {
         var me = this,
             view = me.getView(),
             form = view.down('form[name=period]'),
@@ -82,7 +82,15 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         me.onUnitSubUnit();
     },
 
-    onUnitSubUnit: function (combo, record, eOpts) {
+    onBeforeEdit: function ( editor, context, eOpts ) {
+		var fd = context.field,
+			cx = context.colIdx,
+			rd = context.record;
+
+        context.cancel = ([0,3].indexOf(cx) != -1) || (!rd.get(fd));
+    },
+
+    onUnitSubUnit: function ( combo, record, eOpts ) {
         var me = this,
             view = me.getView(),
             form = view.down('form[name=period]'),
@@ -110,11 +118,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
     },
 
-    onBeforeEdit: function ( editor, context, eOpts ) {
-        context.cancel = [0,3].indexOf(context.colIdx) != -1;
-    },
-
-    onCellKeyDown: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+    onCellKeyDown: function ( viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
         var me = this,
             view = me.getView(),
             dateof = view.down('datefield[name=dateof]'),
@@ -133,26 +137,16 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
 
     },
-	
-	onCellKeyDownScore: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts) {
-        var me = this,
-            view = me.getView();
 
-        if (e.getKey() === e.ESC) {
-            view.hide();
-            view.xview.down('gridpanel').getView().focusCell( view.xview.hasPosition );
-        }
-
-    },
-
-    showScoreView: function (form, eOpts) {
+    showScoreView: function ( form, eOpts ) {
         var me = this,
             show = false,
 			search = form.down('naturalpersonsearch'),
             gd = form.xview.down('gridpanel'),
             sm = gd.getSelectionModel(),
             record = sm.getSelection()[0],
-            params = record.data;
+            params = record.data,
+            store = Ext.getStore('schedulingmonthlyscore');
 
 		search.reset();
         search.focus(false, 200);
@@ -193,7 +187,17 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     form.xdata = record;
                     form.loadRecord(record);
                     params.method = 'selectCode';
-                    Ext.getStore('schedulingmonthlyscore').setParams(params).load();
+                    store.setParams(params).load({
+                        callback: function () {
+                            var list = [];
+
+                            store.each( function (rd) {
+                                list.push(rd.get('naturalperson'));
+                            });
+
+                            form.xview.fieldValue = list.join(", ");
+                        }
+                    });
                 }
             });
 
@@ -201,31 +205,23 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     },
 
-    onBeforeHide: function (form, eOpts) {
-        var list = [],
-            gd = form.xview.down('gridpanel'),
-            sm = gd.getSelectionModel(),
-            record = sm.getSelection()[0],
-            score = Ext.getStore('schedulingmonthlyscore'),
-            dataIndex = gd.getColumnManager().getHeaderAtIndex(form.cellIndex).dataIndex;
-
-        score.each( function (r,i) {
-            list.push(r.get('naturalperson'));
-        });
-
-        var fieldValue = list.join(", ");
-
-        record.set(dataIndex,fieldValue);
-
-    },
-
-    onUpdateScore: function (panel, eOpts) {
+    onUpdateScore: function ( panel, eOpts ) {
         var me = this,
             view = me.getView(),
             grid = view.down('gridpanel');
 
         me._success = function (form, action) {
-            grid.store.load();
+            grid.store.load({
+                callback: function () {
+                    var list = [];
+
+                    grid.store.each( function (rd) {
+                        list.push(rd.get('naturalperson'));
+                    });
+
+                    view.xview.fieldValue = list.join(", ");
+                }
+            });
         }
 
         me._failure = function (form, action) {
@@ -239,7 +235,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     },
 
-    onSelectScore: function (rowModel, record, index, eOpts) {
+    onSelectScore: function ( rowModel, record, index, eOpts ) {
         var me = this,
             view = me.getView();
 
@@ -247,18 +243,56 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     },
 
     onCellClickScore: function ( viewTable, td, cellIndex, record, tr, rowIndex, e ) {
-        var columns = viewTable.getColumnManager().columns.length;
+        var me = this,
+            view = me.getView(),
+            store = viewTable.store,
+            search = view.down('naturalpersonsearch'),
+            columns = viewTable.getColumnManager().columns.length;
 
         if(cellIndex != columns-1) {
             return false;
         }
 
-        viewTable.store.remove(record);
-        viewTable.store.sync({
-            success: function (batch, options) {
-                viewTable.store.load();
+        store.remove(record);
+        store.sync({
+            callback: function () {
+                var list = [];
+
+                store.each( function (rd) {
+                    list.push(rd.get('naturalperson'));
+                });
+
+                search.reset();
+                search.focus(false, 200);
+
+                view.xview.fieldValue = list.join(", ");
             }
         });
+
+    },
+
+    onPickerCollapse: function ( field, eOpts ) {
+        var me = this,
+            view = me.getView(),
+            dataIndex = field.dataIndex,
+            gd = view.down('gridpanel'),
+            sm = gd.getSelectionModel(),
+            record = sm.getSelection()[0];
+
+        record.set(dataIndex,view.fieldValue);
+        record.commit();
+
+    },
+
+    onCellKeyDownScore: function ( viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
+        var me = this,
+            view = me.getView();
+
+        if (e.getKey() === e.ESC) {
+            view.hide();
+            view.xview.down('gridpanel').getView().focusCell( view.xview.hasPosition );
+        }
+
     }
 
 });

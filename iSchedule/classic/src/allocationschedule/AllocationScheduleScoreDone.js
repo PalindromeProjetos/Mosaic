@@ -26,7 +26,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
 
     listeners: {
         show: 'showScoreView',
-        beforehide: 'onBeforeHide',
         updatescore: 'onUpdateScore'
     },
 
@@ -83,15 +82,13 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
             }, {
                 xtype: 'container',
                 layout: 'hbox',
-				defaults: {
-                    allowBlank: false
-                },
 				items: [
 					{
 						flex: 1,
 						pageSize: 0,
-                        submitValue: false,
+						allowBlank: false,
 						hideTrigger: true,
+                        submitValue: false,
 						fieldLabel: 'Lançar sócio',
 						hiddenNameId: 'naturalpersonid',
                         name: 'naturalperson',
@@ -123,6 +120,15 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
                     cellclick: 'onCellClickScore',
                     cellkeydown: 'onCellKeyDownScore'
                 }
+            }, {
+				xtype: 'splitter'
+            }, {
+				xtype: 'label',
+				text: 'para salvar, alt + S',
+				style: {
+					textAlign: 'center;',
+					fontSize: '12px;'
+				}
             }
         ]
     }

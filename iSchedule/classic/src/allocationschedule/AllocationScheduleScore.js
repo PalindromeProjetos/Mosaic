@@ -87,6 +87,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                     scoreView = ( [1,4].indexOf(cellIndex) != -1 ) ? 'allocationschedulescoredone' : 'allocationschedulescorepaid';
 
                                 return Ext.widget(scoreView, { xview: me, hasPosition: hasPosition, cellIndex: cellIndex });
+                            },
+                            listeners: {
+                                collapse: 'onPickerCollapse'
                             }
                         }
                     };

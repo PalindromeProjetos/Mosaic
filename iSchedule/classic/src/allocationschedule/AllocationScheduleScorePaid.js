@@ -26,7 +26,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
 
     listeners: {
         show: 'showScoreView',
-        beforehide: 'onBeforeHide',
         updatescore: 'onUpdateScore'
     },
 
@@ -90,23 +89,23 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
                     {
                         flex: 1,
                         pageSize: 0,
-                        submitValue: false,
+                        margin: '0 5 0 0',
                         hideTrigger: true,
-                        fieldLabel: 'Lançar sócio',
-                        hiddenNameId: 'naturalpersonid',
+                        submitValue: false,
                         name: 'naturalperson',
+                        fieldLabel: 'Lançar sócio',
                         xtype: 'naturalpersonsearch',
-                        margin: '0 5 0 0'
+                        hiddenNameId: 'naturalpersonid'
                     }, {
+                        value: 1,
                         width: 70,
-                        name: 'dutyfraction',
-                        fieldLabel: 'Fração',
-                        xtype: 'textfield',
-                        plugins: 'textmask',
                         money: true,
                         mask: '0,00',
-                        value: 1,
-                        margin: '0 0 0 5'
+                        margin: '0 0 0 5',
+                        xtype: 'textfield',
+                        plugins: 'textmask',
+                        name: 'dutyfraction',
+                        fieldLabel: 'Fração'
                     }
                 ]
             }, {
@@ -138,7 +137,16 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
                     cellclick: 'onCellClickScore',
                     cellkeydown: 'onCellKeyDownScore'
                 }
-            }
+            }, {
+				xtype: 'splitter'
+            }, {
+				xtype: 'label',
+				text: 'para salvar, alt + S',
+				style: {
+					textAlign: 'center;',
+					fontSize: '12px;'
+				}
+			}
         ]
     }
 
