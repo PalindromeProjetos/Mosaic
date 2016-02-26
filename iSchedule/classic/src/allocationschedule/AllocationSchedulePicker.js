@@ -25,7 +25,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationSchedulePicker', {
 
     viewConfig: {
         loadMask: false,
-        loadingText: undefined,
+        loadingText: false,
         scroll: false,
         style: {
             overflow: 'auto',

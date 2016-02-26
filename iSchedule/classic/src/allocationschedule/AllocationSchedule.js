@@ -211,8 +211,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationSchedule', {
                                                 showSmartTheme: 'sky'
                                             }
                                         ]
-                                    }, {
-                                        xtype: 'allocationschedulescoreold'
+                                    //}, {
+                                    //    xtype: 'allocationschedulescoreold'
                                     }
                                 ]
                             }

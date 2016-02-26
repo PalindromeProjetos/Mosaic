@@ -23,8 +23,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleWeek', {
 
     viewConfig: {
         loadMask: false,
-        loadingText: undefined,
-        scroll:false,
+        loadingText: false,
+        scroll: false,
         style:{
             overflow: 'auto',
             overflowX: 'hidden'
@@ -34,9 +34,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleWeek', {
     listeners: {
         cellclick: 'onCellClick',
         cellkeydown: 'onCellKeyDown',
-        celldblclick: 'onScheduleCelldDlclick',
-        beforeitemclick: 'onBeforeItemKeyDown',
-        beforeitemkeydown: 'onBeforeItemKeyDown'
+        celldblclick: 'onScheduleCelldDlclick'
+        //beforeitemclick: 'onBeforeItemKeyDown'
+        //beforeitemkeydown: 'onBeforeItemKeyDown'
     },
 
     _columnText: {

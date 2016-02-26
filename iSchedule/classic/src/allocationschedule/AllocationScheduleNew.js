@@ -26,20 +26,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
         type: 'fit'
     },
 
-    buttons: [
-        {
-            showSmartTheme: 'red-dark',
-            text: 'Salvar',
-            handler: 'insertAllocationSchedule'
-        }, {
-            text: 'Fechar',
-            showSmartTheme: 'green',
-            handler: function (btn) {
-                btn.up('window').close();
-            }
-        }
-    ],
-
     initComponent: function () {
         var me = this;
         me.buildItems();
@@ -168,6 +154,22 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
                 ]
             }
         ]
-    }
+    },
+
+    buttonAlign: 'center',
+
+    buttons: [
+        {
+            showSmartTheme: 'red-dark',
+            text: 'Salvar',
+            handler: 'insertAllocationSchedule'
+        }, {
+            text: 'Fechar',
+            showSmartTheme: 'green',
+            handler: function (btn) {
+                btn.up('window').close();
+            }
+        }
+    ]
 
 });

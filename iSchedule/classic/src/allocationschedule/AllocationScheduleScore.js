@@ -246,6 +246,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                             clicksToEdit: 1,
                                             pluginId: 'pluginscore'
                                         },
+                                        columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
+                                            var list = [0,3];
+                                            meta.style = ( list.indexOf(colIndex) != -1 ) ? "color: red;" : "";
+                                            return value;
+                                        },
                                         columns: [
                                             {
                                                 cls: 'dark',

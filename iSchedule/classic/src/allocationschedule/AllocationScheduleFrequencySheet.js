@@ -49,7 +49,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleFrequencySheet'
                         name: 'period',
                         fieldLabel: 'Competencia',
                         xtype: 'textfield',
-                        readOnlyColor: true,
+                        useReadColor: true,
                         useMondaFont: true,
                         fieldStyle: {
                             color: 'blue;',
@@ -103,6 +103,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleFrequencySheet'
             }
         ]
     },
+
+    buttonAlign: 'center',
 
     buttons: [
         {
