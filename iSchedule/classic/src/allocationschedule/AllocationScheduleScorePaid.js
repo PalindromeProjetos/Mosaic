@@ -98,7 +98,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
                         hiddenNameId: 'naturalpersonid'
                     }, {
                         value: 1,
-                        width: 70,
+                        width: 60,
                         money: true,
                         mask: '0,00',
                         margin: '0 0 0 5',
@@ -141,10 +141,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
 				xtype: 'splitter'
             }, {
 				xtype: 'label',
-				text: 'para salvar, alt + S',
+                text: 'para salvar, Alt + S',
 				style: {
-					textAlign: 'center;',
-					fontSize: '12px;'
+                    display: 'table-cell;',
+                    textAlign: 'center;',
+                    color: 'red;'
 				}
 			}
         ]

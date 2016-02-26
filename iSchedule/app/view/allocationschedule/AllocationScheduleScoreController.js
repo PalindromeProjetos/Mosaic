@@ -220,6 +220,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     });
 
                     view.xview.fieldValue = list.join(", ");
+
+                    view.down('hiddenfield[name=id]').setValue('');
                 }
             });
         }
@@ -250,6 +252,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             columns = viewTable.getColumnManager().columns.length;
 
         if(cellIndex != columns-1) {
+            return false;
+        }
+
+        if(store.getCount() == 1) {
             return false;
         }
 

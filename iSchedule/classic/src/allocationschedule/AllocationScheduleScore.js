@@ -163,8 +163,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                 editable: false,
                                 xtype: 'datefield',
                                 afterLabelTextTpl: [
-                                    '<i style="font-style: italic;"> ...navegação, ctrl + </i>',
-                                    '<i class="fa fa-arrow-left"></i> <i class="fa fa-arrow-right"></i>'
+                                    '<i style="font-style: italic; color: red;"> ...navegação, Ctrl + </i>',
+                                    '<i class="fa fa-arrow-left" style="color: red;"></i> <i class="fa fa-arrow-right" style="color: red;"></i>'
                                 ],
                                 fieldLabel: 'Data',
                                 hideTrigger: false,

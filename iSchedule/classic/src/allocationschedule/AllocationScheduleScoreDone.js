@@ -124,10 +124,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
 				xtype: 'splitter'
             }, {
 				xtype: 'label',
-				text: 'para salvar, alt + S',
+				text: 'para salvar, Alt + S',
 				style: {
-					textAlign: 'center;',
-					fontSize: '12px;'
+                    display: 'table-cell;',
+                    textAlign: 'center;',
+                    color: 'red;'
 				}
             }
         ]
