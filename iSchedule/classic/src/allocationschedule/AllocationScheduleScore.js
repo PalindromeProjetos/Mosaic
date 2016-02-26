@@ -12,6 +12,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         'Smart.form.field.ComboSearch',
         'iContract.store.contractor.ContractorUnit',
         'iSchedule.store.allocationschedule.AllocationScheduleScore',
+		'iSchedule.view.allocationschedule.AllocationScheduleScorePlan',
         'iSchedule.view.allocationschedule.AllocationScheduleScoreDone',
         'iSchedule.view.allocationschedule.AllocationScheduleScorePaid',
         'iSchedule.view.allocationschedule.AllocationScheduleScoreController'

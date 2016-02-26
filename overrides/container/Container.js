@@ -48,7 +48,21 @@ Ext.define( 'Ext.overrides.container.Container', {
         }
 
         me.callParent();
+		
+		me.onAfter('afterrender', me.fnAfterRender, me);
 
+    },
+
+	fnAfterRender: function (panel, eOpts) {
+        var me = this;
+		
+		me.getEl().on('keydown', me.fnElKeyDown, me);
+	},
+	
+	fnElKeyDown: function(e) {
+        var me = this;
+		
+		me.fireEvent('keydown', me, e, {});
     }
 
 });
