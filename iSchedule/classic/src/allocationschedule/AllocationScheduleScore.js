@@ -37,36 +37,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
         var me = this;
         me.buildItems();
         me.callParent();
-
-        me.on('render', me.onFormRender, me);
-    },
-
-    onFormRender: function() {
-        var me = this;
-        me.getEl().on('keydown', me.onFormElKeyDown, me);
-    },
-
-    onFormElKeyDown: function(e) {
-        var me = this,
-            dateof = me.down('datefield[name=dateof]'),
-            dateto = me.down('datefield[name=dateto]'),
-            datescore = me.down('datefield[name=datescore]');
-
-        if (e.ctrlKey == true) {
-            switch(e.keyCode) {
-                case 37:
-                    me.fireEvent('dateprev',me,datescore,dateof,dateto);
-                    break;
-                case 39:
-                    me.fireEvent('datenext',me,datescore,dateof,dateto);
-                    break;
-            }
-        }
     },
 
     listeners: {
-        dateprev: 'onDatePrev',
-        datenext: 'onDateNext'
+        keydown: 'onDateMove'
     },
 
     buildScore: function (shift) {
@@ -81,17 +55,34 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                         editor: {
                             xtype: 'pickerfield',
                             createPicker: function () {
-                                var gd = me.down('gridpanel'),
+                                var scoreView = {},
+                                    gd = me.down('gridpanel'),
                                     sm = gd.getSelectionModel(),
                                     hasPosition = sm.getPosition(),
-                                    cellIndex = gd.view.getCellByPosition(sm.getCurrentPosition()).dom.cellIndex,
-                                    scoreView = ( [1,4].indexOf(cellIndex) != -1 ) ? 'allocationschedulescoredone' : 'allocationschedulescorepaid';
+                                    cellIndex = gd.view.getCellByPosition(sm.getCurrentPosition()).dom.cellIndex;
+
+                                if ( [0,3].indexOf(cellIndex) != -1 ) {
+                                    scoreView = 'allocationschedulescoreplan';
+                                }
+
+                                if ( [1,4].indexOf(cellIndex) != -1 ) {
+                                    scoreView = 'allocationschedulescoredone';
+                                }
+
+                                if ( [2,5].indexOf(cellIndex) != -1 ) {
+                                    scoreView = 'allocationschedulescorepaid';
+                                }
 
                                 return Ext.widget(scoreView, { xview: me, hasPosition: hasPosition, cellIndex: cellIndex });
                             },
                             listeners: {
                                 collapse: 'onPickerCollapse'
                             }
+                        },
+                        renderer: function (value, meta, record, rowIndex, colIndex, store) {
+                            var list = [0,3];
+                            meta.style = ( list.indexOf(colIndex) != -1 ) ? "color: red;" : "";
+                            return value;
                         }
                     };
 
@@ -246,11 +237,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                             ptype: 'cellediting',
                                             clicksToEdit: 1,
                                             pluginId: 'pluginscore'
-                                        },
-                                        columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
-                                            var list = [0,3];
-                                            meta.style = ( list.indexOf(colIndex) != -1 ) ? "color: red;" : "";
-                                            return value;
                                         },
                                         columns: [
                                             {

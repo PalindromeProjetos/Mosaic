@@ -25,37 +25,14 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
     },
 
     listeners: {
-        show: 'showScoreView',
-        updatescore: 'onUpdateScore'
+        keydown: 'setKeyDown',
+        show: 'showScoreView'
     },
 
     initComponent: function () {
         var me = this;
         me.buildItems();
         me.callParent();
-
-        me.on('render', me.onFormRender, me);
-    },
-
-    onFormRender: function() {
-        var me = this;
-        me.getEl().on('keydown', me.onFormElKeyDown, me);
-    },
-
-    onFormElKeyDown: function(e) {
-        var me = this;
-
-        if (e.getKey() === e.ESC) {
-            me.hide();
-            me.xview.down('gridpanel').getView().focusCell( me.xview.hasPosition );
-        }
-
-        if (e.altKey == true) {
-            if([83,115].indexOf(e.keyCode) != -1) {
-                me.fireEvent('updatescore', me, {});
-            }
-        }
-
     },
 
     buildItems: function () {

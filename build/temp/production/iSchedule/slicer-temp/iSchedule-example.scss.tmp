@@ -1174,6 +1174,7 @@ $include-ischedule-view-allocationschedule-allocationschedulescorecontroller: dy
 $include-ischedule-view-allocationschedule-allocationschedulescoredone: dynamic(true);;
 $include-ischedule-view-allocationschedule-allocationschedulescoreold: dynamic(true);;
 $include-ischedule-view-allocationschedule-allocationschedulescorepaid: dynamic(true);;
+$include-ischedule-view-allocationschedule-allocationschedulescoreplan: dynamic(true);;
 $include-ischedule-view-allocationschedule-allocationschedulescorereport: dynamic(true);;
 $include-ischedule-view-allocationschedule-allocationscheduleverifypayreport: dynamic(true);;
 $include-ischedule-view-allocationschedule-allocationscheduleweek: dynamic(true);;
