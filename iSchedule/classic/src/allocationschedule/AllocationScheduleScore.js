@@ -243,7 +243,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                         selModel: 'cellmodel',
                                         plugins: {
                                             ptype: 'cellediting',
-                                            clicksToEdit: 1
+                                            clicksToEdit: 1,
+                                            pluginId: 'pluginscore'
                                         },
                                         columns: [
                                             {
