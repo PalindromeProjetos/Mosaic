@@ -268,9 +268,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                             }
                                         ],
                                         listeners: {
-                                            edit: function ( editor, context, eOpts ) {
-                                                console.info(context.field);
-                                            },
                                             beforeedit: 'onBeforeEdit',
                                             cellkeydown: 'onCellKeyDown'
                                         }

@@ -160,6 +160,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         var me = this,
             view = me.getView();
 
+        if (e.getKey() === e.ENTER) {
+
+        }
+
         me.onDateMove(view,e,eOpts);
     },
 
