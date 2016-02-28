@@ -68,7 +68,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
     },
 
-    setSchedule: function ( button, eOpts) {
+    setSchedule: function ( btn, eOpts) {
         var me = this,
             view = me.getView(),
             datescore = view.down('datefield[name=datescore]'),
@@ -92,6 +92,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     xdata: record
                 }).show(null, function() {
                     this.down('hiddenfield[name=id]').setValue('');
+                    this.down('hiddenfield[name=releasetype]').setValue('M');
                     this.down('datefield[name=dutydate]').setReadColor(true);
                     this.down('datefield[name=dutydate]').setValue(datescore.getValue());
                 });
@@ -99,7 +100,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         });
     },
 
-    getSchedule: function ( button, eOpts) {
+    getSchedule: function ( btn, eOpts) {
 
     },
 
