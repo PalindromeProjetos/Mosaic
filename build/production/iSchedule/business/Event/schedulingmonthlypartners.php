@@ -3,7 +3,7 @@
 namespace iSchedule\Event;
 
 use Smart\Utils\Session;
-use iSchedule\Setup\Start;
+use Smart\Setup\Start;
 
 class schedulingmonthlypartners extends \Smart\Data\Event {
 

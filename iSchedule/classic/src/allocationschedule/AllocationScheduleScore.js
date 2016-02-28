@@ -6,6 +6,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
 
     requires: [
         'Smart.form.field.*',
+        'Ext.button.Segmented',
         'Ext.form.field.Picker',
         'Smart.form.field.ComboEnum',
         'Ext.grid.plugin.CellEditing',
@@ -206,10 +207,32 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                     select: 'onUnitSubUnit'
                                 }
                             }, {
-                                xtype: 'button',
-                                scale: 'large',
-                                iconCls: "fa fa-print",
-                                text: 'Imprimir Contagem'
+                                xtype: 'segmentedbutton',
+                                //allowMultiple: true,
+                                defaults: {
+                                    scale: 'medium'
+                                },
+                                items: [
+                                    {
+                                        width: 70,
+                                        xtype: 'splitbutton',
+                                        iconCls: "fa fa-print",
+                                        menu: [
+                                            {
+                                                text: 'Menu Item 1'
+                                            }
+                                        ]
+                                    }, {
+                                        iconCls: "fa fa-desktop",
+                                        text: 'Novo Plantão',
+                                        handler: 'setSchedule'
+                                    }
+                                ]
+                                //listeners: {
+                                //    toggle: function(container, button, pressed) {
+                                //        console.log("User toggled the '" + button.text + "' button: " + (pressed ? 'on' : 'off'));
+                                //    }
+                                //}
                             }
                         ]
                     }, {

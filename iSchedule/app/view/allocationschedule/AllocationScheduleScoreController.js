@@ -5,7 +5,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     alias: 'controller.allocationschedulescore',
 
     requires: [
-        'Smart.util.Message'
+        'Smart.util.Message',
+        'iSchedule.store.allocationschedule.AllocationSchedule'
     ],
 
     setKeyDown: function ( form, e, eOpts ) {
@@ -65,6 +66,41 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         if(form.isValid()) {
             me.newScoreDate(datescore,dateof,dateto,'+');
         }
+    },
+
+    setSchedule: function ( button, eOpts) {
+        var me = this,
+            view = me.getView(),
+            datescore = view.down('datefield[name=datescore]'),
+            contractorunitid = view.down('hiddenfield[name=contractorunitid]');
+
+        Ext.create('iSchedule.store.allocationschedule.AllocationSchedule');
+
+        Ext.Ajax.request({
+            scope: me,
+            url: '../iContract/business/Calls/contractorunit.php',
+            params: {
+                action: 'select',
+                method: 'selectItem',
+                query: contractorunitid.getValue()
+            },
+            success: function(response) {
+                var result = Ext.decode(response.responseText),
+                    record = Ext.create('Ext.data.Model', result.rows[0]);
+
+                Ext.widget('allocationschedulenew', {
+                    xdata: record
+                }).show(null, function() {
+                    this.down('hiddenfield[name=id]').setValue('');
+                    this.down('datefield[name=dutydate]').setReadColor(true);
+                    this.down('datefield[name=dutydate]').setValue(datescore.getValue());
+                });
+            }
+        });
+    },
+
+    getSchedule: function ( button, eOpts) {
+
     },
 
     newScoreDate: function ( datescore, dateof, dateto, signal ) {
