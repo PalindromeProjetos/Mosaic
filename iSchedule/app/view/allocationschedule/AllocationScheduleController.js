@@ -8,103 +8,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         'Smart.util.Message'
     ],
 
-    //onFilterScore: function (field, newValue, oldValue, eOpts) {
-    //    var me = this,
-    //        view = me.getView().down('allocationschedulescoreold'),
-    //        form = view.down('form[name=selectscore]'),
-    //        layout = form.getLayout();
-    //
-    //    layout.setActiveItem(newValue.filterscore);
-    //    layout.getActiveItem().down('gridpanel').store.load();
-    //},
-
-    //onClosedScore: function () {
-    //    var me = this;
-    //    //me.onChangeMonthlyScore(false);
-    //},
-
-    //onUpdateScore: function () {
-    //    var me = this,
-    //        view = me.getView().down('allocationschedulescoreold'),
-    //        data = view.xdata,
-    //        form = view.getActiveItem(),
-    //        grid = form.down('gridpanel'),
-    //        schedulingmonthlypartnersid = form.down('hiddenfield[name=schedulingmonthlypartnersid]');
-    //
-    //    schedulingmonthlypartnersid.setValue(data.get('id'));
-    //
-    //    me._success = function (form, action) {
-    //        grid.store.load();
-    //    }
-    //
-    //    me._failure = function (form, action) {
-    //        grid.store.rejectChanges();
-    //    }
-    //
-    //    me.setModuleData(grid.store);
-    //    me.setModuleForm(form);
-    //    me.updateModule();
-    //},
-
-    //onInsertScore: function () {
-    //    var me = this,
-    //        view = me.getView(),
-    //        form = view.down('form[name=updatescore]'),
-    //        card = form.down('form[name=selectscore]');
-    //
-    //    card.reset();
-    //    card.getLayout().getActiveItem().down('gridpanel').getSelectionModel().deselectAll();
-    //},
-
-    //onSelectShiftHours: function (combo, record, eOpts) {
-    //    var me = this,
-    //        view = me.getView().down('allocationschedulescoreold');
-    //
-    //    view.xdata.set('shifthours',combo.getValue());
-    //
-    //    view.xdata.store.sync({
-    //        success: function (batch, options) {
-    //            view.xdata.commit();
-    //        }
-    //    });
-    //},
-
-    //onSelectNaturalPerson: function (combo, record, eOpts) {
-    //    var me = this;
-    //    me.onUpdateScore(combo);
-    //},
-
-    //onCellClickScore: function ( viewTable, td, cellIndex, record, tr, rowIndex, e ) {
-    //    var me = this,
-    //        view = me.getView().down('allocationschedulescoreold'),
-    //        form = view.getActiveItem(),
-    //        dataIndex = viewTable.getColumnManager().getHeaderAtIndex(cellIndex).dataIndex,
-    //        warning = 'O Sócio será removido da presente lista!';
-    //
-    //    if(dataIndex != '') {
-    //        return false;
-    //    }
-    //
-    //    Smart.Msg.question("Confirma a remocao deste registro? <br/> <br/>" + warning, function(btn) {
-    //        if (btn === 'yes') {
-    //            viewTable.store.remove(record);
-    //            viewTable.store.sync({
-    //                success: function (batch, options) {
-    //                    viewTable.store.load();
-    //                    form.reset();
-    //                }
-    //            });
-    //        }
-    //    });
-    //},
-
-    //onSelectScore: function (rowModel, record, index, eOpts) {
-    //    var me = this,
-    //        view = me.getView().down('allocationschedulescoreold'),
-    //        form = view.getActiveItem();
-    //    form.loadRecord(record);
-    //},
-
     startPublishSchedule: function () {
         var me = this,
             view = me.getView(),
@@ -136,17 +39,17 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
 
     onShowDirectorShip: function (win) {
         var me = this,
-            param = {},
+            params = {},
             view = me.getView(),
             store = Ext.getStore('contractorunit');
 
-        param.limit = 0;
-        param.action = 'select';
-        param.method = 'selectLike';
+        params.limit = 0;
+        params.action = 'select';
+        params.method = 'selectLike';
 
         view.setLoading('Carregando escala ...');
 
-        store.setParams(param).load({
+        store.setParams(params).load({
             scope: me,
             callback: function(records, operation, success) {
                 view.setLoading(false);
@@ -244,9 +147,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
 
     showSelectScheduleContagem: function () {
         var me = this,
-            view = me.getView(),
-            period = view.down('schedulingperiodsearch'),
-            record = period.getSelectedRecord(),
             params = { limit: 1000 },
             win = Ext.widget('allocationschedulescorereport');
 
@@ -257,11 +157,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
     },
 
     showSelectScheduleExtrato: function () {
-        var me = this,
-            //view = me.getView(),
-            //period = view.down('schedulingperiodsearch'),
-            //record = period.getSelectedRecord(),
-            params = { limit: 1000 },
+        var params = { limit: 1000 },
             win = Ext.widget('allocationscheduleextractreport');
 
         win.show(null,function(){
@@ -270,11 +166,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
     },
 
     showSelectScheduleVerifyPay: function () {
-        var me = this,
-            //view = me.getView(),
-            //period = view.down('schedulingperiodsearch'),
-            //record = period.getSelectedRecord(),
-            params = { limit: 1000 },
+        var params = { limit: 1000 },
             win = Ext.widget('allocationscheduleverifypayreport');
 
         win.show(null,function(){
@@ -342,7 +234,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         var me = this,
             view = me.getView(),
             contractorunitlist = [],
-            //contractorsublist = [],
             form = view.down('form'),
             data = form.getValues(),
             list = view.down('gridpanel[name=contractorunitexclud]').getSelectionModel().getSelection(),
@@ -367,17 +258,12 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         var me = this,
             view = me.getView(),
             contractorunitlist = [],
-            //contractorsublist = [],
             form = view.down('form'),
             data = form.getValues(),
             list = view.down('gridpanel[name=contractorunitexclud]').getSelectionModel().getSelection(),
-            //listSub = view.down('gridpanel[name=contractorsubunitexclud]').getSelectionModel().getSelection(),
             url = 'business/Calls/Report/ScheduleVerifyPay.php?',
             qrp = 'periodof={0}&periodto={1}&contractorunitid={2}&unitexclud={3}',
             unitexclud = '';
-            //subexclud = '';
-
-        //console.info(data);
 
         if(form.isValid()) {
 
@@ -509,15 +395,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         form.down('hiddenfield[name=releasetype]').setValue('M');
     },
 
-    //onBeforeItemKeyDown: function ( rowModel, record, index, eOpts ) {
-    //    var me = this;
-    //
-    //    //me.onChangeMonthlyScore(false);
-    //},
-
     onCellClick: function ( viewTable, td, cellIndex, record, tr, rowIndex, e ) {
         var me = this,
-            param = {},
             view = me.getView(),
             period = view.down('schedulingperiodsearch'),
             status = period.foundRecord().get('status'),
@@ -588,14 +467,12 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
 
     onScheduleCelldDlclick: function (viewTable, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
         var me = this,
-            param = {},
+            params = {},
             view = me.getView(),
             period = view.down('schedulingperiodsearch'),
             status = period.foundRecord().get('status'),
             fieldName = viewTable.getColumnManager().getHeaderAtIndex(cellIndex).dataIndex,
             dataIndex = fieldName.replace("description","");
-
-        //me.onChangeMonthlyScore(false);
 
         if(cellIndex < 2) {
             return false;
@@ -605,40 +482,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
             return false;
         }
 
-        //if(status == 'C') {
-        //
-        //    if(record.get(fieldName) == '...') {
-        //        return false;
-        //    }
-        //
-        //    view.setLoading('Carregando contagem da escala ...');
-        //
-        //    param = {
-        //        query: record.get(dataIndex),
-        //        action: 'select',
-        //        method: 'selectCode',
-        //        period: period.getValue(),
-        //        dataIndex: dataIndex,
-        //        rows: Ext.encode(record.data)
-        //    };
-        //
-        //    var storePartners = Ext.create('iSchedule.store.allocationschedule.SchedulingMonthlyPartners');
-        //
-        //    storePartners.setParams(param).load({
-        //        scope: me,
-        //        callback: function(records, operation, success) {
-        //            var record = records[0];
-        //            view.setLoading(false);
-        //            me.onChangeMonthlyScore(true,record,param);
-        //        }
-        //    });
-        //
-        //}
-
         if(status == 'A') {
             view.setLoading('Carregando edição da escala ...');
 
-            param = {
+            params = {
                 query: record.get(dataIndex),
                 action: 'select',
                 method: 'selectCode',
@@ -649,7 +496,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
 
             var storeTurning = Ext.create('iSchedule.store.allocationschedule.TMP_TurningMonthly');
 
-            storeTurning.setParams(param).load({
+            storeTurning.setParams(params).load({
                 scope: me,
                 callback: function(records, operation, success) {
                     view.setLoading(false);
@@ -693,40 +540,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         }
     },
 
-    //onChangeMonthlyScore: function ( newValue, record, param ) {
-    //    var me = this,
-    //        view = me.getView(),
-    //        form = view.down('form[name=updatescore]'),
-    //        bbar = view.down('toolbar[name=updatescore]'),
-    //        changestatus = view.down('segmentedbutton[name=changestatus]');
-    //
-    //    form.reset();
-    //
-    //    if(newValue) {
-    //        form.show();
-    //        bbar.show();
-    //        changestatus.hide();
-    //
-    //        var storeR = view.down('gridpanel[name=schedulingmonthlyscoreR]').store;
-    //        var storeP = view.down('gridpanel[name=schedulingmonthlyscoreP]').store;
-    //
-    //        view.down('allocationschedulescoreold').xdata = record;
-    //
-    //        view.down('combobox[name=shifthours]').setValue(record.get('shifthours'));
-    //
-    //        param.scoretype = 'R';
-    //        storeR.setParams(param).load();
-    //        param.scoretype = 'P';
-    //        storeP.setParams(param).load();
-    //
-    //    } else {
-    //        form.hide();
-    //        bbar.hide();
-    //        form.reset();
-    //        changestatus.show();
-    //    }
-    //},
-
     onBeforeQuery: function ( queryPlan, eOpts ) {
         var combo = queryPlan.combo,
             store = combo.store;
@@ -739,7 +552,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
 
     selectSchedule: function (record) {
         var me = this,
-            param = {},
+            params = {},
             view = me.getView(),
             days = [0,1,2,3,4,5,6],
             grid = view.down('allocationscheduleweek'),
@@ -750,18 +563,16 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
 
         grid.status = status;
 
-        param.status = period.status;
-        param.action = 'select';
-        param.method = 'selectSchedule';
-        param.period = period.getValue();
-        param.dateOf = record.get('dateof');
-        param.dateTo = record.get('dateto');
-
-        //me.onChangeMonthlyScore(false);
+        params.status = period.status;
+        params.action = 'select';
+        params.method = 'selectSchedule';
+        params.period = period.getValue();
+        params.dateOf = record.get('dateof');
+        params.dateTo = record.get('dateto');
 
         view.setLoading('Carregando escala ...');
 
-        store.setParams(param).load({
+        store.setParams(params).load({
             scope: me,
             callback: function(records, operation, success) {
                 view.setLoading(false);
@@ -794,7 +605,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
 
     onSelectPeriod: function ( combo, record, eOpts ) {
         var me = this,
-            param = {},
+            params = {},
             view = me.getView(),
             status = record.get('status'),
             picker = view.down('allocationschedulepicker'),
@@ -813,13 +624,13 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
         if(status == 'P') buttonC.setDisabled(false);
         if(status == 'C') buttonE.setDisabled(false);
 
-        param.action = 'select';
-        param.method = 'selectSchedulePicker';
-        param.period = record.get('id');
+        params.action = 'select';
+        params.method = 'selectSchedulePicker';
+        params.period = record.get('id');
 
         view.setLoading('Carregando as semanas do período ...');
 
-        picker.store.setParams(param).load({
+        picker.store.setParams(params).load({
             scope: me,
             callback: function(records, operation, success) {
                 view.setLoading(false);

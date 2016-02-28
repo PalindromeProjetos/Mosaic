@@ -8,7 +8,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationSchedule', {
         'Ext.layout.container.SegmentedButton',
         'iSchedule.view.allocationschedule.AllocationScheduleWeek',
         'iSchedule.view.allocationschedule.SchedulingPeriodSearch',
-        'iSchedule.view.allocationschedule.AllocationScheduleScoreOld',
         'iSchedule.view.allocationschedule.AllocationSchedulePicker',
         'iSchedule.view.allocationschedule.AllocationScheduleController'
     ],

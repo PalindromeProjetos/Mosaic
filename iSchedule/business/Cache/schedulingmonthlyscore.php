@@ -41,6 +41,41 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
           and sm.contractorunitid = :contractorunitid
         order by s.schedulingmonthlypartnersid, tp.shift, tp.position";
 
+    public function selectPlan (array $data) {
+        $query = $data['query'];
+        $proxy = $this->getStore()->getProxy();
+
+        $sql = "
+            select
+                tp.*,
+                n.shortname as naturalperson,
+                c.shortname as contractorunit,
+                getEnum('subunit',tp.subunit) as subunitdescription
+            from
+                schedulingmonthlypartners tp
+                inner join schedulingmonthly sm on ( tp.schedulingmonthlyid = sm.id )
+                inner join person n on ( n.id = tp.naturalpersonid )
+                inner join person c on ( c.id = sm.contractorunitid )
+            where tp.id = :id";
+
+        try {
+            $pdo = $proxy->prepare($sql);
+
+            $pdo->bindValue(":id", $query, \PDO::PARAM_INT);
+
+            $pdo->execute();
+            $rows = self::encodeUTF8($pdo->fetchAll());
+
+            self::_setRows($rows);
+
+        } catch ( \PDOException $e ) {
+            self::_setSuccess(false);
+            self::_setText($e->getMessage());
+        }
+
+        return self::getResultToJson();
+    }
+
     public function selectItem (array $data) {
         $query = $data['query'];
         $proxy = $this->getStore()->getProxy();

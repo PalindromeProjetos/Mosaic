@@ -5,11 +5,13 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     alias: 'controller.allocationschedulescore',
 
     requires: [
-        'Smart.util.Message'
+        'Smart.util.Message',
+        'iSchedule.store.allocationschedule.SchedulingMonthlyPartners'
     ],
 
     setKeyDown: function ( form, e, eOpts ) {
-        var me = this;
+        var me = this,
+            cellIndex = form.cellIndex;
 
         if (e.getKey() === e.ESC) {
             form.hide();
@@ -18,7 +20,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
         if (e.altKey == true) {
             if([83,115].indexOf(e.keyCode) != -1) {
-                me.onUpdateScore(form,eOpts);
+                if([0,3].indexOf(cellIndex) != -1) {
+                    me.setShiftHours(form,eOpts);
+                } else {
+                    me.onUpdateScore(form,eOpts);
+                }
             }
         }
     },
@@ -158,66 +164,66 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         me.onDateMove(view,e,eOpts);
     },
 
-    showScorePlan: function ( form, eOpts ) {
-        var me = this,
-            show = false,
-            search = form.down('naturalpersonsearch'),
-            gd = form.xview.down('gridpanel'),
-            sm = gd.getSelectionModel(),
-            record = sm.getSelection()[0],
-            params = record.data,
-            store = Ext.getStore('schedulingmonthlyscore');
-
-    },
-
     showScoreView: function ( form, eOpts ) {
         var me = this,
-            show = false,
-			search = form.down('naturalpersonsearch'),
+            colums = [1,2,4,5],
+            method = 'selectPlan',
             gd = form.xview.down('gridpanel'),
             sm = gd.getSelectionModel(),
             record = sm.getSelection()[0],
             params = record.data,
             store = Ext.getStore('schedulingmonthlyscore');
 
-		search.reset();
-        search.focus(false, 200);
-		search.getStore().removeAll();
+        if(colums.indexOf(form.cellIndex) != -1) {
+            var search = form.down('naturalpersonsearch');
+            method = 'selectItem';
+            search.reset();
+            search.focus(false, 200);
+            search.getStore().removeAll();
+        } else {
+            var shifthours = form.down('combobox[name=shifthours]');
+            shifthours.reset();
+            shifthours.focus(false, 200);
+        }
 
         switch(form.cellIndex) {
+            case 0:
+                params = Ext.merge( params, { query: params.idshiftd, shift: 'D' } );
+                break;
             case 1:
-                show = true;
                 params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'R' } );
                 break;
             case 2:
-                show = true;
                 params = Ext.merge( params, { query: params.idshiftd, shift: 'D', scoretype: 'P' } );
                 break;
+            case 3:
+                params = Ext.merge( params, { query: params.idshiftn, shift: 'N' } );
+                break;
             case 4:
-                show = true;
                 params = Ext.merge( params, { query: params.idshiftn, shift: 'N', scoretype: 'R' } );
                 break;
             case 5:
-                show = true;
                 params = Ext.merge( params, { query: params.idshiftn, shift: 'N', scoretype: 'P' } );
                 break;
         }
 
-        if(show) {
-            params.action = 'select';
-            params.method = 'selectItem';
+        params.method = method;
+        params.action = 'select';
 
-            Ext.Ajax.request({
-                scope: me,
-                url: 'business/Calls/schedulingmonthlyscore.php',
-                params: params,
-                success: function(response) {
-                    var result = Ext.decode(response.responseText),
-                        record = Ext.create('Ext.data.Model', result.rows[0]);
+        Ext.Ajax.request({
+            scope: me,
+            url: 'business/Calls/schedulingmonthlyscore.php',
+            params: params,
+            success: function(response) {
+                var result = Ext.decode(response.responseText),
+                    record = Ext.create('Ext.data.Model', result.rows[0]);
 
+                form.xview.fieldValue = record.get('naturalperson');
+                form.xdata = record;
+                form.loadRecord(record);
+
+                if(colums.indexOf(form.cellIndex) != -1) {
                     record.set('id','');
-                    form.xdata = record;
-                    form.loadRecord(record);
                     params.method = 'selectCode';
                     store.setParams(params).load({
                         callback: function () {
@@ -231,18 +237,20 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                         }
                     });
                 }
-            });
-
-        }
+            }
+        });
 
     },
 
-    onUpdateScore: function ( panel, eOpts ) {
+    onUpdateScore: function ( form, eOpts ) {
         var me = this,
             view = me.getView(),
             grid = view.down('gridpanel');
 
+        view.xview.setLoading('Salvando alterações...');
+
         me._success = function (form, action) {
+            view.xview.setLoading(false);
             grid.store.load({
                 callback: function () {
                     var list = [];
@@ -260,12 +268,36 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
         me._failure = function (form, action) {
             grid.store.rejectChanges();
+            view.xview.setLoading(false);
         }
 
         me.setModuleForm(view);
         me.setModuleData(grid.store);
 
         me.updateRecord();
+
+    },
+
+    setShiftHours: function ( form, eOpts ) {
+        var me = this,
+            view = me.getView(),
+            params = view.getValues();
+
+        params.action = 'update';
+        params.rows = Ext.encode(params);
+
+        view.xview.setLoading('Salvando alterações...');
+
+        Ext.Ajax.request({
+            scope: me,
+            url: 'business/Calls/schedulingmonthlypartners.php',
+            params: params,
+            success: function(response) {
+                view.xview.setLoading(false);
+                view.hide();
+                view.xview.down('gridpanel').getView().focusCell( view.xview.hasPosition );
+            }
+        });
 
     },
 
