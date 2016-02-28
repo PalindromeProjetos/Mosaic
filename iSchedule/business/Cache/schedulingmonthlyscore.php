@@ -30,6 +30,7 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
             n.shortname as naturalperson,
             tp.shift,
             s.scoretype,
+            s.releasetype,
             s.schedulingmonthlypartnersid
         from
             schedulingmonthlyscore s

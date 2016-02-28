@@ -37,8 +37,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePlan', {
     buildItems: function () {
         var me = this;
 
-        Ext.create('iSchedule.store.allocationschedule.SchedulingMonthlyPartners');
-
         me.items = [
             {
                 xtype: 'hiddenfield',

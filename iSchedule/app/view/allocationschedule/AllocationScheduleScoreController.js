@@ -218,12 +218,12 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                 var result = Ext.decode(response.responseText),
                     record = Ext.create('Ext.data.Model', result.rows[0]);
 
-                form.xview.fieldValue = record.get('naturalperson');
+                record.set('id','');
                 form.xdata = record;
+                form.xview.fieldValue = record.get('naturalperson');
                 form.loadRecord(record);
 
                 if(colums.indexOf(form.cellIndex) != -1) {
-                    record.set('id','');
                     params.method = 'selectCode';
                     store.setParams(params).load({
                         callback: function () {
@@ -247,14 +247,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             view = me.getView(),
             grid = view.down('gridpanel');
 
-        view.xview.setLoading('Salvando alterações...');
-
         me._success = function (form, action) {
-            view.xview.setLoading(false);
             grid.store.load({
                 callback: function () {
                     var list = [];
-
                     grid.store.each( function (rd) {
                         list.push(rd.get('naturalperson'));
                     });
@@ -268,7 +264,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
         me._failure = function (form, action) {
             grid.store.rejectChanges();
-            view.xview.setLoading(false);
         }
 
         me.setModuleForm(view);
@@ -286,14 +281,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         params.action = 'update';
         params.rows = Ext.encode(params);
 
-        view.xview.setLoading('Salvando alterações...');
-
         Ext.Ajax.request({
             scope: me,
             url: 'business/Calls/schedulingmonthlypartners.php',
             params: params,
             success: function(response) {
-                view.xview.setLoading(false);
                 view.hide();
                 view.xview.down('gridpanel').getView().focusCell( view.xview.hasPosition );
             }
