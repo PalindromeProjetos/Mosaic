@@ -171,8 +171,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             gd = form.xview.down('gridpanel'),
             sm = gd.getSelectionModel(),
             record = sm.getSelection()[0],
-            params = record.data,
-            store = Ext.getStore('schedulingmonthlyscore');
+            params = record.data;
 
         form.xview.cellIndex = form.cellIndex;
 
@@ -226,7 +225,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                 form.loadRecord(record);
 
                 if(colums.indexOf(form.cellIndex) != -1) {
+                    var store = Ext.getStore('schedulingmonthlyscore');
+
                     params.method = 'selectCode';
+                    store.removeAll();
                     store.setParams(params).load({
                         callback: function () {
                             var list = [];
@@ -331,16 +333,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     },
 
-    onCellClickScore: function ( viewTable, td, cellIndex, record, tr, rowIndex, e ) {
+    onCellClickScore: function(grid, rowIndex, colIndex, actionItem, event, record, row) {
         var me = this,
             view = me.getView(),
-            store = viewTable.store,
-            search = view.down('naturalpersonsearch'),
-            columns = viewTable.getColumnManager().columns.length;
-
-        if(cellIndex != columns-1) {
-            return false;
-        }
+            store = grid.store,
+            search = view.down('naturalpersonsearch');
 
         if(store.getCount() == 1) {
             return false;

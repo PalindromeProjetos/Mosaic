@@ -37,10 +37,16 @@ Ext.define( 'iSchedule.store.allocationschedule.AllocationScheduleScore', {
             name: 'shiftn',
             type: 'auto'
         }, {
-            name: 'releasetyped',
+            name: 'releasetypedr',
             type: 'auto'
         }, {
-            name: 'releasetypen',
+            name: 'releasetypedp',
+            type: 'auto'
+        }, {
+            name: 'releasetypenr',
+            type: 'auto'
+        }, {
+            name: 'releasetypenp',
             type: 'auto'
         }
     ],

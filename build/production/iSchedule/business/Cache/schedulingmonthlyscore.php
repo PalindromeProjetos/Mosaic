@@ -83,6 +83,7 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
 
         $sql = "
             select
+                tp.id,
                 tp.naturalpersonid,
                 n.shortname as naturalpersonshift,
                 tp.shift,
@@ -218,9 +219,10 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
 
                 $list[$k]["idshift$shift"] = $item['id'];
                 $list[$k]["shift$shift"] = $item['naturalperson'];
-                $list[$k]["releasetype$shift"] = $this->doneModify($item);
                 $list[$k]["shift$shift".'r'] = $this->selectList($item,'R');
                 $list[$k]["shift$shift".'p'] = $this->selectList($item,'P');
+                $list[$k]["releasetype$shift".'r'] = $this->doneModify($item,'R');
+                $list[$k]["releasetype$shift".'p'] = $this->doneModify($item,'P');
                 $k++;
 
                 if($item['shift'] == 'D') {
@@ -245,12 +247,13 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
         return self::getResultToJson();
     }
 
-    public function doneModify ($item) {
+    public function doneModify ($item,$type) {
         $id = $item['id'];
         $shift = $item['shift'];
         $detail = $this->tblDetail;
 
         $detail = self::searchArray($detail,'shift',$shift);
+        $detail = self::searchArray($detail,'scoretype',$type);
         $detail = self::searchArray($detail,'releasetype','L');
         $detail = self::searchArray($detail,'schedulingmonthlypartnersid',$id);
 

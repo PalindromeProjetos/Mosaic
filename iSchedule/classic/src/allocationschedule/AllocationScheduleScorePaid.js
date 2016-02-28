@@ -93,29 +93,33 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScorePaid', {
                 height: 150,
                 xtype: 'gridpanel',
                 store: 'schedulingmonthlyscore',
-				columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
-					meta.style = "font-size: 14px; line-height: 20px; font-family: Monda; color: rgba(3, 98, 253, 1);";
-					return ( colIndex == 1 ) ? Smart.maskRenderer('0,00',true)(value) : value;
-				},
 				columns: [
 					{
 						flex: 1,
-						dataIndex: 'naturalperson'
+						dataIndex: 'naturalperson',
+                        renderer: function (value, meta, record, rowIndex, colIndex, store) {
+                            meta.style = "font-size: 14px; line-height: 20px; font-family: Monda; color: rgba(3, 98, 253, 1);";
+                            return value;
+                        }
 					}, {
 						width: 60,
 						align: 'right',
-						dataIndex: 'dutyfraction'
+						dataIndex: 'dutyfraction',
+                        renderer: function (value, meta, record, rowIndex, colIndex, store) {
+                            meta.style = "font-size: 14px; line-height: 20px; font-family: Monda; color: rgba(3, 98, 253, 1);";
+                            return Smart.maskRenderer('0,00',true)(value);
+                        }
 					}, {
-						width: 40,
-						align: 'center',
-						renderer: function (value, meta, rec) {
-							return '<div class="delete-item" style="color: rgba(3, 98, 253, 1); font-size: 14px;"><i class="icon-cancel-circle"></i></div>';
-						}
+                        xtype:'actioncolumn',
+                        width: 40,
+                        align: 'center',
+                        iconCls: "fa fa-minus-circle action-delete-color-font",
+                        tooltip: 'Remover item',
+                        handler: 'onCellClickScore'
 					}
 				],
                 listeners: {
                     select: 'onSelectScore',
-                    cellclick: 'onCellClickScore',
                     cellkeydown: 'onCellKeyDownScore'
                 }
             }, {

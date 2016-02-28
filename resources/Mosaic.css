@@ -123,6 +123,10 @@
     background-color: rgb(248, 202, 0) !important;
 }
 
+.action-update-color-font {
+    color: rgb(248, 202, 0) !important;
+}
+
 .action-delete-color {
     color: white !important;
 }
@@ -132,6 +136,14 @@
     background-color: rgb(245, 105, 145) !important;
 }
 
+.action-delete-color-font {
+    color: rgb(245, 105, 145) !important;
+}
+
+.action-delete-color-font:hover {
+    color: red !important;
+}
+
 .action-select-color {
     color: white !important;
 }
@@ -139,6 +151,10 @@
 .action-select-color:before {
     padding: 3px 4px 3px 4px !important;
     background-color: rgb(138, 155, 15) !important;
+}
+
+.action-select-color-font {
+    color: rgb(138, 155, 15) !important;
 }
 
 .title-label {

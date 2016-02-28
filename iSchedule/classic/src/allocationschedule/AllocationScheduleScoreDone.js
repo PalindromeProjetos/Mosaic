@@ -80,25 +80,25 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
                 height: 150,
                 xtype: 'gridpanel',
                 store: 'schedulingmonthlyscore',
-                columnsRenderer: function (value, meta, record, rowIndex, colIndex, store) {
-                    meta.style = "font-size: 14px; line-height: 20px; font-family: Monda; color: rgba(252, 24, 36,.6);";
-                    return value;
-                },
                 columns: [
                     {
                         flex: 1,
-                        dataIndex: 'naturalperson'
+                        dataIndex: 'naturalperson',
+                        renderer: function (value, meta, record, rowIndex, colIndex, store) {
+                            meta.style = "font-size: 14px; line-height: 20px; font-family: Monda; color: rgba(252, 24, 36,.6);";
+                            return value;
+                        }
                     }, {
+                        xtype:'actioncolumn',
                         width: 40,
                         align: 'center',
-                        renderer: function (value, meta, rec) {
-                            return '<div class="delete-item" style="color: rgba(252, 24, 36,1); font-size: 14px;"><i class="icon-cancel-circle"></i></div>';
-                        }
+                        iconCls: "fa fa-minus-circle action-delete-color-font",
+                        tooltip: 'Remover item',
+                        handler: 'onCellClickScore'
                     }
                 ],
                 listeners: {
                     select: 'onSelectScore',
-                    cellclick: 'onCellClickScore',
                     cellkeydown: 'onCellKeyDownScore'
                 }
             }, {
