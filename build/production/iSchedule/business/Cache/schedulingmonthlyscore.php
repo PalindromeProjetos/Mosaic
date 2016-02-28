@@ -13,6 +13,7 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
     private $sqlMaster = "
         select
             tp.id,
+            tp.releasetype,
             n.shortname as naturalperson,
             tp.shift
         from
@@ -223,6 +224,9 @@ class schedulingmonthlyscore extends \Smart\Data\Cache {
                 $list[$k]["shift$shift".'p'] = $this->selectList($item,'P');
                 $list[$k]["releasetype$shift".'r'] = $this->doneModify($item,'R');
                 $list[$k]["releasetype$shift".'p'] = $this->doneModify($item,'P');
+
+                $list[$k]["releasetype$shift"] = $item['releasetype'];
+
                 $k++;
 
                 if($item['shift'] == 'D') {
