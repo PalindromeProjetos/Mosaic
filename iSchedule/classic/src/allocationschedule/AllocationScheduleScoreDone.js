@@ -16,7 +16,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
     shadow: false,
     cls: 'panel-frame',
 
-    //hidden: true,
+    hidden: true,
     floating: true,
     bodyPadding: 10,
     layout: 'anchor',
