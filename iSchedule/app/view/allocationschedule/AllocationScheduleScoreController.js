@@ -92,7 +92,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                     xdata: record
                 }).show(null, function() {
                     this.down('hiddenfield[name=id]').setValue('');
-                    this.down('hiddenfield[name=releasetype]').setValue('M');
                     this.down('datefield[name=dutydate]').setReadColor(true);
                     this.down('datefield[name=dutydate]').setValue(datescore.getValue());
                 });

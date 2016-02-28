@@ -82,10 +82,10 @@ class schedulingmonthlypartners extends \Smart\Data\Event {
 
         $sqlInsert = "
             insert into schedulingmonthlyscore
-              ( schedulingmonthlypartnersid, naturalpersonid, scoretype, changedate, username, observation )
+              ( schedulingmonthlypartnersid, naturalpersonid, scoretype, changedate, username, observation, releasetype )
             values
-              ( :id, :naturalpersonid, 'R', :changedate, :username, :observation ),
-              ( :id, :naturalpersonid, 'P', :changedate, :username, :observation );";
+              ( :id, :naturalpersonid, 'R', :changedate, :username, :observation, 'L' ),
+              ( :id, :naturalpersonid, 'P', :changedate, :username, :observation, 'L' );";
 
         $pdo = $proxy->prepare($sqlInsert);
         $pdo->bindValue(":id", $id, \PDO::PARAM_INT);

@@ -228,11 +228,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                         handler: 'setSchedule'
                                     }
                                 ]
-                                //listeners: {
-                                //    toggle: function(container, button, pressed) {
-                                //        console.log("User toggled the '" + button.text + "' button: " + (pressed ? 'on' : 'off'));
-                                //    }
-                                //}
                             }
                         ]
                     }, {
