@@ -5,8 +5,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
     alias: 'controller.allocationschedulescore',
 
     requires: [
-        'Smart.util.Message',
-        'iSchedule.store.allocationschedule.SchedulingMonthlyPartners'
+        'Smart.util.Message'
     ],
 
     setKeyDown: function ( form, e, eOpts ) {
@@ -14,8 +13,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             cellIndex = form.cellIndex;
 
         if (e.getKey() === e.ESC) {
-            form.hide();
             form.xview.down('gridpanel').getView().focusCell( form.xview.hasPosition );
+            form.hide();
         }
 
         if (e.altKey == true) {
@@ -225,10 +224,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
                 form.loadRecord(record);
 
                 if(colums.indexOf(form.cellIndex) != -1) {
-                    var store = Ext.getStore('schedulingmonthlyscore');
+                    var store = form.down('gridpanel').store;
 
                     params.method = 'selectCode';
                     store.removeAll();
+
                     store.setParams(params).load({
                         callback: function () {
                             var list = [];
@@ -293,8 +293,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             url: 'business/Calls/schedulingmonthlypartners.php',
             params: params,
             success: function(response) {
-                view.hide();
                 view.xview.down('gridpanel').getView().focusCell( view.xview.hasPosition );
+                view.hide();
             }
         });
 
@@ -366,8 +366,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             view = me.getView();
 
         if (e.getKey() === e.ESC) {
-            view.hide();
             view.xview.down('gridpanel').getView().focusCell( view.xview.hasPosition );
+            view.hide();
         }
 
     }
