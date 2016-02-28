@@ -80,8 +80,19 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                             }
                         },
                         renderer: function (value, meta, record, rowIndex, colIndex, store) {
-                            var list = [0,3];
-                            meta.style = ( list.indexOf(colIndex) != -1 ) ? "color: red;" : "";
+
+                            if([0,3].indexOf(colIndex) != -1 ) {
+                                meta.style = "color: red;";
+                            }
+
+                            if([1,2].indexOf(colIndex) != -1 ) {
+                                meta.style = ( record.get('releasetyped') == 'L' ) ? "color: blue; font-style: italic;" : "";
+                            }
+
+                            if([4,5].indexOf(colIndex) != -1 ) {
+                                meta.style = ( record.get('releasetypen') == 'L' ) ? "color: blue; font-style: italic;" : "";
+                            }
+
                             return value;
                         }
                     };

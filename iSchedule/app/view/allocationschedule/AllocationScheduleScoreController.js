@@ -21,7 +21,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         if (e.altKey == true) {
             if([83,115].indexOf(e.keyCode) != -1) {
                 if([0,3].indexOf(cellIndex) != -1) {
-                    me.setShiftHours(form,eOpts);
+                    me.onUpdateHours(form,eOpts);
                 } else {
                     me.onUpdateScore(form,eOpts);
                 }
@@ -174,6 +174,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             params = record.data,
             store = Ext.getStore('schedulingmonthlyscore');
 
+        form.xview.cellIndex = form.cellIndex;
+
         if(colums.indexOf(form.cellIndex) != -1) {
             var search = form.down('naturalpersonsearch');
             method = 'selectItem';
@@ -251,6 +253,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             grid.store.load({
                 callback: function () {
                     var list = [];
+
                     grid.store.each( function (rd) {
                         list.push(rd.get('naturalperson'));
                     });
@@ -266,6 +269,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             grid.store.rejectChanges();
         }
 
+        view.down('hiddenfield[name=releasetype]').setValue('L');
+
         me.setModuleForm(view);
         me.setModuleData(grid.store);
 
@@ -273,7 +278,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     },
 
-    setShiftHours: function ( form, eOpts ) {
+    onUpdateHours: function ( form, eOpts ) {
         var me = this,
             view = me.getView(),
             params = view.getValues();
@@ -306,10 +311,23 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             dataIndex = field.dataIndex,
             gd = view.down('gridpanel'),
             sm = gd.getSelectionModel(),
-            record = sm.getSelection()[0];
+            record = sm.getSelection()[0],
+            modify = (field.getValue() != view.fieldValue);
+
 
         record.set(dataIndex,view.fieldValue);
         record.commit();
+
+        if(modify) {
+            var pluginscore = gd.getPlugin('pluginscore'),
+                getCell = pluginscore.getCell(record,gd.getColumns()[view.cellIndex]);
+
+            getCell.applyStyles(function () {
+                    return 'color: blue; font-style: italic;';
+                    // OR return { fontStyle: 'italic' };
+                }
+            );
+        }
 
     },
 

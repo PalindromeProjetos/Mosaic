@@ -33,6 +33,12 @@ class schedulingmonthlyscore extends \Smart\Data\Model {
     private $scoretype;
 
     /**
+     * @Policy {"nullable":false, "length":1}
+     * @Column {"description":"", "type":"string", "policy":true}
+     */
+    private $releasetype;
+
+    /**
      * @Policy {"nullable":false}
      * @Column {"description":"", "type":"string", "policy":true}
      */
@@ -117,6 +123,22 @@ class schedulingmonthlyscore extends \Smart\Data\Model {
      */
     public function setScoretype($scoretype) {
         $this->scoretype = $scoretype;
+        return $this;
+    }
+
+    /**
+     * @return type string
+     */
+    public function getReleasetype() {
+        return $this->releasetype;
+    }
+
+    /**
+     * @param type $releasetype
+     * @return \iSchedule\Model\schedulingmonthlyscore
+     */
+    public function setReleasetype($releasetype) {
+        $this->releasetype = $releasetype;
         return $this;
     }
 

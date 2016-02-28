@@ -52,6 +52,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
                 name: 'scoretype',
                 value: 'R'
             }, {
+                xtype: 'hiddenfield',
+                name: 'releasetype',
+                value: 'P'
+            }, {
                 xtype: 'displayfield',
                 name: 'naturalpersonshift',
                 fieldLabel: 'Planejado',
