@@ -90,10 +90,10 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                     meta.style = ( record.get('releasetypedr') == 'L' ) ? "color: blue; font-style: italic;" : "";
                                     break;
                                 case 2:
-                                    meta.style = ( record.get('releasetypen') == 'M' ) ? "color: blue; font-style: italic;" : "";
+                                    meta.style = ( record.get('releasetypen') == 'L' ) ? "color: blue; font-style: italic;" : "";
                                     break;
                                 case 3:
-                                    meta.style = ( record.get('releasetypen') == 'L' ) ? "color: red; font-style: italic;" : "";
+                                    meta.style = ( record.get('releasetypen') == 'M' ) ? "color: red; font-style: italic;" : "";
                                     break;
                                 case 4:
                                     meta.style = ( record.get('releasetypenr') == 'L' ) ? "color: blue; font-style: italic;" : "";
