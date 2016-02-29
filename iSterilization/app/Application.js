@@ -1,28 +1,17 @@
-/**
- * The main application class. An instance of this class is created by app.js when it
- * calls Ext.application(). This is the ideal place to handle application launch and
- * initialization details.
- */
-Ext.define('iSterilization.Application', {
-    extend: 'Ext.app.Application',
-    
+//@charset UTF-8
+Ext.define( 'iSterilization.Application', {
+    extend: 'Smart.ux.app.Application',
+
     name: 'iSterilization',
 
-    stores: [
-        // TODO: add global / shared stores here
+    controllers: [
+        'iSterilization.controller.App'
     ],
-    
-    launch: function () {
-        // TODO - Launch the application
-    },
 
-    onAppUpdate: function () {
-        Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
-            function (choice) {
-                if (choice === 'yes') {
-                    window.location.reload();
-                }
-            }
-        );
-    }
+    requires: [
+        'Smart.ux.app.Application',
+        'iSterilization.view.main.Main',
+        'iSterilization.view.login.Login'
+    ]
+
 });

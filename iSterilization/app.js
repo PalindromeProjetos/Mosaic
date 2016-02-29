@@ -1,26 +1,24 @@
-/*
- * This file is generated and updated by Sencha Cmd. You can edit this file as
- * needed for your application, but these edits will have to be merged by
- * Sencha Cmd when upgrading.
- */
+//@charset UTF-8
+Ext.Loader.setConfig({
+    enabled: true,
+    paths: {
+        'Smart.ux': '../library/ux',
+        'Smart.app': '../library/app',
+        'Smart.util': '../library/util',
+        'Smart.data': '../library/data',
+        'Smart.form': '../library/form',
+        'Smart.plugins': '../library/plugins',
+        'Smart.data.field': '../library/data/field',
+        'Smart.form.field': '../library/form/field',
+        'Smart.ux.app': '../library/ux/app',
+        'Smart.ux.main': '../library/ux/main',
+        'Smart.ux.login': '../library/ux/login'
+    }
+});
+
 Ext.application({
     name: 'iSterilization',
 
-    extend: 'iSterilization.Application',
+    extend: 'iSterilization.Application'
 
-    requires: [
-        'iSterilization.view.main.Main'
-    ],
-
-    // The name of the initial view to create. With the classic toolkit this class
-    // will gain a "viewport" plugin if it does not extend Ext.Viewport. With the
-    // modern toolkit, the main view will be added to the Viewport.
-    //
-    mainView: 'iSterilization.view.main.Main'
-	
-    //-------------------------------------------------------------------------
-    // Most customizations should be made to iSterilization.Application. If you need to
-    // customize this file, doing so below this section reduces the likelihood
-    // of merge conflicts when upgrading to new versions of Sencha Cmd.
-    //-------------------------------------------------------------------------
 });

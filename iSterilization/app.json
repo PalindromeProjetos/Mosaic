@@ -22,7 +22,8 @@
      */
     "classpath": [
         "app",
-        "${toolkit.name}/src"
+        "${toolkit.name}/src",
+        "${app.dir}/../library"
     ],
 
     /**
@@ -34,8 +35,11 @@
      */
     "overrides": [
         "overrides",
+        "${app.dir}/../overrides",
         "${toolkit.name}/overrides"
     ],
+
+    "locale": "pt_BR",
 
     /**
      * The Sencha Framework for this application: "ext" or "touch".
@@ -269,6 +273,18 @@
      */
     "css": [
         {
+            "path": "../resources/Mosaic.css"
+        }, {
+            "path": "../resources/Smart.css"
+        }, {
+            "path": "../resources/SmartButton.css"
+        }, {
+            "path": "../resources/FontFamily.css"
+        }, {
+            "path": "../resources/Fontello.css"
+        }, {
+            "path": "../resources/Animate.css"
+        }, {
             // this entry uses an ant variable that is the calculated
             // value of the generated output css file for the app,
             // defined in .sencha/app/defaults.properties
@@ -553,13 +569,17 @@
      *     }
      *
      */
-    
+
     "builds": {
         "classic": {
+            "requires": [
+                "locale"
+            ],
+
             "toolkit": "classic",
-            
+
             "theme": "theme-triton",
-            
+
             "sass": {
                 // "save": "classic/sass/save.scss"
             }
@@ -567,9 +587,9 @@
 
         "modern": {
             "toolkit": "modern",
-            
+
             "theme": "theme-triton",
-            
+
             "sass": {
                 // "save": "modern/sass/save.scss"
             }
