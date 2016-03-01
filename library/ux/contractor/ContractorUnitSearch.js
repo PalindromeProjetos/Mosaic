@@ -20,11 +20,11 @@ Ext.define( 'Smart.ux.contractor.ContractorUnitSearch', {
     hideTrigger: true,
     enableKeyEvents: true,
 
-    matchFieldWidth: false,
+    //matchFieldWidth: false,
 
-    listConfig: {
-        width: 150
-    },
+    //listConfig: {
+    //    width: 150
+    //},
 
     listeners: {
         select: 'selectContractorUnit',

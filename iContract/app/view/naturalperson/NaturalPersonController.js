@@ -77,6 +77,10 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
             callback: function(records, operation, success) {
                 var record = records[0];
                 form.loadRecord(record);
+                Ext.getStore('naturalpersondistribution').setParams({
+                    query: record.get('id'),
+                    method: 'selectCode'
+                }).load();
                 Ext.getStore('personbank').setParams({
                     query: record.get('id'),
                     method: 'selectCode'

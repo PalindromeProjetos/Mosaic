@@ -215,3 +215,41 @@
 .contractdata .x-item-selected .thumb{
     background:transparent;
 }
+
+.distribution-edit .x-grid-cell-inner {
+    padding: 5px 0 4px 0;
+}
+
+.distribution-edit .x-grid-item {
+    font-family: arial !important;
+}
+
+.distribution-edit .x-column-header {
+    font: 300 13px/15px arial !important;
+    border-top-color: white !important;
+    border-right-color: white !important;
+}
+
+.distribution-edit .x-btn-default-toolbar-small {
+    background-color: #FB3C4A !important;
+}
+
+.distribution-edit .x-btn-default-toolbar-small .x-btn-inner-default-toolbar-small {
+    color: #ffffff !important;
+}
+
+.distribution-edit .x-grid-row-editor .x-form-display-field {
+    padding: 5px 7px 4px 0 !important;
+}
+
+.distribution-edit .dark .x-column-header-inner {
+    background-image: none;
+    color: white !important;
+    background-color: rgb(53, 186, 246) !important;
+}
+
+.distribution-edit .ligth .x-column-header-inner {
+    background-image: none;
+    color: black !important;
+    background-color: rgba(53, 186, 246, .7) !important;
+}

@@ -124,6 +124,38 @@ class contractorunit extends \Smart\Data\Cache {
         return self::getResultToJson();
     }
 
+    public function selectItem(array $data) {
+        $query = $data['query'];
+        $proxy = $this->getStore()->getProxy();
+
+        $sql = "
+            select
+                cu.id as contractorunitid,
+                p.shortname as contractorunit,
+                cu.*
+            from
+                contractorunit cu
+                inner join person p on ( cu.id = p.id )
+            where cu.id = :id";
+
+        try {
+            $pdo = $proxy->prepare($sql);
+
+            $pdo->bindValue(":id", $query, \PDO::PARAM_INT);
+
+            $pdo->execute();
+            $rows = $pdo->fetchAll();
+
+            self::_setRows($rows);
+
+        } catch ( \PDOException $e ) {
+            self::_setSuccess(false);
+            self::_setText($e->getMessage());
+        }
+
+        return self::getResultToJson();
+    }
+
     public function selectCodePerson(array $data) {
         $query = $data['query'];
         $proxy = $this->getStore()->getProxy();

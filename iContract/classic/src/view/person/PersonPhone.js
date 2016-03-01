@@ -13,7 +13,7 @@ Ext.define( 'iContract.view.person.PersonPhone', {
     store: 'personphone',
 
     iconCls: "fa fa-phone",
-    title: 'Endereço',
+    title: 'Telefones',
     cls: 'update-grid',
 
     hideHeaders: false,
