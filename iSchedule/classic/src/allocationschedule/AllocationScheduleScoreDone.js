@@ -79,10 +79,13 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreDone', {
             }, {
                 height: 150,
                 xtype: 'gridpanel',
+                hideHeaders: false,
+                headerBorders: false,
                 store: 'schedulingmonthlyscore',
                 columns: [
                     {
                         flex: 1,
+                        text: '<b>Realizado</b>',
                         dataIndex: 'naturalperson',
                         renderer: function (value, meta, record, rowIndex, colIndex, store) {
                             meta.style = "font-size: 14px; line-height: 20px; font-family: Monda; color: rgba(252, 24, 36,.6);";
