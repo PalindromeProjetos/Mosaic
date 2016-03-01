@@ -225,9 +225,9 @@
 }
 
 .distribution-edit .x-column-header {
-    font: 300 13px/15px arial !important;
     border-top-color: white !important;
     border-right-color: white !important;
+    font: 300 13px/15px arial !important;
 }
 
 .distribution-edit .x-btn-default-toolbar-small {
@@ -248,7 +248,7 @@
     background-color: rgb(53, 186, 246) !important;
 }
 
-.distribution-edit .ligth .x-column-header-inner {
+.distribution-edit .light .x-column-header-inner {
     background-image: none;
     color: black !important;
     background-color: rgba(53, 186, 246, .7) !important;

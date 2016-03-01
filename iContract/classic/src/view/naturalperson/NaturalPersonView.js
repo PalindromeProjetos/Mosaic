@@ -49,7 +49,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                 var header = {
                     width: 130,
                     text: name,
-                    cls: 'ligth',
+                    cls: 'light',
                     sortable: false,
                     dataIndex: code + 'description',
                     editor: {
@@ -481,8 +481,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                 store: 'naturalpersondistribution',
                                 columns: [
                                     {
-                                        flex: 1,
-                                        text: '<a style="font-size: 18px; font-family: Monda;">Turnos e Posições</a>',
+                                        width: 200,
+                                        cls: 'dark',
+                                        text: '<a style="font-size: 16px; font-family: Monda;">Turnos e Posições</a>',
                                         dataIndex: 'shiftdescription',
                                         renderer: function (value,meta) {
                                             meta.style = "padding-left: 10px; background: rgba(245, 245, 245, 1);";
@@ -508,16 +509,6 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                     beforeedit: 'onDistributionBeforeEdit',
                                     celldblclick: 'onDistributionCellDblClick'
                                 }
-                                //dockedItems: [
-                                //    {
-                                //        scale: 'large',
-                                //        dock: 'bottom',
-                                //        xtype: 'button',
-                                //        handler: 'getDistribution',
-                                //        text: 'Obter planilha com distribuição',
-                                //        showSmartTheme: 'red'
-                                //    }
-                                //]
                             }, {
                                 bodyPadding: 10,
                                 xtype: 'personaddress'
