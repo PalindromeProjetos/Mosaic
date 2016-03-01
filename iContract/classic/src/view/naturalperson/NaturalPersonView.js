@@ -477,18 +477,24 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                 xtype: 'gridpanel',
                                 hideHeaders: false,
                                 name: 'distribution',
-                                cls: 'update-grid distribution-edit',
+                                cls: 'distribution-edit',
                                 store: 'naturalpersondistribution',
                                 columns: [
                                     {
-                                        width: 200,
                                         cls: 'dark',
-                                        text: '<a style="font-size: 16px; font-family: Monda;">Turnos e Posições</a>',
-                                        dataIndex: 'shiftdescription',
-                                        renderer: function (value,meta) {
-                                            meta.style = "padding-left: 10px; background: rgba(245, 245, 245, 1);";
-                                            return value;
-                                        }
+                                        text: '<a style="font-size: 16px; font-family: Monda;">DISTRIBUIÇÃO</a>',
+                                        columns: [
+                                            {
+                                                width: 200,
+                                                cls: 'light',
+                                                text: 'Turnos / Posição',
+                                                dataIndex: 'shiftdescription',
+                                                renderer: function (value,meta) {
+                                                    meta.style = "padding-left: 10px; background: rgba(245, 245, 245, 1);";
+                                                    return value;
+                                                }
+                                            }
+                                        ]
                                     }, {
                                         cls: 'dark',
                                         text: '<a style="font-size: 16px; font-family: Monda;">DIAS DA SEMANA</a>',

@@ -278,7 +278,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleWeek', {
                 text: '<a style="font-size: 18px; font-family: Monda;">U N I D A D E S</a>',
                 columns: me._getGroup()
             }, {
-                cls: 'ligth',
+                cls: 'light',
                 text: '<span style="font-size: 18px; font-family: Monda;">DIAS DA SEMANA</span>',
                 columns: me._buildDays([0,4])
             }, {

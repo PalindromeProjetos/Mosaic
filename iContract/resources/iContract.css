@@ -216,8 +216,12 @@
     background:transparent;
 }
 
-.distribution-edit .x-grid-cell-inner {
-    padding: 5px 0 4px 0;
+.distribution-edit {
+    z-index: 0 !important;
+}
+
+.distribution-edit .x-grid-body {
+    border-width: 1px 1px 1px 1px;
 }
 
 .distribution-edit .x-grid-item {
@@ -228,6 +232,11 @@
     border-top-color: white !important;
     border-right-color: white !important;
     font: 300 13px/15px arial !important;
+}
+
+.distribution-edit .x-grid-cell-inner {
+    font-size: 14px;
+    line-height: 24px;
 }
 
 .distribution-edit .x-btn-default-toolbar-small {

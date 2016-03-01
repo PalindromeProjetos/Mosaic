@@ -26,7 +26,7 @@
     background-color: rgba(84, 86, 62, .7) !important;
 }
 
-.allocationschemaweek .ligth .x-column-header-inner {
+.allocationschemaweek .light .x-column-header-inner {
     background-image: none;
     color: black !important;
     background-color: rgba(84, 86, 62, .5) !important;
@@ -60,7 +60,7 @@
     background-color: rgba(111, 145, 61, .8) !important;
 }
 
-.allocationscheduleweek .ligth .x-column-header-inner {
+.allocationscheduleweek .light .x-column-header-inner {
     color: black !important;
     background-image: none;
     background-color: rgba(111, 145, 61, .5) !important;

@@ -251,7 +251,7 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchemaWeek', {
                     }
                 ]
             }, {
-                cls: 'ligth',
+                cls: 'light',
                 text: '<span style="font-size: 18px; font-family: Monda;">DIAS DA SEMANA</span>',
                 columns: me._buildDays([0,4])
             }, {
