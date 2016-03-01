@@ -484,6 +484,7 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchemaController', {
                     fields.push({
                         text: i,
                         align: 'center',
+                        cls: 'light',
                         dataIndex: 'week' + Ext.String.leftPad(i, 2, '0'),
                         width: 30,
                         renderer: function (value, meta, rec, rowIndex, colIndex) {
@@ -573,7 +574,7 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchemaController', {
                     }
                 ]
             }, {
-                cls: 'ligth',
+                cls: 'dark',
                 align: 'center',
                 text: '<a style="font-size: 18px; font-family: Monda;">S E M A N A S</a>',
                 columns: getFields()

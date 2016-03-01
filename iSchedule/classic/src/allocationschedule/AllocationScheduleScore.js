@@ -50,7 +50,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                 var header = {
                         width: 220,
                         text: text,
-                        cls: 'ligth',
+                        cls: 'light',
                         sortable: false,
                         dataIndex: scoreType,
                         editor: {
