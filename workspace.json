@@ -4,8 +4,7 @@
      */
     "apps": [
         "iContract",
-        "iSchedule",
-        "iSterilization"
+        "iSchedule"
     ],
 
     /**
