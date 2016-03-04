@@ -94,7 +94,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                             Ext.widget('component', {
                                                 renderTo: id0,
                                                 cls:"delete-icon fa fa-minus-circle action-delete-color-font"
-                                            }).getEl().on('click', function (e, el, eOpts) { me.fireEvent('deleteplan', me, record, colIndex); }, me);
+                                            }).getEl().on('click', function (e, el, eOpts) { me.fireEvent('deleteplan', me, record, colIndex, e, eOpts); }, me);
                                         }, 50);
                                         cellValue = Ext.String.format(cellStyle,value,id0);
                                     }
@@ -114,7 +114,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                             Ext.widget('component', {
                                                 renderTo: id1,
                                                 cls:"delete-icon fa fa-minus-circle action-delete-color-font"
-                                            }).getEl().on('click', function (e, el, eOpts) { me.fireEvent('deleteplan', me, record, colIndex); }, me);
+                                            }).getEl().on('click', function (e, el, eOpts) { me.fireEvent('deleteplan', me, record, colIndex, e, eOpts); }, me);
                                         }, 50);
                                         cellValue = Ext.String.format(cellStyle,value,id1);
                                     }

@@ -166,6 +166,12 @@ class Proxy extends \PDO {
                             $commit->bindValue(":$field", $entity->$method(), $this->getParams($column["type"]));
                         }
                         break;
+                    case self::DML_DELETE:
+                        if($field === 'id') {
+                            $method = "get" . strtoupper($field[0]) . substr($field, 1);
+                            $commit->bindValue(":$field", $entity->$method(), $this->getParams($column["type"]));
+                        }
+                        break;
                     default:
                         $method = "get" . strtoupper($field[0]) . substr($field, 1);
                         $commit->bindValue(":$field", $entity->$method(), $this->getParams($column["type"]));

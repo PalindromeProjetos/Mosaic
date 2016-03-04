@@ -61,7 +61,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
                         anchor: '',
                         width: 150,
                         useMondaFont: true,
-                        useReadColor: false,
+                        useReadColor: true,
                         fieldStyle: {
                             textAlign: 'center',
                             color: 'blue;',
@@ -78,7 +78,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
                         defaults: {
                             allowBlank: false,
                             useMondaFont: true,
-                            useReadColor: false,
+                            useReadColor: true,
                             fieldStyle: {
                                 color: 'blue;',
                                 fontSize: '16px;'
@@ -104,6 +104,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
                                 width: 90,
                                 xtype: 'comboenum',
                                 fieldLabel: 'Turno',
+                                useReadColor: false,
                                 name: 'shiftdescription',
                                 margin: '0 0 0 5'
                             }

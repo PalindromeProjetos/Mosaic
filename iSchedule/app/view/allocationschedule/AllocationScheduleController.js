@@ -385,14 +385,16 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
                 'contractorunit'
             ];
 
-        form.loadRecord(view.xdata);
+        if(view.xdata) {
+            form.loadRecord(view.xdata);
+        }
 
         Ext.each(fields,function (field) {
             form.getForm().findField(field).setReadColor(true);
         });
 
         form.down('hiddenfield[name=id]').setValue(null);
-        form.down('hiddenfield[name=releasetype]').setValue('M');
+        //form.down('hiddenfield[name=releasetype]').setValue('M');
     },
 
     onCellClick: function ( viewTable, td, cellIndex, record, tr, rowIndex, e ) {

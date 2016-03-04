@@ -137,6 +137,7 @@ class Store {
         try {
 
             //$this->policy();
+            self::_setCrud('insert');
 
             $this->proxy->beginTransaction();
 
@@ -161,7 +162,6 @@ class Store {
 
             $this->proxy->commit();
 
-            self::_setCrud('insert');
             self::_setRows($this->getRecord());
 
         } catch ( \PDOException $e ) {
@@ -177,6 +177,7 @@ class Store {
     public function delete() {
 
         try {
+            self::_setCrud('delete');
 
             $this->proxy->beginTransaction();
 
@@ -195,7 +196,6 @@ class Store {
 
             $this->proxy->commit();
 
-            self::_setCrud('delete');
             self::_setRecords($statement->rowCount());
 
         } catch ( \PDOException $e ) {

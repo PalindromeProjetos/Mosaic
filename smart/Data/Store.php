@@ -137,6 +137,7 @@ class Store {
         try {
 
             //$this->policy();
+            self::_setCrud('insert');
 
             $this->proxy->beginTransaction();
 
@@ -161,7 +162,6 @@ class Store {
 
             $this->proxy->commit();
 
-            self::_setCrud('insert');
             self::_setRows($this->getRecord());
 
         } catch ( \PDOException $e ) {

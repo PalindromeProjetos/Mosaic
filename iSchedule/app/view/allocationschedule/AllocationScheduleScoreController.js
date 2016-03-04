@@ -68,39 +68,25 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         }
     },
 
-    setSchedule: function ( btn, eOpts) {
+    setSchedule: function (btn, eOpts) {
         var me = this,
             view = me.getView(),
             datescore = view.down('datefield[name=datescore]'),
-            contractorunitid = view.down('hiddenfield[name=contractorunitid]');
+            subunit = view.down('hiddenfield[name=subunit]').getValue(),
+            contractorunit = view.down('combosearch[name=contractorunit]').getRawValue(),
+            contractorunitid = view.down('hiddenfield[name=contractorunitid]').getValue(),
+            subunitdescription = view.down('comboenum[name=subunitdescription]').getRawValue();
 
         Ext.create('iSchedule.store.allocationschedule.AllocationSchedule');
 
-        Ext.Ajax.request({
-            scope: me,
-            url: '../iContract/business/Calls/contractorunit.php',
-            params: {
-                action: 'select',
-                method: 'selectItem',
-                query: contractorunitid.getValue()
-            },
-            success: function(response) {
-                var result = Ext.decode(response.responseText),
-                    record = Ext.create('Ext.data.Model', result.rows[0]);
-
-                Ext.widget('allocationschedulenew', {
-                    xdata: record
-                }).show(null, function() {
-                    this.down('hiddenfield[name=id]').setValue('');
-                    this.down('datefield[name=dutydate]').setReadColor(true);
-                    this.down('datefield[name=dutydate]').setValue(datescore.getValue());
-                });
-            }
+        Ext.widget('allocationschedulenew').show(null, function() {
+            this.down('hiddenfield[name=id]').setValue('');
+            this.down('datefield[name=dutydate]').setValue(datescore.getValue());
+            this.down('hiddenfield[name=contractorunitid]').setValue(contractorunitid);
+            this.down('naturalpersonsearch[name=contractorunit]').setValue(contractorunit);
+            this.down('hiddenfield[name=subunit]').setValue(subunit);
+            this.down('comboenum[name=subunitdescription]').setValue(subunitdescription);
         });
-    },
-
-    getSchedule: function ( btn, eOpts) {
-
     },
 
     newScoreDate: function ( datescore, dateof, dateto, signal ) {
@@ -157,51 +143,53 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         me.onUnitSubUnit();
     },
 
-    onDeletePlan: function (grid, record, colIndex) {
+    onDeletePlan: function (grid, record, colIndex, e, eOpts) {
         var me = this,
             id = null,
             releasetype = null,
             view = me.getView(),
             warning = 'Após a confirmação este plantão será removido da contagem!';
 
-        Smart.Msg.question("Confirma a remoção deste plantão? <br/> <br/>" + warning, function(btn) {
-            if (btn === 'yes') {
+        if(e.ctrlKey == true) {
+            Smart.Msg.question("Confirma a remoção deste plantão? <br/> <br/>" + warning, function(btn) {
+                if (btn === 'yes') {
 
-                switch(colIndex) {
-                    case 0:
-                        id = record.get('idshiftd');
-                        releasetype = record.get('releasetyped');
-                        break;
-                    case 3:
-                        id = record.get('idshiftn');
-                        releasetype = record.get('releasetypen');
-                        break;
-                }
-
-                view.setLoading('Removendo plantão ...');
-
-                Ext.Ajax.request({
-                    url: 'business/Calls/schedulingmonthlypartners.php',
-                    params: {
-                        action: 'delete',
-                        rows: Ext.encode({id: id, releasetype: releasetype})
-                    },
-                    callback: function(options,success,response) {
-                        view.setLoading(false);
-
-                        if(success) {
-                            var result = Ext.decode(response.responseText);
-                            if(result.success) {
-                                grid.getStore().load();
-                            } else {
-                                Smart.Msg.error(result.text);
-                            }
-                        }
-
+                    switch(colIndex) {
+                        case 0:
+                            id = record.get('idshiftd');
+                            releasetype = record.get('releasetyped');
+                            break;
+                        case 3:
+                            id = record.get('idshiftn');
+                            releasetype = record.get('releasetypen');
+                            break;
                     }
-                });
-            }
-        });
+
+                    view.setLoading('Removendo plantão ...');
+
+                    Ext.Ajax.request({
+                        url: 'business/Calls/schedulingmonthlypartners.php',
+                        params: {
+                            action: 'delete',
+                            rows: Ext.encode({id: id, releasetype: releasetype})
+                        },
+                        callback: function(options,success,response) {
+                            view.setLoading(false);
+
+                            if(success) {
+                                var result = Ext.decode(response.responseText);
+                                if(result.success) {
+                                    grid.getStore().load();
+                                } else {
+                                    Smart.Msg.error(result.text);
+                                }
+                            }
+
+                        }
+                    });
+                }
+            });
+        }
 
     },
 

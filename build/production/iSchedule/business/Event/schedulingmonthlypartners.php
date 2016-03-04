@@ -114,7 +114,19 @@ class schedulingmonthlypartners extends \Smart\Data\Event {
      * @param \iSchedule\Model\schedulingmonthlypartners $model
      */
     public function preDelete( \iSchedule\Model\schedulingmonthlypartners &$model ) {
+        $proxy = $this->getProxy();
+        $id = $model->getId();
+        $releasetype = $model->getReleasetype();
 
+        if($releasetype != 'M') {
+            throw new \PDOException('Este plantão não pode ser removido pois não é um plantão extra!');
+        }
+
+        $sqlDelete = "delete from schedulingmonthlyscore where schedulingmonthlypartnersid = :id";
+
+        $pdo = $proxy->prepare($sqlDelete);
+        $pdo->bindValue(":id", $id, \PDO::PARAM_INT);
+        $pdo->execute();
     }
 
     /**
