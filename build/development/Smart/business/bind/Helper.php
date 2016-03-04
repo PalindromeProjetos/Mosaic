@@ -17,6 +17,7 @@ class Helper extends \Smart\Data\Proxy
     public function __construct() {
         $this->submit = $_POST;
         $this->dir = getcwd();
+        $this->sch = Start::tableSchema();
         $this->pwd = Start::getPassWord();
         $this->usr = Start::getUserName();
         $this->dns = Start::getConnnect();
@@ -39,7 +40,7 @@ class Helper extends \Smart\Data\Proxy
 
             $pdo = $this->prepare($sql);
 
-            $pdo->bindValue(":TABLE_SCHEMA", $this->dtb, \PDO::PARAM_STR);
+            $pdo->bindValue(":TABLE_SCHEMA", $this->sch, \PDO::PARAM_STR);
 
             $pdo->execute();
             $rows = $pdo->fetchAll();

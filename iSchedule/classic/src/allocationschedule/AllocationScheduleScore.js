@@ -81,10 +81,24 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                             }
                         },
                         renderer: function (value, meta, record, rowIndex, colIndex, store) {
+                            var me = this,
+                                cellValue = value,
+                                cellStyle = '<div><div style="float: left;">{0}</div><div id="{1}"></div></div>';
 
                             switch(colIndex) {
                                 case 0:
                                     meta.style = ( record.get('releasetyped') == 'M' ) ? "color: red; font-style: italic;" : "";
+                                    if( record.get('releasetyped') == 'M' ) {
+                                        var id0 = Ext.id();
+                                        Ext.defer(function () {
+                                            Ext.widget('component', {
+                                                renderTo: id0,
+                                                cls:"delete-icon fa fa-minus-circle action-delete-color-font"
+                                            }).getEl().on('click', function (e, el, eOpts) { me.fireEvent('deleteplan', me, record, colIndex); }, me);
+                                        }, 50);
+                                        cellValue = Ext.String.format(cellStyle,value,id0);
+                                    }
+                                    return cellValue;
                                     break;
                                 case 1:
                                     meta.style = ( record.get('releasetypedr') == 'L' ) ? "color: blue; font-style: italic;" : "";
@@ -94,6 +108,17 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                     break;
                                 case 3:
                                     meta.style = ( record.get('releasetypen') == 'M' ) ? "color: red; font-style: italic;" : "";
+                                    if( record.get('releasetypen') == 'M' ) {
+                                        var id1 = Ext.id();
+                                        Ext.defer(function () {
+                                            Ext.widget('component', {
+                                                renderTo: id1,
+                                                cls:"delete-icon fa fa-minus-circle action-delete-color-font"
+                                            }).getEl().on('click', function (e, el, eOpts) { me.fireEvent('deleteplan', me, record, colIndex); }, me);
+                                        }, 50);
+                                        cellValue = Ext.String.format(cellStyle,value,id1);
+                                    }
+                                    return cellValue;
                                     break;
                                 case 4:
                                     meta.style = ( record.get('releasetypenr') == 'L' ) ? "color: blue; font-style: italic;" : "";
@@ -103,7 +128,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                     break;
                             }
 
-                            return value;
+                            return cellValue;
                         }
                     };
 
@@ -289,6 +314,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                         ],
                                         listeners: {
                                             beforeedit: 'onBeforeEdit',
+                                            deleteplan: 'onDeletePlan',
                                             cellkeydown: 'onCellKeyDown'
                                         }
                                     }

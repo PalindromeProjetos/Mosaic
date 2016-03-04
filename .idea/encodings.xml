@@ -128,25 +128,6 @@
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/contract/ContractView.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/login/Login.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/classic/src/main/Main.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/Application.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/controller/App.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/model/module/ModuleMenu.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/model/module/ModuleMenuTree.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/model/users/Users.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/model/users/UsersMenu.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/model/users/UsersMenuAction.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/model/users/UsersMenuTree.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/store/module/ModuleMenu.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/store/module/ModuleMenuTree.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/store/users/Users.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/store/users/UsersMenu.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/store/users/UsersMenuAction.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/store/users/UsersMenuTree.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/view/login/LoginController.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/app/view/main/MainController.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/classic/src/view/login/Login.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/iSterilization/classic/src/view/main/Main.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/address/SearchAddress.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/address/TextAddress.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/address/TextFieldSearch.js" charset="UTF-8" />

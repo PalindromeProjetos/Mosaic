@@ -157,6 +157,30 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
         me.onUnitSubUnit();
     },
 
+    onDeletePlan: function (grid, record, colIndex) {
+        var me = this,
+            warning = 'Após a confirmação este plantão será removido da contagem!';
+
+        Smart.Msg.question("Confirma a remoção deste plantão? <br/> <br/>" + warning, function(btn) {
+            if (btn === 'yes') {
+
+                console.info(record, colIndex);
+
+                //view.setLoading('Removendo plantão ...');
+                //
+                //Ext.Ajax.request({
+                //    url: 'business/Calls/schedulingmonthlypartners.php',
+                //    params: params,
+                //    success: function(response){
+                //        view.setLoading(false);
+                //        grid.getStore().load();
+                //    }
+                //});
+            }
+        });
+
+    },
+
     onBeforeEdit: function ( editor, context, eOpts ) {
         var fd = context.field,
             rd = context.record;

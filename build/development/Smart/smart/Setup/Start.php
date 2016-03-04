@@ -9,8 +9,12 @@ class Start {
     private static $dtb = "bighero";
     private static $tmz = "America/Manaus";
     private static $dns = "mysql:host=localhost;dbname=database";
-    //    private $dns = "sqlsrv:server=(local);database=fgv";
+//    private static $sch = "dbo";
+//    private static $dns = "sqlsrv:server=(local);database=SATOR";
 
+    public static function tableSchema() {
+        return self::$sch;
+    }
     public static function getPassWord() {
         return self::$pwd;
     }
