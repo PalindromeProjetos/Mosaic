@@ -177,6 +177,7 @@ class Store {
     public function delete() {
 
         try {
+            self::_setCrud('delete');
 
             $this->proxy->beginTransaction();
 
@@ -195,7 +196,6 @@ class Store {
 
             $this->proxy->commit();
 
-            self::_setCrud('delete');
             self::_setRecords($statement->rowCount());
 
         } catch ( \PDOException $e ) {

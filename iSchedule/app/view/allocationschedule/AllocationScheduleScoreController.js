@@ -159,23 +159,47 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
     onDeletePlan: function (grid, record, colIndex) {
         var me = this,
+            id = null,
+            releasetype = null,
+            view = me.getView(),
             warning = 'Após a confirmação este plantão será removido da contagem!';
 
         Smart.Msg.question("Confirma a remoção deste plantão? <br/> <br/>" + warning, function(btn) {
             if (btn === 'yes') {
 
-                console.info(record, colIndex);
+                switch(colIndex) {
+                    case 0:
+                        id = record.get('idshiftd');
+                        releasetype = record.get('releasetyped');
+                        break;
+                    case 3:
+                        id = record.get('idshiftn');
+                        releasetype = record.get('releasetypen');
+                        break;
+                }
 
-                //view.setLoading('Removendo plantão ...');
-                //
-                //Ext.Ajax.request({
-                //    url: 'business/Calls/schedulingmonthlypartners.php',
-                //    params: params,
-                //    success: function(response){
-                //        view.setLoading(false);
-                //        grid.getStore().load();
-                //    }
-                //});
+                view.setLoading('Removendo plantão ...');
+
+                Ext.Ajax.request({
+                    url: 'business/Calls/schedulingmonthlypartners.php',
+                    params: {
+                        action: 'delete',
+                        rows: Ext.encode({id: id, releasetype: releasetype})
+                    },
+                    callback: function(options,success,response) {
+                        view.setLoading(false);
+
+                        if(success) {
+                            var result = Ext.decode(response.responseText);
+                            if(result.success) {
+                                grid.getStore().load();
+                            } else {
+                                Smart.Msg.error(result.text);
+                            }
+                        }
+
+                    }
+                });
             }
         });
 
