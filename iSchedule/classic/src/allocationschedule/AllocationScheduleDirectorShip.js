@@ -78,6 +78,13 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleDirectorShip', 
                                 flex: 1
                             }
                         ]
+                    },  {
+                        xtype: 'splitter'
+                    }, {
+                        xtype: 'comboenum',
+                        fieldLabel: 'SubUnidade',
+                        name: 'subunitdescription',
+                        allowBlank: false
                     }
                 ]
             }

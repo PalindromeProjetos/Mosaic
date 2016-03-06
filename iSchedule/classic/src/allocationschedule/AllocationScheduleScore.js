@@ -16,7 +16,11 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
 		'iSchedule.view.allocationschedule.AllocationScheduleScorePlan',
         'iSchedule.view.allocationschedule.AllocationScheduleScoreDone',
         'iSchedule.view.allocationschedule.AllocationScheduleScorePaid',
-        'iSchedule.view.allocationschedule.AllocationScheduleScoreController'
+        'iSchedule.view.allocationschedule.AllocationScheduleScoreController',
+        'iSchedule.view.allocationschedule.AllocationScheduleWeek',
+        'iSchedule.view.allocationschedule.SchedulingPeriodSearch',
+        'iSchedule.view.allocationschedule.AllocationSchedulePicker',
+        'iSchedule.view.allocationschedule.AllocationScheduleController'
     ],
 
     controller: 'allocationschedulescore',
@@ -246,7 +250,14 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScore', {
                                         iconCls: "fa fa-print",
                                         menu: [
                                             {
-                                                text: 'Menu Item 1'
+                                                handler: 'showSelectScheduleContagem',
+                                                text: 'Contagem'
+                                            }, {
+                                                handler: 'showSelectScheduleExtrato',
+                                                text: 'Extrato Individual'
+                                            }, {
+                                                handler: 'showSelectScheduleVerifyPay',
+                                                text: 'Conferencia "Pagar Para"'
                                             }
                                         ]
                                     }, {

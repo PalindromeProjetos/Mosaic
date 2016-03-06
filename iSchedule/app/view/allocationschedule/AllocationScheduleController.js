@@ -285,17 +285,22 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
             data = form.getValues(),
             list = grid.getSelectionModel().getSelection(),
             url = 'business/Calls/Report/DirectorShip.php?',
-            qrp = 'periodid={0}&contractorunitlist={1}&status={2}';
+            qrp = 'periodid={0}&contractorunitlist={1}&status={2}&subunit={3}';
 
-        if(list.length) {
+        console.info(data);
+        //return false;
+
+        if(list.length &&  data.subunitdescription.length) {
             var status = data.status,
-                periodid = data.periodid;
+                periodid = data.periodid,
+                subunit = data.subunitdescription;
 
             Ext.each(list,function(record, index) {
                 contractorunitlist.push(parseInt(record.get('id')));
             },me);
 
-            window.open(Ext.String.format(url + qrp,periodid,Ext.encode(contractorunitlist),status));
+            window.open(Ext.String.format(url + qrp,periodid,Ext.encode(contractorunitlist),status,subunit));
+
         } else {
 
         }

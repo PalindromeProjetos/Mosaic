@@ -7,6 +7,7 @@ use Smart\Setup\Start;
 use Smart\Utils\Report;
 use Smart\Utils\Session;
 
+
 class DirectorShip extends Report {
 
     private $proxy;
@@ -27,16 +28,16 @@ class DirectorShip extends Report {
 
     public function preConstruct() {
         $this->post = (object) self::decodeUTF8($_REQUEST);
-        $link = array(Start::getConnnect(), Start::getUserName(), Start::getPassWord());
-
         set_time_limit(600); // 10 minutos
 
-        $this->proxy = new Proxy($link);
-
+        $status = $this->post->status;
         $periodid = $this->post->periodid;
         $contractorunitlist = $this->post->contractorunitlist;
+        $subunit = $this->post->subunit;
 
         $list = substr($contractorunitlist, 1, -1);
+
+        $this->proxy = new Proxy(array(Start::getConnnect(), Start::getUserName(), Start::getPassWord()));
 
         $sql = "
             select
@@ -45,6 +46,7 @@ class DirectorShip extends Report {
                 sm.dutydate,
                 sm.contractorunitid,
                 c.name as contractorunit,
+                c.shortname as unit_shortname,
                 substring(lower(dayname(sm.dutydate)),1,3) as dayname,
                 tp.position,
                 tp.naturalpersonid,
@@ -63,6 +65,7 @@ class DirectorShip extends Report {
             where sp.id = $periodid
               and sm.contractorunitid in ($list)
               and tp.naturalpersonid is not null
+              and tp.subunit = $subunit
             order by cu.position, sm.contractorunitid, sm.dutydate, tp.shift, tp.subunit, tp.position";
 
         $sql = $this->setTableSchedule($periodid,$sql);
@@ -74,7 +77,7 @@ class DirectorShip extends Report {
 
     public function posConstruct() {
         $this->AliasNbPages();
-//        $this->AddFont('LucidaSans-Typewriter','','LTYPE.php');
+        $this->AddFont('LucidaSans-Typewriter','','LTYPE.php');
         $this->setAllMarginPage(7);
         $this->AddPage();
         $this->Detail();
@@ -92,19 +95,35 @@ class DirectorShip extends Report {
         $this->SetFillColor(197, 224, 220);
 
         $this->Cell($this->squareWidth,5,'Segunda - ' . $this->AddDay($date,$week)->format("d"),1,0,'C',1);
-        $this->Cell($this->squareWidth,5,'Ter�a - '   . $this->AddDay($date,$week)->format("d"),1,0,'C',1);
+        $this->Cell($this->squareWidth,5,utf8_decode('Terça - ') . $this->AddDay($date,$week)->format("d"),1,0,'C',1);
         $this->Cell($this->squareWidth,5,'Quarta - '  . $this->AddDay($date,$week)->format("d"),1,0,'C',1);
         $this->Cell($this->squareWidth,5,'Quinta - '  . $this->AddDay($date,$week)->format("d"),1,0,'C',1);
         $this->Cell($this->squareWidth,5,'Sexta - '   . $this->AddDay($date,$week)->format("d"),1,0,'C',1);
-        $this->Cell($this->squareWidth,5,'S�bado - '  . $this->AddDay($date,$week)->format("d"),1,0,'C',1);
+        $this->Cell($this->squareWidth,5,utf8_decode('Sábado - ') . $this->AddDay($date,$week)->format("d"),1,0,'C',1);
         $this->Cell($this->squareWidth,5,'Domingo - ' . $this->AddDay($date,$week)->format("d"),1,1,'C',1);
     }
 
     public function Header() {
-        $this->configStyleHeader(18);
+
+        switch ($this->rows[0]['unit_shortname']) {
+            case "CECON":
+            case "HEMOAM":
+            case "Moura":
+            case "Ambulatorio de Dor":
+            case "Moura Tapajoz";
+
+                $this->Image("../../../../resources/images/appanest/logo-text.png",5,5,30,"PNG");
+                break;
+            default :
+                $this->Image("../../../../resources/images/appanest/logoIAA.png",5,5,30,"PNG");
+
+
+        };
+
+        $this->configStyleHeader(14);
         $year = $this->ScheduleMonth->format("Y");
         $month = $this->translate['monthly'][strtolower($this->ScheduleMonth->format( "M" ))];
-        $this->Cell($this->getInternalW(),4, 'Escala para Diretoria - M�s: ' . $month . ' de '. $year,0,1,'C',false);
+        $this->Cell($this->getInternalW(),4, utf8_decode('Escala para Diretoria - Mês: ') . $month . ' de '. $year,0,1,'C',false);
         $this->Ln(2);
     }
 
@@ -133,7 +152,25 @@ class DirectorShip extends Report {
 
         foreach($data as $item) {
             $this->configStyleHeader(12);
-            $this->Cell($this->getInternalW(),4, $item['contractorunit'],0,1,'C',false);
+            //print_r($list);
+
+            switch ($list['subunit']) {
+                case "000":
+                    //$su = 'GERAL E VASCULAR';
+                    $su = 'PLANTÕES';
+                    break;
+                case "003":
+                    $su = 'CARDÍACA';
+                    break;
+                case "004":
+                    $su = 'HEMODINÂMICA';
+                    break;
+                case "005":
+                    $su = 'ELETROFISIOLOGIA';
+                    break;
+            };
+
+            $this->Cell($this->getInternalW(),4, $item['contractorunit'] .' - '. utf8_decode($su) ,0,1,'C',false);
             $date = date("Y-m-d", strtotime($this->ScheduleMonth->format("Y-m-d"). " - $d days"));
 
             $this->SetLineWidth(0.4);
@@ -153,14 +190,15 @@ class DirectorShip extends Report {
             $q++;
             $this->SetLineWidth(0.3);
             $g = $item['contractorunitid'];
-            $this->setDaysPrint($y,$m,$d);
+            //        $this->setDaysPrint($y,$m,$d);
             $this->setDaysShift($y,$m,$d,$g);
             if(count($data) > $q) $this->AddPage();
         }
     }
 
     public function Footer() {
-        Start::setTimeZone();
+
+        date_default_timezone_set("America/Manaus");
 
         $this->SetY(-8);
         $this->SetTextColor(7,23,35);
@@ -173,8 +211,10 @@ class DirectorShip extends Report {
         $page       = "pagina ";
         $of         = " de ";
 
-        $this->Cell(0,4, $issuedOn . $date . $by . $passport,0,0,'L');
-        $this->Cell(0,4, $page . $this->PageNo() . $of . '{nb}',0,0,'R');
+//        $this->Cell(0,4, $issuedOn . $date . $by . $passport,0,0,'L');
+        $this->Cell(0,4, $issuedOn . $date ,0,0,'L');
+        //$this->Cell(0,4, $page . $this->PageNo() . $of . '{nb}',0,0,'R');
+        $this->Cell(0,4, $page . 1 . $of . '1',0,0,'R');
     }
 
     public function AddDay(&$date, &$week) {
@@ -200,7 +240,7 @@ class DirectorShip extends Report {
         $widthColumn = $this->squareWidth;
         $dm = cal_days_in_month(CAL_GREGORIAN,$m,$y);
 
-//        $this->SetFont('LucidaSans-Typewriter', '', 18);
+        $this->SetFont('LucidaSans-Typewriter', '', 18);
         $this->SetTextColor(229, 252, 194);
 
         foreach($this->vLine as $line) {
@@ -234,7 +274,7 @@ class DirectorShip extends Report {
         $dm = cal_days_in_month(CAL_GREGORIAN,$m,$y);
         $date = date("Y-m-d", strtotime($this->ScheduleMonth->format("Y-m-d"). " - 1 days"));
 
-//        $this->SetFont("LucidaSans-Typewriter","",9);
+        $this->SetFont("LucidaSans-Typewriter","",9);
         $this->SetTextColor(48, 51, 50);
 
         foreach($this->vLine as $line) {

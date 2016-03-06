@@ -47,7 +47,7 @@ class Report extends FPDF {
         $start_week = date('W', $start);
         $end_week = date('W', $end);
         if ($end_week < $start_week) {
-            return ((52 + $end_week) - $start_week) + 1;
+            return ((53 + $end_week) - $start_week) + 1;
         }
         return ($end_week - $start_week) + 1;
     }
@@ -112,7 +112,8 @@ class Report extends FPDF {
         $this->SetDrawColor(23,45,58);
         $this->SetLineWidth(0.1);
         $this->SetTextColor(36,62,62); 
-        $this->SetFillColor(252, 248, 232);
+        //$this->SetFillColor(252, 248, 232);
+        $this->SetFillColor(230, 230, 230);
         $this->SetFont('Arial','',$sizeFont);
     }
 
@@ -144,6 +145,7 @@ class Report extends FPDF {
         $ln = 1;
 
         $this->SetFont('Arial','',$sizeFont);
+        $this->SetFillColor(230, 230, 230);
 
         foreach($columns as $c){
             $l = $this->_countLine($c[1], $c[0])+1;
@@ -163,10 +165,11 @@ class Report extends FPDF {
 
             $c[1] .= str_repeat("\n",$ln-$this->_countLine($c[1], $c[0]));
 
-            $this->MultiCell($c[0],7,$c[1],'B',$c[2],1);
+            //$this->MultiCell($c[0],7,$c[1],'B',$c[2],1);
+            $this->MultiCell($c[0],7,$c[1],'1',$c[2],1);
 
         }
-        $this->Cell(15,5,'','',1);
+        //$this->Cell(15,5,'','',1);
     }
 
     public function loadHeader($title){
@@ -214,6 +217,7 @@ class Report extends FPDF {
 
         $this->Cell($buttonLineSize,3, '','B',1,'C');
         $this->Cell(0,4, $issuedOn . $date . $by . $passport,0,0,'L');
+
         $this->Cell(0,4, $page . $this->PageNo() . $of . '{nb}',0,0,'R');		
     }
 

@@ -446,6 +446,36 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             view.hide();
         }
 
-    }
+    },
+
+    showSelectScheduleContagem: function () {
+        var me = this,
+            params = { limit: 1000 },
+            win = Ext.widget('allocationschedulescorereport');
+
+        win.show(null,function(){
+            Ext.getStore('contractorunitexclud').setParams(params).load();
+            Ext.getStore('contractorsubunitexclud').setParams(params).load();
+        });
+    },
+
+    showSelectScheduleExtrato: function () {
+        var params = { limit: 1000 },
+            win = Ext.widget('allocationscheduleextractreport');
+
+        win.show(null,function(){
+            Ext.getStore('contractorunitexclud').setParams(params).load();
+        });
+    },
+
+    showSelectScheduleVerifyPay: function () {
+        var params = { limit: 1000 },
+            win = Ext.widget('allocationscheduleverifypayreport');
+
+        win.show(null,function(){
+            Ext.getStore('contractorunitexclud').setParams(params).load();
+        });
+    },
+
 
 });
