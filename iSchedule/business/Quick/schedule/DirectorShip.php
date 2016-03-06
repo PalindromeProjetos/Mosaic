@@ -7,7 +7,6 @@ use Smart\Setup\Start;
 use Smart\Utils\Report;
 use Smart\Utils\Session;
 
-
 class DirectorShip extends Report {
 
     private $proxy;
@@ -54,7 +53,8 @@ class DirectorShip extends Report {
                 tp.shift,
                 tp.subunit,
                 tp.releasetype,
-                tp.allocationschema
+                tp.allocationschema,
+                getLegalEntityFileData(c.id) as legalentityfiledata
             from
                 schedulingmonthly sm
                 inner join contractorunit cu on ( cu.id = sm.contractorunitid )
@@ -104,22 +104,6 @@ class DirectorShip extends Report {
     }
 
     public function Header() {
-
-        switch ($this->rows[0]['unit_shortname']) {
-            case "CECON":
-            case "HEMOAM":
-            case "Moura":
-            case "Ambulatorio de Dor":
-            case "Moura Tapajoz";
-
-                $this->Image("../../../../resources/images/appanest/logo-text.png",5,5,30,"PNG");
-                break;
-            default :
-                $this->Image("../../../../resources/images/appanest/logoIAA.png",5,5,30,"PNG");
-
-
-        };
-
         $this->configStyleHeader(14);
         $year = $this->ScheduleMonth->format("Y");
         $month = $this->translate['monthly'][strtolower($this->ScheduleMonth->format( "M" ))];
@@ -139,6 +123,7 @@ class DirectorShip extends Report {
         foreach($this->rows as $list) {
             $data[$i]['contractorunit'] = $list['contractorunit'];
             $data[$i]['contractorunitid'] = $list['contractorunitid'];
+            $data[$i]['legalentityfiledata'] = $list['legalentityfiledata'];
             $i++;
         }
 
@@ -152,11 +137,9 @@ class DirectorShip extends Report {
 
         foreach($data as $item) {
             $this->configStyleHeader(12);
-            //print_r($list);
 
             switch ($list['subunit']) {
                 case "000":
-                    //$su = 'GERAL E VASCULAR';
                     $su = 'PLANTÕES';
                     break;
                 case "003":
@@ -192,7 +175,13 @@ class DirectorShip extends Report {
             $g = $item['contractorunitid'];
             //        $this->setDaysPrint($y,$m,$d);
             $this->setDaysShift($y,$m,$d,$g);
-            if(count($data) > $q) $this->AddPage();
+
+            $legalentityfiledata = $item['legalentityfiledata'];
+            $this->Image("../../../../resources/images/appanest/logo$legalentityfiledata.PNG",5,5,30,"PNG");
+
+            if(count($data) > $q) {
+                $this->AddPage();
+            }
         }
     }
 

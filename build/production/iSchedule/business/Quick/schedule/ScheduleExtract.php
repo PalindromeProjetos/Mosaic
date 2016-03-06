@@ -223,7 +223,9 @@ class ScheduleExtract extends Report {
 
                 $this->Cell(20, 4, $data->format("d/m/Y") , 0, 0, 'L', $lineColor);
                 //$this->Cell(20+5, 4, $data->format("l") , 0, 0, 'L', $lineColor);
-                $this->Cell(20+5, 4,  utf8_decode($this->dayweek[ strftime('%a',strtotime($record['dutydate']))]) , 0, 0, 'L', $lineColor);
+                $this->Cell(20+5, 4, strftime('%a',strtotime($record['dutydate'])) , 0, 0, 'L', $lineColor);
+
+                //$this->Cell(20+5, 4,  utf8_decode($this->dayweek[ strftime('%a',strtotime($record['dutydate']))]) , 0, 0, 'L', $lineColor);
                 $this->Cell(20, 4, $horario  , 0, 0, 'L', $lineColor);
                 $this->Cell(20, 4,$record['quickname']  , 0, 0, 'L', $lineColor);
                 $this->Cell(30, 4,$record['realpag']  , 0, 0, 'L', $lineColor);
