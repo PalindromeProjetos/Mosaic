@@ -287,10 +287,12 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
             url = 'business/Calls/Report/DirectorShip.php?',
             qrp = 'periodid={0}&contractorunitlist={1}&status={2}&subunit={3}';
 
-        console.info(data);
-        //return false;
+        if(!list.length) {
+            Smart.Msg.error('Favor Selecionar Unidade(s) para gerar relatório!');
+            return false;
+        }
 
-        if(list.length &&  data.subunitdescription.length) {
+        if(form.isValid()) {
             var status = data.status,
                 periodid = data.periodid,
                 subunit = data.subunitdescription;
@@ -300,10 +302,8 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
             },me);
 
             window.open(Ext.String.format(url + qrp,periodid,Ext.encode(contractorunitlist),status,subunit));
-
-        } else {
-
         }
+
     },
 
     showReportSheetFrequency: function (btn) {

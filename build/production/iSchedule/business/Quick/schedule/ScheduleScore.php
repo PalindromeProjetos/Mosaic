@@ -41,16 +41,16 @@ class ScheduleScore extends Report {
 
         switch ($this->subunit) {
             case "000":
-                $this->subunitDesc = '(PLANTOES)';
+                $this->subunitDesc = utf8_encode('(PLANTÕES)');
                 break;
             case "003":
-                $this->subunitDesc = '(CARDIACA)';
+                $this->subunitDesc = utf8_encode('(CARDÍACA)');
                 break;
             case "004":
-                $this->subunitDesc = '(HEMODINAMICA)';
+                $this->subunitDesc = utf8_encode('(HEMODINÂMICA)');
                 break;
             case "005":
-                $this->subunitDesc = '(ELETROFISIOLOGIA)';
+                $this->subunitDesc = utf8_encode('(ELETROFISIOLOGIA)');
                 break;
         };
 
@@ -65,14 +65,14 @@ class ScheduleScore extends Report {
             $unitexclud = ' ';
         } else {
             $unitexclud = " and a.id not in ( ".str_replace(array("[","]"),"",$this->unitexclud)." ) ";
-            $this->subunitDesc = '(C/ EXCLUSOES)';
+            $this->subunitDesc = utf8_encode('(C/ EXCLUSÕES)');
         }
 
         if (empty($this->subexclud) ) {
             $subexclud = ' ';
         } else {
             $subexclud = " and c.subunit  not in ( ".str_replace(array("[","]"),"",$this->subexclud)." ) ";
-            $this->subunitDesc = '(C/ EXCLUSOES)';
+            $this->subunitDesc = utf8_encode('(C/ EXCLUSÕES)');
         }
 
         Start::setTimeZone();
@@ -245,7 +245,7 @@ class ScheduleScore extends Report {
     }
 
     function Detail() {
-        $lineColor = 1;//($lineColor == 0) ? 1 : 0;
+        $lineColor = 1; //($lineColor == 0) ? 1 : 0;
 
         $data = $this->rows;
 
@@ -270,21 +270,18 @@ class ScheduleScore extends Report {
             $k = count($resultArray);
             $resultArray[$k-1][2][ $this->unitPosit[ $record['unidadeNomeCurto'] ] ] = $record['Qtde'];
             $totalSoma = bcadd((float)$totalSoma,(float)$record['Qtde'],2) ;
-
             $totalGeral[ $this->unitPosit[ $record['unidadeNomeCurto'] ] ] =  bcadd((float)$totalGeral[ $this->unitPosit[ $record['unidadeNomeCurto'] ] ],(float)$record['Qtde'],2) ;
-
         }
         if ($lastCoop != '') {
             $resultArray[$k-1][2][ $this->unitPosit[ 'Total' ] ] = $totalSoma;
             $totalGeral[ $this->unitPosit[ 'Total' ] ] = bcadd($totalGeral[ $this->unitPosit[ 'Total' ] ], $totalSoma,2);
         }
 
-
         $this->configStyleDetail();
 
         foreach($resultArray as $record) {
 
-            if ( ($this->getY() > 179 ) ) {
+            if ( ($this->getY() > 181 ) ) {
                 $bord = 'LRB';
             } else {
                 $bord = 'LR';
