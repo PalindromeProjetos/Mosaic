@@ -236,6 +236,8 @@ class Schedule extends \Smart\Data\Proxy {
     }
 
     private function setScheduleWeek (&$objPHPExcel,$rows,$week,$dateof) {
+        Start::setTimeZone();
+        $mesAno = strtoupper( strftime('%B/%Y',strtotime($dateof)) );
 
         $featured = array('010','012','013','014');
         $daysname = $this->daysweek['daysname'];
@@ -402,6 +404,7 @@ class Schedule extends \Smart\Data\Proxy {
         $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(12);
 
         $day = new \DateTime($dateof);
+
         $mon = $day->format("d");
 
         $day->modify('+ 1 days');
@@ -651,8 +654,6 @@ class Schedule extends \Smart\Data\Proxy {
                     );
 
 
-
-
                 //Merge Diurno
                 if ($no > 0) {
                     $objPHPExcel->getActiveSheet()
@@ -724,8 +725,9 @@ class Schedule extends \Smart\Data\Proxy {
 
         $objPHPExcel->getActiveSheet()
             ->getHeaderFooter()
-            ->setOddHeader('ESCALA DE NOVEMBRO/2015')
+            ->setOddHeader("ESCALA DE $mesAno")
         ;
+
 
 
     }
