@@ -184,6 +184,12 @@ Ext.define( 'iContract.view.users.UsersController', {
 
     },
 
+    onListViewEdit: function (viewView, record, item, index, e, eOpts) {
+        var me = this;
+
+        me.onViewEdit(viewView, null, null, null, e, record);
+    },
+
     onViewEdit: function(grid, rowIndex, colIndex, actionItem, event, record, row) {
         var me = this;
 

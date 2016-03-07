@@ -49,7 +49,7 @@ Ext.define( 'iContract.view.enums.EnumTypeList', {
                 headerBorders: false,
                 cls: 'search-grid',
                 listeners: {
-                    itemdblclick: 'onViewEdit'
+                    itemdblclick: 'onListViewEdit'
                 },
                 columns: [
                     {

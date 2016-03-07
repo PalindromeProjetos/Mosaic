@@ -49,7 +49,7 @@ Ext.define( 'iContract.view.users.UsersList', {
                 headerBorders: false,
                 cls: 'search-grid',
                 listeners: {
-                    itemdblclick: 'onViewEdit'
+                    itemdblclick: 'onListViewEdit'
                 },
                 columns: [
                     {

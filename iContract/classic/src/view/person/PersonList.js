@@ -68,7 +68,7 @@ Ext.define( 'iContract.view.person.PersonList', {
                 cls: 'search-grid',
 
                 listeners: {
-                    itemdblclick: 'onViewEdit'
+                    itemdblclick: 'onListViewEdit'
                 },
 
                 columns: me.makeColumn(),

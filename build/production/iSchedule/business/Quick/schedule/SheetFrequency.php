@@ -17,6 +17,8 @@ class SheetFrequency extends Report {
         $list = array("P", "C", "E");
 
         $rows = $this->proxy->query("select status from schedulingperiod where id = $period")->fetchAll();
+        $currentRecord = array();
+
         $status = $rows[0]['status'];
 
         $tablename = (in_array($status, $list)) ? 'schedulingmonthlypartners' : 'tmp_turningmonthly';
@@ -25,6 +27,7 @@ class SheetFrequency extends Report {
     }
 
     public function preConstruct() {
+
 
         $this->post = (object) self::decodeUTF8($_REQUEST);
 
@@ -52,7 +55,8 @@ class SheetFrequency extends Report {
                 c.shortname as unit_shortname,
                 n.shortname as naturalperson,
                 tp.shift,
-                tp.subunit
+                tp.subunit,
+                getLegalEntityFileData(c.id) as legalentityfiledata
             from
                 schedulingmonthly sm
                 inner join schedulingperiod sp on ( sp.id = sm.schedulingperiodid )
@@ -106,7 +110,9 @@ class SheetFrequency extends Report {
     }
 
     function SetCoverPage () {
-
+//        print_r($this->post);
+//        print_r($rows_local);
+//        return false;
         $subunittext = $this->post->subunittext;
 
         $this->Rect(4, 4, 202, 280, 'D');
@@ -117,18 +123,8 @@ class SheetFrequency extends Report {
         $this->SetFont('Arial', 'B', 24);
         $this->Cell(190,24, utf8_decode('Folha de Frequência'),0,1,'C',false);
 
-        switch ($this->rows[0]['unit_shortname']) {
-            case "CECON":
-            case "HEMOAM":
-            case "Moura":
-            case "Ambulatorio de Dor":
-            case "Moura Tapajoz";
-                $this->Image("../../../../resources/images/appanest/logo-text.png",60,30,80,20,"PNG");
-                break;
-            default :
-                $this->Image("../../../../resources/images/appanest/logoIAA.png",60,30,80,20,"PNG");
-        };
-
+        $legalentityfiledata = $this->rows[0]['legalentityfiledata'];
+        $this->Image("../../../../resources/images/appanest/logo$legalentityfiledata.PNG",60,30,80,20,"PNG");
 
         $periodof = new \DateTime($this->post->dateof);
         $periodto = new \DateTime($this->post->dateto);
@@ -248,6 +244,9 @@ class SheetFrequency extends Report {
 
     function setDutyDateShift (array $rows) {
 
+//        print_r($rows);
+//        return false;
+
         $data = array();
         $temp = array();
         $uniq = array();
@@ -269,12 +268,16 @@ class SheetFrequency extends Report {
         $rows[$k]['naturalperson'] = '';
         $rows[$k]['shift'] = 'N';
         $rows[$k]['subunit'] = '000';
+        $rows[$k]['unit_shortname'] = '';
+        $rows[$k]['legalentityfiledata'] = '';
 
         foreach($rows as $record) {
 
             $data[$i]['shift'] = $record['shift'];
             $data[$i]['dutydate'] = $record['dutydate'];
             $data[$i]['naturalperson'] = $record['naturalperson'];
+            $data[$i]['unit_shortname'] = $record['unit_shortname'];
+            $data[$i]['legalentityfiledata'] = $record['legalentityfiledata'];
 
             $i++;
             $j++;
@@ -287,11 +290,15 @@ class SheetFrequency extends Report {
                         if($item['shift'] == 'D') {
                             $uniq[$d]['dutydate'] = $item['dutydate'];
                             $uniq[$d]['shiftd'] = $item['naturalperson'];
+                            $uniq[$d]['unit_shortname'] = $item['unit_shortname'];
+                            $uniq[$d]['legalentityfiledata'] = $item['legalentityfiledata'];
                             $d++;
                         }
                         if($item['shift'] == 'N') {
                             $uniq[$n]['dutydate'] = $item['dutydate'];
                             $uniq[$n]['shiftn'] = $item['naturalperson'];
+                            $uniq[$n]['unit_shortname'] = $item['unit_shortname'];
+                            $uniq[$n]['legalentityfiledata'] = $item['legalentityfiledata'];
                             $n++;
                         };
                     }
@@ -325,8 +332,15 @@ class SheetFrequency extends Report {
 
         $dutydate = '';
 
+        //print_r($data);
+        //return false;
+
+
         foreach($data as $record) {
-            $lineColor = 0;//($lineColor == 0) ? 1 : 0;
+
+            $this->currentRecord = $record;
+
+            $lineColor = 0; //($lineColor == 0) ? 1 : 0;
 
             if (isset($record['shiftd'])) {
                 if ($record['shiftd'] != '') {
@@ -345,7 +359,8 @@ class SheetFrequency extends Report {
                         // $this->Cell(0,4,$this->getY());
 
 
-                        switch ($this->rows[0]['unit_shortname']) {
+                        //switch ($this->rows[0]['unit_shortname']) {
+                        switch ($this->currentRecord['unit_shortname']) {
                             case "Adriano Jorge":
                             case "HUGV":
                                 $aa = 35;
@@ -398,7 +413,9 @@ class SheetFrequency extends Report {
                 };
             };
 
-            $dutydate = $record['dutydate'];
+            if (isset($record['dutydate'])) {
+                $dutydate = $record['dutydate'];
+            }
 
         };
 

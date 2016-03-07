@@ -43,7 +43,6 @@ Ext.define( 'Smart.ux.contract.ContractList', {
                 headerBorders: false,
                 cls: 'contract-list',
                 listeners: {
-                    itemdblclick: 'onViewEdit',
                     additiveitem: 'onAdditiveItem'
                 },
                 columns: [

@@ -4,6 +4,12 @@ Ext.define( 'iContract.view.person.PersonController', {
 
     alias: 'controller.person',
 
+    onListViewEdit: function (viewView, record, item, index, e, eOpts) {
+        var me = this;
+
+        me.onViewEdit(viewView, null, null, null, e, record);
+    },
+
     onLoadEnd: function (field,file) {
         var me = this,
             view = me.getView(),

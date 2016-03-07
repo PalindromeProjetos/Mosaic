@@ -92,7 +92,8 @@ Ext.define( 'iContract.view.users.UsersView', {
                             }, {
                                 flex: 2,
                                 height: 200,
-                                xtype: 'portrait'
+                                xtype: 'portrait',
+                                tableName: 'users'
                             }, {
                                 flex: 1,
                                 xtype: 'container'
