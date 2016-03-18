@@ -2,17 +2,10 @@
 Ext.define( 'iContract.model.naturalperson.NaturalPersonDistribution', {
     extend: 'Ext.data.Model',
 
-    requires: [
-        'Smart.data.identifier.Auto'
-    ],
-
-    identifier: 'auto',
-
     fields: [
         {
             name: 'id',
-            type: 'int',
-            serializeType: 'auto'
+            type: 'int'
         }, {
             name: 'naturalpersonid',
             type: 'int',

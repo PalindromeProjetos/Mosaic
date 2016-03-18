@@ -163,7 +163,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
             success: function(response){
                 var result = Ext.decode(response.responseText);
                 if(result.success == true) {
-                    record.set(result.rows[0]);
+                    var rows = result.rows[0];
+                    delete(rows.id);
+                    record.set(rows);
                     record.commit();
                 } else {
                     record.reject();
