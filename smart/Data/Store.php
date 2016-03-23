@@ -2,7 +2,6 @@
 
 namespace Smart\Data;
 
-use Smart\Data\Proxy;
 use Smart\Utils\Submit;
 use Smart\Common\Traits as Traits;
 
@@ -98,7 +97,7 @@ class Store {
 
         try {
 
-            //$this->policy();
+            $this->policy();
 
             $this->proxy->beginTransaction();
 
@@ -119,7 +118,6 @@ class Store {
 
             $this->proxy->commit();
 
-            self::_setCrud('update');
             self::_setRecords($statement->rowCount());
 
         } catch ( \PDOException $e ) {
@@ -136,8 +134,7 @@ class Store {
 
         try {
 
-            //$this->policy();
-            self::_setCrud('insert');
+            $this->policy();
 
             $this->proxy->beginTransaction();
 
@@ -177,7 +174,6 @@ class Store {
     public function delete() {
 
         try {
-            self::_setCrud('delete');
 
             $this->proxy->beginTransaction();
 
@@ -219,7 +215,6 @@ class Store {
             $record = $this->getRecord();
             $submit = $model->getSubmit()->getToArray();
             $record = array_merge($submit,$record);
-
             $this->proxy->saveFile($record);
             $_FILES = array();
         }

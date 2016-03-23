@@ -455,6 +455,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleController', {
                         xdata: record,
                         dataIndex: dataIndex
                     }).show(null, function() {
+                        this.down('datefield[name=dutydate]').setReadColor(false);
+                        this.down('comboenum[name=subunitdescription]').setReadColor(false);
+
                         this.down('hiddenfield[name=status]').setValue(status);
                         this.down('datefield[name=dutydate]').setMinValue(period.foundRecord().get('periodof'));
                         this.down('datefield[name=dutydate]').setMaxValue(period.foundRecord().get('periodto'));

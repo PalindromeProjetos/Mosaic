@@ -392,7 +392,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             record = sm.getSelection()[0],
             modify = (field.getValue() != view.fieldValue);
 
-
         record.set(dataIndex,view.fieldValue);
         record.commit();
 
@@ -402,7 +401,6 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
 
             getCell.applyStyles(function () {
                     return 'color: blue; font-style: italic;';
-                    // OR return { fontStyle: 'italic' };
                 }
             );
         }
