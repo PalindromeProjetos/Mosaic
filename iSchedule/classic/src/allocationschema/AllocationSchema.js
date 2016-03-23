@@ -249,7 +249,8 @@ Ext.define( 'iSchedule.view.allocationschema.AllocationSchema', {
                                                             }, {
                                                                 flex: 1,
                                                                 name: 'weekold',
-                                                                fieldLabel: 'OLD'
+                                                                fieldLabel: 'OLD',
+                                                                useReadColor: false
                                                             }, {
                                                                 xtype: 'splitter'
                                                             }, {
