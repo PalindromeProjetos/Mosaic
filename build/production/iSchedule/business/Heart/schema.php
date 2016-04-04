@@ -152,7 +152,7 @@ class schema extends \Smart\Data\Proxy {
     public function __construct() {
         $this->post = (object)$_POST;
 
-        $link = array(Start::getDataBase(), Start::getUserName(), Start::getPassWord());
+        $link = array(Start::getConnnect(), Start::getUserName(), Start::getPassWord());
 
         parent::__construct( $link );
 

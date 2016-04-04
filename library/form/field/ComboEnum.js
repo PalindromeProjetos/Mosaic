@@ -14,19 +14,28 @@ Ext.define( 'Smart.form.field.ComboEnum', {
     editable: false,
     fieldLabel: null,
     submitValue: true,
+    queryFilter: 'stAll',
+
+    setQueryFilter: function (filter) {
+        var me = this,
+            params = me.getStore().getParams();
+
+        me.queryFilter = filter;
+        me.getStore().setParams(Ext.merge(params, { filter: filter }));
+    },
 
     config: {
         url: '../iContract/business/Calls/enumtype.php',
         params: {
+            filter: 'stAll',
             action: 'select',
             method: 'selectEnum'
         }
     },
 
     valueField: null,
-    displayField: null,
-
     filterField: null,
+    displayField: null,
 
     buildCombo: function () {
         var me = this,
@@ -38,6 +47,7 @@ Ext.define( 'Smart.form.field.ComboEnum', {
         me.params.type  = hiddenName;
         me.hiddenNameId = hiddenName;
         me.fields.push(name,hiddenName);
+        me.params.filter = me.queryFilter;
     },
 
     initComponent: function () {

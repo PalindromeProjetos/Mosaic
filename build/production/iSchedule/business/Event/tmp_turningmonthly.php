@@ -3,7 +3,7 @@
 namespace iSchedule\Event;
 
 use Smart\Utils\Session;
-use iSchedule\Setup\Start;
+use Smart\Setup\Start;
 
 class tmp_turningmonthly extends \Smart\Data\Event {
 

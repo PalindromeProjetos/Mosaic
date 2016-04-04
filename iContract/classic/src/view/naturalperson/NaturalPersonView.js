@@ -149,21 +149,20 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                 items: [
                                     {
                                         flex: 1,
+                                        margin: '0 5 0 0',
                                         name: 'birthdate',
                                         xtype: 'datefield',
                                         plugins: 'textmask',
                                         fieldLabel: 'Nascimento'
                                     }, {
-                                        xtype: 'splitter'
-                                    }, {
                                         flex: 1,
+                                        margin: '0 5 0 5',
                                         xtype: 'comboenum',
                                         fieldLabel: 'Sexo',
                                         name: 'genderdescription'
                                     }, {
-                                        xtype: 'splitter'
-                                    }, {
                                         flex: 1,
+                                        margin: '0 0 0 5',
                                         xtype: 'comboenum',
                                         fieldLabel: 'Raça/Cor',
                                         name: 'racecolordescription'
@@ -232,6 +231,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                         items: [
                                             {
                                                 flex: 1,
+                                                margin: '0 5 0 0',
                                                 maskRe: /[0-9\/]/,
                                                 fieldLabel: 'Matricula',
                                                 name: 'registrationid',
@@ -239,23 +239,19 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                                     change: 'onChangeRegistrationId'
                                                 }
                                             }, {
-                                                xtype: 'splitter'
-                                            }, {
                                                 flex: 1,
+                                                margin: '0 5 0 5',
                                                 fieldLabel: 'Ingressou em',
                                                 xtype: 'datefield',
                                                 plugins: 'textmask',
                                                 name: 'associationdate'
                                             }, {
-                                                xtype: 'splitter'
-                                            }, {
                                                 flex: 1,
                                                 fieldLabel: 'Nacionalidade',
                                                 name: 'nationality'
                                             }, {
-                                                xtype: 'splitter'
-                                            }, {
                                                 flex: 1,
+                                                margin: '0 0 0 5',
                                                 fieldLabel: 'Local nascimento',
                                                 name: 'placebirth'
                                             }
@@ -339,24 +335,21 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                                         fieldLabel: 'Registro geral',
                                                         name: 'identnumber'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
+                                                        margin: '0 5 0 5',
                                                         fieldLabel: 'Org. emissor',
                                                         name: 'identissuing'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
+                                                        margin: '0 5 0 5',
                                                         fieldLabel: 'UF emissor',
                                                         name: 'identissuingstate',
                                                         plugins: 'textmask',
                                                         money: false,
                                                         mask: 'LL'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
+                                                        margin: '0 0 0 5',
                                                         xtype: 'datefield',
                                                         plugins: 'textmask',
                                                         fieldLabel: 'Data emissão',
@@ -406,24 +399,22 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                                 items: [
                                                     {
                                                         flex: 1,
+                                                        margin: '0 5 0 0',
                                                         fieldLabel: 'Inscrição',
                                                         name: 'voter'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
+                                                        margin: '0 5 0 5',
                                                         fieldLabel: 'Zona',
                                                         name: 'voterzone'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
+                                                        margin: '0 5 0 5',
                                                         fieldLabel: 'Seção',
                                                         name: 'votersection'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
+                                                        margin: '0 0 0 5',
                                                         xtype: 'datefield',
                                                         plugins: 'textmask',
                                                         fieldLabel: 'Data emissão',

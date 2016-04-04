@@ -68,11 +68,11 @@ Ext.define( 'iContract.view.person.PersonAddress', {
             items: [
                 {
                     flex: 1,
+                    margin: '0 5 0 0',
                     fieldLabel: 'Cidade',
                     name: 'addresslocality'
                 }, {
-                    xtype: 'splitter'
-                }, {
+                    margin: '0 0 0 5',
                     width: 250,
                     xtype: 'comboenum',
                     fieldLabel: 'Estado',

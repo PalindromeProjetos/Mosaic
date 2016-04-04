@@ -97,7 +97,7 @@ class Store {
 
         try {
 
-            $this->policy();
+            //$this->policy();
 
             $this->proxy->beginTransaction();
 
@@ -134,7 +134,7 @@ class Store {
 
         try {
 
-            $this->policy();
+            //$this->policy();
 
             $this->proxy->beginTransaction();
 
