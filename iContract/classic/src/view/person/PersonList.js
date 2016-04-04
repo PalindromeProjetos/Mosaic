@@ -89,7 +89,6 @@ Ext.define( 'iContract.view.person.PersonList', {
                                 xtype: 'splitter'
                             }, {
                                 xtype: 'button',
-                                disabled: true,
                                 iconCls: "fa fa-file-o",
                                 handler: 'insertViewNew',
                                 tooltip: 'Novo cadastro!'

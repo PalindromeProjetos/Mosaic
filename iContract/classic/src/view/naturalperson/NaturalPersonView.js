@@ -14,7 +14,8 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
         'Smart.form.field.ComboEnum',
         'iContract.store.person.*',
         'iContract.store.naturalperson.*',
-        'iContract.view.naturalperson.NaturalPersonController'
+        'iContract.view.naturalperson.NaturalPersonController',
+        'iContract.view.naturalperson.NaturalPersonDistribution'
     ],
 
     frame: true,
@@ -42,43 +43,43 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
         me.callParent();
     },
 
-    columnDays: function (dayList) {
-        var dayCode = ['sun','mon','tue','wed','thu','fri','sat'],
-            dayName = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-            build = function (name,code) {
-                var header = {
-                    width: 130,
-                    text: name,
-                    cls: 'light',
-                    sortable: false,
-                    dataIndex: code + 'description',
-                    editor: {
-                        updateField: code,
-                        xtype: 'contractorunitsearch'
-                    },
-                    renderer: function (value, meta, record, rowIndex, colIndex, store) {
-                        meta.style = ( record.get('shift') == "P" ) ? "text-align: center;" : "";
-                        return value;
-                    }
-                };
-
-                return header;
-            },
-            field = function () {
-                var list = [];
-
-                Ext.each(dayList, function(pos) {
-                    var code = dayCode[pos],
-                        name = ([0,6].indexOf(pos) != -1 ) ? '<b>' + dayName[pos] + '</b>' : dayName[pos];
-
-                    list.push(build(name,code));
-                });
-
-                return list;
-            };
-
-        return field();
-    },
+    //columnDays: function (dayList) {
+    //    var dayCode = ['sun','mon','tue','wed','thu','fri','sat'],
+    //        dayName = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    //        build = function (name,code) {
+    //            var header = {
+    //                width: 130,
+    //                text: name,
+    //                cls: 'light',
+    //                sortable: false,
+    //                dataIndex: code + 'description',
+    //                editor: {
+    //                    updateField: code,
+    //                    xtype: 'contractorunitsearch'
+    //                },
+    //                renderer: function (value, meta, record, rowIndex, colIndex, store) {
+    //                    meta.style = ( record.get('shift') == "P" ) ? "text-align: center;" : "";
+    //                    return value;
+    //                }
+    //            };
+    //
+    //            return header;
+    //        },
+    //        field = function () {
+    //            var list = [];
+    //
+    //            Ext.each(dayList, function(pos) {
+    //                var code = dayCode[pos],
+    //                    name = ([0,6].indexOf(pos) != -1 ) ? '<b>' + dayName[pos] + '</b>' : dayName[pos];
+    //
+    //                list.push(build(name,code));
+    //            });
+    //
+    //            return list;
+    //        };
+    //
+    //    return field();
+    //},
 
     buildItems: function () {
         var me = this;
@@ -472,55 +473,59 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                     }
                                 ]
                             }, {
-                                title: 'Distribuição',
-                                iconCls: "fa fa-map-marker",
-                                xtype: 'gridpanel',
-                                hideHeaders: false,
-                                name: 'distribution',
-                                cls: 'distribution-edit',
-                                store: 'naturalpersondistribution',
-                                columns: [
-                                    {
-                                        cls: 'dark',
-                                        text: '<a style="font-size: 16px; font-family: Monda;">DISTRIBUIÇÃO</a>',
-                                        columns: [
-                                            {
-                                                width: 200,
-                                                cls: 'light',
-                                                text: 'Turnos / Posição',
-                                                dataIndex: 'shiftdescription',
-                                                renderer: function (value,meta) {
-                                                    meta.style = "padding-left: 10px; background: rgba(245, 245, 245, 1);";
-                                                    return value;
-                                                }
-                                            }
-                                        ]
-                                    }, {
-                                        cls: 'dark',
-                                        text: '<a style="font-size: 16px; font-family: Monda;">DIAS DA SEMANA</a>',
-                                        columns: me.columnDays([1,2,3,4,5])
-                                    }, {
-                                        cls: 'dark',
-                                        text: '<a style="font-size: 16px; font-family: Monda;">FINAL DE SEMANA</a>',
-                                        columns: me.columnDays([6,0])
-                                    }
-                                ],
-                                selModel: 'rowmodel',
-                                plugins: {
-                                    ptype: 'rowediting',
-                                    clicksToEdit: 2
-                                },
-                                listeners: {
-                                    edit: 'onDistributionEdit',
-                                    beforeedit: 'onDistributionBeforeEdit',
-                                    celldblclick: 'onDistributionCellDblClick'
-                                }
-                            }, {
                                 bodyPadding: 10,
                                 xtype: 'personaddress'
                             }, {
+                                disabled: true,
+                                xtype: 'naturalpersondistribution'
+                                //title: 'Distribuição',
+                                //iconCls: "fa fa-map-marker",
+                                //xtype: 'gridpanel',
+                                //hideHeaders: false,
+                                //name: 'distribution',
+                                //cls: 'distribution-edit',
+                                //store: 'naturalpersondistribution',
+                                //columns: [
+                                //    {
+                                //        cls: 'dark',
+                                //        text: '<a style="font-size: 16px; font-family: Monda;">DISTRIBUIÇÃO</a>',
+                                //        columns: [
+                                //            {
+                                //                width: 200,
+                                //                cls: 'light',
+                                //                text: 'Turnos / Posição',
+                                //                dataIndex: 'shiftdescription',
+                                //                renderer: function (value,meta) {
+                                //                    meta.style = "padding-left: 10px; background: rgba(245, 245, 245, 1);";
+                                //                    return value;
+                                //                }
+                                //            }
+                                //        ]
+                                //    }, {
+                                //        cls: 'dark',
+                                //        text: '<a style="font-size: 16px; font-family: Monda;">DIAS DA SEMANA</a>',
+                                //        columns: me.columnDays([1,2,3,4,5])
+                                //    }, {
+                                //        cls: 'dark',
+                                //        text: '<a style="font-size: 16px; font-family: Monda;">FINAL DE SEMANA</a>',
+                                //        columns: me.columnDays([6,0])
+                                //    }
+                                //],
+                                //selModel: 'rowmodel',
+                                //plugins: {
+                                //    ptype: 'rowediting',
+                                //    clicksToEdit: 2
+                                //},
+                                //listeners: {
+                                //    edit: 'onDistributionEdit',
+                                //    beforeedit: 'onDistributionBeforeEdit',
+                                //    celldblclick: 'onDistributionCellDblClick'
+                                //}
+                            }, {
+                                disabled: true,
                                 xtype: 'personphone'
                             }, {
+                                disabled: true,
                                 xtype: 'personbank'
                             }
                         ]

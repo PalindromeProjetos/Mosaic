@@ -80,6 +80,7 @@
     <file url="file://$PROJECT_DIR$/iContract/classic/src/view/contractor/ContractorSubUnit.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iContract/classic/src/view/contractor/ContractorUnitList.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iContract/classic/src/view/legalentity/LegalEntityList.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonDistribution.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/app/controller/App.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/app/model/allocationschedule/AllocationScheduleScore.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/iSchedule/app/model/allocationschedule/SchedulingMonthlyPartners.js" charset="UTF-8" />

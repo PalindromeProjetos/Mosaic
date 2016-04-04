@@ -61,6 +61,10 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
             portrait = panel.down('portrait'),
             id = form.down('hiddenfield[name=id]').getValue();
 
+        Ext.getStore('personbank').removeAll();
+        Ext.getStore('personphone').removeAll();
+        Ext.getStore('naturalpersondistribution').removeAll();
+
         if(!panel.xdata) {
             panel.down('textfield[name=shortname]').focus(false, 200);
             return false;
@@ -68,6 +72,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
 
         panel.down('personbank').setDisabled(false);
         panel.down('personphone').setDisabled(false);
+        panel.down('naturalpersondistribution').setDisabled(false);
 
         Ext.getStore('naturalperson').setParams({
             query: panel.xdata.get('id'),
@@ -179,6 +184,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
 
     insertViewNew: function () {
         var me = this;
+
         me.redirectTo('naturalpersonnew');
     },
 
@@ -201,6 +207,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
 
             view.down('personbank').setDisabled(false);
             view.down('personphone').setDisabled(false);
+            view.down('naturalpersondistribution').setDisabled(false);
 
             if(action.result.crud == 'insert') {
                 view.down('hiddenfield[name=id]').setValue(record.get('id'));
@@ -216,7 +223,15 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
 
         me.callParent();
 
+        view.down('tabpanel').setActiveTab(0);
+
         view.down('personbank').setDisabled(true);
+        view.down('personphone').setDisabled(true);
+        view.down('naturalpersondistribution').setDisabled(true);
+
+        Ext.getStore('personbank').removeAll();
+        Ext.getStore('personphone').removeAll();
+        Ext.getStore('naturalpersondistribution').removeAll();
     },
 
     onViewEdit: function(grid, rowIndex, colIndex, actionItem, event, record, row) {

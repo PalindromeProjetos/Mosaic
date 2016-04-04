@@ -1084,6 +1084,7 @@ $include-icontract-view-login-logincontroller: dynamic(true);;
 $include-icontract-view-main-main: dynamic(true);;
 $include-icontract-view-main-maincontroller: dynamic(true);;
 $include-icontract-view-naturalperson-naturalpersoncontroller: dynamic(true);;
+$include-icontract-view-naturalperson-naturalpersondistribution: dynamic(true);;
 $include-icontract-view-naturalperson-naturalpersonlist: dynamic(true);;
 $include-icontract-view-naturalperson-naturalpersonsearch: dynamic(true);;
 $include-icontract-view-naturalperson-naturalpersonview: dynamic(true);;

@@ -200,6 +200,7 @@ class naturalpersondistribution extends \Smart\Data\Cache {
 
         $rows = self::encodeUTF8($proxy->query($sql)->fetchAll());
 
+
         $i = 7;
         $distribution = array();
         $weekdaysList = array('mon'=>'D','tue'=>'E','wed'=>'F','thu'=>'G','fri'=>'H','sat'=>'I','sun'=>'J');

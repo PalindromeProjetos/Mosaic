@@ -15,31 +15,31 @@ class naturalpersondistribution extends \Smart\Data\Model {
     private $id;
 
     /**
-     * @Policy {"nullable":false, "default":""}
+     * @Policy {"nullable":false}
      * @Column {"description":"", "type":"integer", "policy":true}
      */
     private $naturalpersonid;
 
     /**
-     * @Policy {"nullable":true, "default":""}
+     * @Policy {"nullable":true}
      * @Column {"description":"", "type":"integer", "policy":true}
      */
     private $contractorunitid;
 
     /**
-     * @Policy {"nullable":false, "default":"", "length":3}
+     * @Policy {"nullable":false, "length":3}
      * @Column {"description":"", "type":"string", "policy":true}
      */
     private $weekday;
 
     /**
-     * @Policy {"nullable":false, "default":"", "length":1}
+     * @Policy {"nullable":false, "length":1}
      * @Column {"description":"", "type":"string", "policy":true}
      */
     private $shift;
 
     /**
-     * @Policy {"nullable":true, "default":""}
+     * @Policy {"nullable":true}
      * @Column {"description":"", "type":"integer", "policy":true}
      */
     private $position;

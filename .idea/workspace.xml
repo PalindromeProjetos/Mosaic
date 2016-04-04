@@ -2,31 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3afaed74-a64b-46b4-ad4b-8fa906ddb6b7" name="Default" comment="Update 20160318 - Fix NaturalPersonDistribuiton">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonDistribution.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iContract/slicer-temp/theme-capture.png" afterPath="$PROJECT_DIR$/build/temp/production/iContract/slicer-temp/theme-capture.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iSchedule/slicer-temp/theme-capture.png" afterPath="$PROJECT_DIR$/build/temp/production/iSchedule/slicer-temp/theme-capture.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iSchedule/classic/src/allocationschema/AllocationSchema.js" afterPath="$PROJECT_DIR$/iSchedule/classic/src/allocationschema/AllocationSchema.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iContract/app/view/naturalperson/NaturalPersonController.js" afterPath="$PROJECT_DIR$/iContract/app/view/naturalperson/NaturalPersonController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iContract/app/model/naturalperson/NaturalPersonDistribution.js" afterPath="$PROJECT_DIR$/iContract/app/model/naturalperson/NaturalPersonDistribution.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonView.js" afterPath="$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonView.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iContract/classic/src/view/person/PersonList.js" afterPath="$PROJECT_DIR$/iContract/classic/src/view/person/PersonList.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/production/iContract/classic/app.js" afterPath="$PROJECT_DIR$/build/production/iContract/classic/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/production/iSchedule/classic/app.js" afterPath="$PROJECT_DIR$/build/production/iSchedule/classic/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iContract/sass/example/bootstrap.json" afterPath="$PROJECT_DIR$/iContract/sass/example/bootstrap.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iSchedule/sass/example/bootstrap.json" afterPath="$PROJECT_DIR$/iSchedule/sass/example/bootstrap.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/production/iContract/classic.json" afterPath="$PROJECT_DIR$/build/production/iContract/classic.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/production/iSchedule/classic.json" afterPath="$PROJECT_DIR$/build/production/iSchedule/classic.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iContract/classic.json" afterPath="$PROJECT_DIR$/iContract/classic.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iSchedule/classic.json" afterPath="$PROJECT_DIR$/iSchedule/classic.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iContract/sass/iContract-all.scss.tmp" afterPath="$PROJECT_DIR$/build/temp/production/iContract/sass/iContract-all.scss.tmp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iContract/sass/iContract-all.scss" afterPath="$PROJECT_DIR$/build/temp/production/iContract/sass/iContract-all.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iSchedule/sass/iSchedule-all.scss.tmp" afterPath="$PROJECT_DIR$/build/temp/production/iSchedule/sass/iSchedule-all.scss.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iSchedule/sass/iSchedule-all.scss" afterPath="$PROJECT_DIR$/build/temp/production/iSchedule/sass/iSchedule-all.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iSchedule/slicer-temp/iSchedule-example.scss.tmp" afterPath="$PROJECT_DIR$/build/temp/production/iSchedule/slicer-temp/iSchedule-example.scss.tmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iSchedule/slicer-temp/iSchedule-example.scss" afterPath="$PROJECT_DIR$/build/temp/production/iSchedule/slicer-temp/iSchedule-example.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iContract/slicer-temp/iContract-example.scss.tmp" afterPath="$PROJECT_DIR$/build/temp/production/iContract/slicer-temp/iContract-example.scss.tmp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iContract/slicer-temp/iContract-example.scss" afterPath="$PROJECT_DIR$/build/temp/production/iContract/slicer-temp/iContract-example.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/production/iContract/business/Cache/naturalpersondistribution.php" afterPath="$PROJECT_DIR$/build/production/iContract/business/Cache/naturalpersondistribution.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/production/iContract/business/Coach/naturalpersondistribution.php" afterPath="$PROJECT_DIR$/build/production/iContract/business/Coach/naturalpersondistribution.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iContract/business/Cache/naturalpersondistribution.php" afterPath="$PROJECT_DIR$/iContract/business/Cache/naturalpersondistribution.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iContract/business/Coach/naturalpersondistribution.php" afterPath="$PROJECT_DIR$/iContract/business/Coach/naturalpersondistribution.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/production/iSchedule/business/Heart/schema.php" afterPath="$PROJECT_DIR$/build/production/iSchedule/business/Heart/schema.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iSchedule/business/Heart/schema.php" afterPath="$PROJECT_DIR$/iSchedule/business/Heart/schema.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/production/iContract/business/Model/naturalpersondistribution.php" afterPath="$PROJECT_DIR$/build/production/iContract/business/Model/naturalpersondistribution.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/temp/production/iContract/slicer-temp/theme-capture.json" afterPath="$PROJECT_DIR$/build/temp/production/iContract/slicer-temp/theme-capture.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -49,7 +41,38 @@
     <favorites_list name="Mosaic" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="NaturalPersonDistribution.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonDistribution.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+              <folding>
+                <element signature="e#476#536#0" expanded="false" />
+                <element signature="e#553#695#0" expanded="false" />
+                <element signature="e#847#2143#0" expanded="false" />
+                <marker date="1459785275727" expanded="true" signature="2299:2335" placeholder="..." />
+                <marker date="1459785275727" expanded="true" signature="2929:2965" placeholder="..." />
+                <marker date="1459785275727" expanded="true" signature="3119:3155" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NaturalPersonView.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.54642856">
+              <caret line="241" column="19" selection-start-line="241" selection-start-column="19" selection-end-line="241" selection-end-column="19" />
+              <folding>
+                <element signature="e#10643#24132#0" expanded="false" />
+                <element signature="e#24450#24474#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -73,8 +96,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/iSterilization/classic/src/view/login/Login.js" />
-        <option value="$PROJECT_DIR$/iSterilization/app/view/main/MainController.js" />
         <option value="$PROJECT_DIR$/iSterilization/app.json" />
         <option value="$PROJECT_DIR$/iSterilization/app/model/users/UsersMenuTree.js" />
         <option value="$PROJECT_DIR$/iSterilization/app/model/users/UsersMenuAction.js" />
@@ -95,7 +116,6 @@
         <option value="$PROJECT_DIR$/iSchedule/classic/src/allocationschedule/AllocationScheduleScorePaid.js" />
         <option value="$PROJECT_DIR$/iSchedule/classic/src/allocationschedule/AllocationScheduleWeek.js" />
         <option value="$PROJECT_DIR$/iContract/resources/iContract.css" />
-        <option value="$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonView.js" />
         <option value="$PROJECT_DIR$/iSchedule/classic/src/allocationschema/AllocationSchemaWeek.js" />
         <option value="$PROJECT_DIR$/iSchedule/app/view/allocationschema/AllocationSchemaController.js" />
         <option value="$PROJECT_DIR$/workspace.json" />
@@ -120,10 +140,13 @@
         <option value="$PROJECT_DIR$/iSchedule/business/Quick/schedule/Schedule.php" />
         <option value="$PROJECT_DIR$/iSchedule/classic/src/allocationschema/AllocationSchema.js" />
         <option value="$PROJECT_DIR$/iContract/business/Cache/naturalpersondistribution.php" />
-        <option value="$PROJECT_DIR$/iContract/app/view/naturalperson/NaturalPersonController.js" />
         <option value="$PROJECT_DIR$/iContract/app/model/naturalperson/NaturalPersonDistribution.js" />
         <option value="$PROJECT_DIR$/iContract/business/Coach/naturalpersondistribution.php" />
         <option value="$PROJECT_DIR$/iSchedule/business/Heart/schema.php" />
+        <option value="$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonDistribution.js" />
+        <option value="$PROJECT_DIR$/iContract/classic/src/view/person/PersonList.js" />
+        <option value="$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonView.js" />
+        <option value="$PROJECT_DIR$/iContract/app/view/naturalperson/NaturalPersonController.js" />
       </list>
     </option>
   </component>
@@ -139,9 +162,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.6" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="1604" />
-    <option name="height" value="867" />
+    <option name="x" value="-8" />
+    <option name="y" value="32" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -195,7 +219,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="iSchedule" />
+              <option name="myItemId" value="iContract" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -209,11 +233,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="iSchedule" />
+              <option name="myItemId" value="iContract" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="business" />
+              <option name="myItemId" value="classic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -227,15 +259,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="iSchedule" />
+              <option name="myItemId" value="iContract" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="business" />
+              <option name="myItemId" value="classic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Heart" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="person" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mosaic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mosaic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iContract" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="classic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -263,7 +321,7 @@
       <recent name="C:\Palindrome\Mosaic\iSterilization\classic\src\view" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.iScheduleDev">
+  <component name="RunManager" selected="JavaScript Debug.iContractDev">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
@@ -618,29 +676,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1604" height="867" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27331606" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18113612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32789117" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2738255" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2265625" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33061224" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.330033" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39957264" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32789117" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39957264" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -690,104 +748,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/iSchedule/classic/src/allocationschedule/AllocationScheduleVerifyPayReport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.559322">
-          <caret line="57" column="45" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/business/Quick/schedule/ScheduleScore.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="283" column="37" selection-start-line="283" selection-start-column="37" selection-end-line="283" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/business/Quick/schedule/ScheduleVerifyPay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="182" column="82" selection-start-line="182" selection-start-column="37" selection-end-line="182" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/business/Calls/Report/Schedule.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/business/Calls/Report/SheetFrequency.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/business/Quick/schedule/DirectorShip.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="203" column="13" selection-start-line="203" selection-start-column="13" selection-end-line="203" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/classic/src/allocationschedule/AllocationScheduleWeek.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="55" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/business/Quick/schedule/ScheduleExtract.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="225" column="82" selection-start-line="225" selection-start-column="37" selection-end-line="225" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/business/Quick/schedule/Schedule.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="238" column="29" selection-start-line="238" selection-start-column="29" selection-end-line="238" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/business/Quick/schedule/SheetFrequency.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/production/iSchedule/business/Quick/schedule/Schedule.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7586207">
-          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iSchedule/app/Application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iContract/app/Application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iContract/business/Model/contract.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/iContract/business/Calls/additive.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -883,11 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1456018508776" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1456018508776" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1456018508776" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -895,7 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -903,7 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="58" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -911,7 +864,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -919,12 +871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="252" column="83" selection-start-line="252" selection-start-column="83" selection-end-line="252" selection-end-column="83" />
-          <folding>
-            <marker date="1458216044054" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1458216044054" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1458216044054" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1458216044054" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -932,7 +878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -940,7 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.4285715">
           <caret line="4" column="28" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -948,7 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -956,10 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="188" column="12" selection-start-line="188" selection-start-column="12" selection-end-line="188" selection-end-column="12" />
-          <folding>
-            <marker date="1456932388663" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1456932388663" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -967,7 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -975,7 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -983,7 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -991,7 +927,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14144272">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -999,7 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1007,7 +941,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1015,7 +948,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1023,7 +955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.7586207">
           <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1031,22 +962,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.0">
           <caret line="224" column="13" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="13" />
-          <folding>
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select etl.c..enumtype..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select etl.c..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select 'P' a..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select etl.c..enumtype..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select npd.i..naturalpersondistribution..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select npd.i..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select null ..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select null ..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select p.id,..." />
-            <marker date="1458312804349" expanded="true" signature="-1:-1" placeholder="select case ..naturalpersondistribution..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1054,27 +969,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.0">
           <caret line="142" column="1" selection-start-line="142" selection-start-column="1" selection-end-line="142" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iContract/app/view/naturalperson/NaturalPersonController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41297936">
-          <caret line="156" column="36" selection-start-line="156" selection-start-column="36" selection-end-line="156" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3960396">
-          <caret line="515" column="61" selection-start-line="515" selection-start-column="61" selection-end-line="515" selection-end-column="61" />
-          <folding>
-            <marker date="1456932388647" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1456932388647" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1456932388647" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1082,7 +976,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.028288543">
           <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1090,17 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3318584">
           <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
-          <folding>
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select a.id ..allocationschema..." />
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select b.id ..allocationschema..." />
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select asm.s..enumtype..." />
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select sm.sh..allocationschema..." />
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select csu.c..contractorunitschema..." />
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select natur..naturalpersondistribution..." />
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select sp.id..@row..." />
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select @row ..t1..." />
-            <marker date="1458321774300" expanded="true" signature="-1:-1" placeholder="select @row:..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1108,8 +990,143 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38348082">
           <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iSchedule/app/view/naturalperson/NaturalPersonSearch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iSchedule/app/view/allocationschema/AllocationSchemaSearch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iSchedule/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.71036947">
+          <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/business/Cache/legalentity.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4827175">
+          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/business/Cache/contract.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93563765">
+          <caret line="53" column="1" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/business/Cache/additive.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25744936">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="50" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/person/PersonBank.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12342857">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
           <folding>
-            <marker date="1458321437604" expanded="true" signature="-1:-1" placeholder="select etl.c..enumtype..." />
+            <marker date="1454807695498" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1454807695498" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/app/store/person/PersonBank.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/person/PersonAddress.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12342857">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/app/store/person/PersonPhone.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/person/PersonPhone.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="20" selection-end-column="26" />
+          <folding>
+            <marker date="1456789448543" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1456789448543" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/person/PersonList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3947826">
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/app/view/naturalperson/NaturalPersonController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40555555">
+          <caret line="219" column="29" selection-start-line="219" selection-start-column="29" selection-end-line="219" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonDistribution.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+          <folding>
+            <element signature="e#476#536#0" expanded="false" />
+            <element signature="e#553#695#0" expanded="false" />
+            <element signature="e#847#2143#0" expanded="false" />
+            <marker date="1459785275727" expanded="true" signature="2299:2335" placeholder="..." />
+            <marker date="1459785275727" expanded="true" signature="2929:2965" placeholder="..." />
+            <marker date="1459785275727" expanded="true" signature="3119:3155" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iContract/classic/src/view/naturalperson/NaturalPersonView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.54642856">
+          <caret line="241" column="19" selection-start-line="241" selection-start-column="19" selection-end-line="241" selection-end-column="19" />
+          <folding>
+            <element signature="e#10643#24132#0" expanded="false" />
+            <element signature="e#24450#24474#0" expanded="false" />
           </folding>
         </state>
       </provider>
