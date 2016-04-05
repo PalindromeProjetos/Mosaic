@@ -119,27 +119,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                 name: 'typeperson',
                                 value: 'N'
                             }, {
-                                xtype: 'container',
-                                layout: 'hbox',
-                                defaultType: 'textfield',
-                                defaults: {
-                                    allowBlank: false
-                                },
-                                items: [
-                                    {
-                                        flex: 5,
-                                        fieldLabel: 'Apelido',
-                                        name: 'shortname'
-                                    }, {
-                                        xtype: 'splitter'
-                                    }, {
-                                        flex: 2,
-                                        submitValue: false,
-                                        readOnlyColor: true,
-                                        fieldLabel: 'Matricula',
-                                        name: 'registrationcode'
-                                    }
-                                ]
+                                allowBlank: false,
+                                fieldLabel: 'Apelido',
+                                name: 'shortname'
                             }, {
                                 allowBlank: false,
                                 fieldLabel: 'Nome completo',
@@ -247,10 +229,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                                 margin: '0 5 0 0',
                                                 maskRe: /[0-9\/]/,
                                                 fieldLabel: 'Matricula',
-                                                name: 'registrationid',
-                                                listeners: {
-                                                    change: 'onChangeRegistrationId'
-                                                }
+                                                name: 'registrationid'
                                             }, {
                                                 flex: 1,
                                                 margin: '0 5 0 5',
