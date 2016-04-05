@@ -14,6 +14,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
         'Smart.form.field.ComboEnum',
         'iContract.store.person.*',
         'iContract.store.naturalperson.*',
+        'iContract.model.naturalperson.NaturalPerson',
         'iContract.view.naturalperson.NaturalPersonController',
         'iContract.view.naturalperson.NaturalPersonDistribution'
     ],
@@ -121,6 +122,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                 xtype: 'container',
                                 layout: 'hbox',
                                 defaultType: 'textfield',
+                                defaults: {
+                                    allowBlank: false
+                                },
                                 items: [
                                     {
                                         flex: 5,
@@ -137,15 +141,20 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                     }
                                 ]
                             }, {
+                                allowBlank: false,
                                 fieldLabel: 'Nome completo',
                                 name: 'name'
                             }, {
+                                allowBlank: false,
                                 vtype: 'email',
                                 name: 'mainmail',
                                 fieldLabel: 'E-mail principal'
                             }, {
                                 xtype: 'container',
                                 layout: 'hbox',
+                                defaults: {
+                                    allowBlank: false
+                                },
                                 items: [
                                     {
                                         flex: 1,
@@ -169,6 +178,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                     }
                                 ]
                             }, {
+                                allowBlank: false,
                                 name: 'isactive',
                                 xtype: 'checkboxfield',
                                 boxLabel: 'Ativo'
@@ -228,6 +238,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                         labelCls: 'sub-title-label',
                                         layout: 'hbox',
                                         defaultType: 'textfield',
+                                        defaults: {
+                                            allowBlank: false
+                                        },
                                         items: [
                                             {
                                                 flex: 1,
@@ -262,6 +275,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                         fieldLabel: 'Filiação',
                                         layout: 'hbox',
                                         defaultType: 'textfield',
+                                        defaults: {
+                                            allowBlank: false
+                                        },
                                         items: [
                                             {
                                                 flex: 1,
@@ -280,6 +296,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                         labelCls: 'sub-title-label',
                                         fieldLabel: 'Documentação',
                                         layout: 'anchor',
+                                        defaults: {
+                                            allowBlank: false
+                                        },
                                         items: [
                                             {
                                                 xtype: 'label',
@@ -293,6 +312,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonView', {
                                                 layout: 'hbox',
                                                 margin: '0 0 10 0',
                                                 defaultType: 'textfield',
+                                                defaults: {
+                                                    allowBlank: false
+                                                },
                                                 items: [
                                                     {
                                                         flex: 1,

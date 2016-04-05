@@ -166,12 +166,6 @@ class Proxy extends \PDO {
                             $commit->bindValue(":$field", $entity->$method(), $this->getParams($column["type"]));
                         }
                         break;
-                    case self::DML_DELETE:
-                        if($field === 'id') {
-                            $method = "get" . strtoupper($field[0]) . substr($field, 1);
-                            $commit->bindValue(":$field", $entity->$method(), $this->getParams($column["type"]));
-                        }
-                        break;
                     default:
                         $method = "get" . strtoupper($field[0]) . substr($field, 1);
                         $commit->bindValue(":$field", $entity->$method(), $this->getParams($column["type"]));
@@ -203,16 +197,6 @@ class Proxy extends \PDO {
             default:
                 return \PDO::PARAM_STR;
         }
-    }
-
-    /**
-     * Chama o método armazenado no indice <code>action<code/>
-     *
-     * @return json <code>$result<code/>
-     */
-    public function callAction() {
-        $action = $this->submit['action'];
-        return method_exists($this, $action) ? call_user_func(array($this, $action)) : $this->UNEXPECTED_COMMAND;
     }
 
 }

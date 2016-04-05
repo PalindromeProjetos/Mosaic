@@ -8,22 +8,12 @@ class naturalperson extends \Smart\Data\Event {
      * @param \iContract\Model\naturalperson $model
      */
     public function preInsert( \iContract\Model\naturalperson &$model ) {
-//        $person = new \iContract\Coach\person();
-//        $person->getStore()->getModel()->setTypeperson('N');
-//        $person->getStore()->getModel()->getSubmit()->setRowValue('typeperson','N');
-//        $person->update();
-//        $id = $person->getStore()->getModel()->getId();
-//
-//        $model->setId($id);
-//        $model->getSubmit()->setRowValue('id',$id);
-
         $person = new \iContract\Coach\person();
         $person->update();
-        $record = $person->getStore()->getModel()->getRecord();
+        $id = $person->getStore()->getModel()->getId();
+        $model->setId($id);
 
-        $model->setId($record['id']);
-
-        if(strlen($record['id']) == 0) {
+        if(strlen($id) == 0) {
             throw new \PDOException('Não foi possível inserir o registro!');
         }
     }

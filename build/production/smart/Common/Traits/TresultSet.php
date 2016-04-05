@@ -288,6 +288,15 @@ trait TresultSet {
      *
      * @param string $param operação de CRUD
      */
+    public static function _getCrud() {
+        return isset(self::$result['crud']) ? self::$result['crud'] : '';
+    }
+
+    /**
+     * Mensagem de retorno
+     *
+     * @param string $param operação de CRUD
+     */
     public static function _setCrud($param) {
         self::$result['crud'] = $param;
     }

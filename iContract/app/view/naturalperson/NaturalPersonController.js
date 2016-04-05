@@ -127,7 +127,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
         var me = this,
             fixed = [1,2,3,4,5];
             shift = record.get('shift'),
-            grid = me.getView().down('gridpanel[name=distribution]');
+            grid = me.getView().down('naturalpersondistribution');
 
         if((shift == 'N' && (fixed.indexOf(cellIndex) != -1 ))) {
             var weekday = grid.columns[cellIndex].dataIndex.substring(0, 3);
@@ -159,7 +159,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
             record = context.record;
 
         Ext.Ajax.request({
-            url: 'business/Calls/naturalpersondistribution.php',
+            url: '../iContract/business/Calls/naturalpersondistribution.php',
             params: {
                 action: 'update',
                 weekday: eOpts.weekday || null,
@@ -203,14 +203,28 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
         me.setModuleForm(view.down('form'));
 
         me._success = function (form, action) {
-            var record = form.getRecord();
 
             view.down('personbank').setDisabled(false);
             view.down('personphone').setDisabled(false);
             view.down('naturalpersondistribution').setDisabled(false);
 
             if(action.result.crud == 'insert') {
-                view.down('hiddenfield[name=id]').setValue(record.get('id'));
+                var id = action.result.rows.id;
+
+                view.down('hiddenfield[name=id]').setValue(id);
+
+                Ext.getStore('naturalpersondistribution').setParams({
+                    query: id,
+                    method: 'selectCode'
+                }).load();
+                Ext.getStore('personbank').setParams({
+                    query: id,
+                    method: 'selectCode'
+                }).load();
+                Ext.getStore('personphone').setParams({
+                    query: id,
+                    method: 'selectCode'
+                }).load();
             }
         }
 
@@ -220,9 +234,11 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
     insertView: function () {
         var me = this,
             view = me.getView();
+            //model = Ext.create('iContract.model.naturalperson.NaturalPerson');
 
         me.callParent();
 
+        //view.down('form').loadRecord(model);
         view.down('tabpanel').setActiveTab(0);
 
         view.down('personbank').setDisabled(true);

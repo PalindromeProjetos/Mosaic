@@ -10,7 +10,7 @@ class naturalperson extends \Smart\Data\Model {
 
     /**
      * @Policy {"nullable":false}
-     * @Column {"description":"", "strategy":"AUTO", "type":"integer", "policy":true}
+     * @Column {"description":"", "strategy":"NONE", "type":"integer", "policy":true}
      */
     private $id;
 

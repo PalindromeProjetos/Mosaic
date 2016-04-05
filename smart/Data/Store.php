@@ -98,10 +98,13 @@ class Store {
         try {
 
             //$this->policy();
+            self::_setCrud('update');
 
             $this->proxy->beginTransaction();
 
             $this->fireEvent('PreUpdate');
+
+            $this->model->getSubmit()->setRawValue('action',self::_getCrud());
 
             $statement = $this->proxy->sqlUpdate($this->model);
 
@@ -135,10 +138,13 @@ class Store {
         try {
 
             //$this->policy();
+            self::_setCrud('insert');
 
             $this->proxy->beginTransaction();
 
             $this->fireEvent('PreInsert');
+
+            $this->model->getSubmit()->setRawValue('action',self::_getCrud());
 
             $statement = $this->proxy->sqlInsert($this->model);
 
@@ -151,7 +157,12 @@ class Store {
 
             $id = $this->proxy->lastInsertId();
 
+            if($id == 0) {
+                $id = $this->model->getId();
+            }
+
             $this->model->setId($id);
+            $this->model->getSubmit()->setRowValue('id',$id);
 
             $this->upload($this->model);
 
@@ -270,19 +281,6 @@ class Store {
         return new $event($this->proxy);
     }
 
-//    public function getRecord () {
-//        $record = array();
-//        $entity = $this->model;
-//        $fields = $entity->getNotate()->property;
-//
-//        foreach ($fields as $field => $value) {
-//            $method = "get" . strtoupper($field[0]) . substr($field, 1);
-//            $record[$field] = $entity->$method();
-//        }
-//
-//        return $record;
-//    }
-
     public function getRecord () {
         return $this->model->getRecord();
     }
@@ -290,25 +288,6 @@ class Store {
     public function setRecord () {
         return $this->model->setRecord();
     }
-
-//    public function setRecord () {
-//        $entity = $this->model;
-//        $submit = $entity->getSubmit();
-//        $notate = $entity->getNotate();
-//
-//        $exists = $notate->property;
-//
-//        foreach ($submit['rows'] as $field => $value) {
-//            if(isset($exists[$field]) && strlen($value) !== 0 ) {
-//                $method = "set" . strtoupper($field[0]) . substr($field, 1);
-//                if(method_exists($entity, $method)) {
-//                    $entity->$method($value);
-//                }
-//            }
-//        }
-//
-//        return $this->model = $entity;
-//    }
 
     private function fireEvent($eventName) {
         $model = $this->model;

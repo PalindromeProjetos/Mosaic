@@ -24,6 +24,9 @@ Ext.define( 'iContract.view.person.PersonAddress', {
             labelCls: 'sub-title-label',
             layout: 'hbox',
             defaultType: 'textfield',
+            defaults: {
+                allowBlank: false
+            },
             items: [
                 {
                     flex: 5,
@@ -42,6 +45,9 @@ Ext.define( 'iContract.view.person.PersonAddress', {
             xtype: 'container',
             layout: 'hbox',
             defaultType: 'textfield',
+            defaults: {
+                allowBlank: false
+            },
             items: [
                 {
                     flex: 5,
@@ -67,11 +73,13 @@ Ext.define( 'iContract.view.person.PersonAddress', {
             defaultType: 'textfield',
             items: [
                 {
+                    allowBlank: false,
                     flex: 1,
                     margin: '0 5 0 0',
                     fieldLabel: 'Cidade',
                     name: 'addresslocality'
                 }, {
+                    allowBlank: false,
                     margin: '0 0 0 5',
                     width: 250,
                     xtype: 'comboenum',

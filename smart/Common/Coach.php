@@ -59,6 +59,7 @@ class Coach {
     public function update() {
         $submit = $this->store->getModel()->getSubmit();
 
+
         $id = $submit->getRowValue('id');
 
         $update = isset($id) ? strlen($id) !== 0 : false;
