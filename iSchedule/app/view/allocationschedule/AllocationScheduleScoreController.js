@@ -413,9 +413,9 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleScoreController
             store = grid.store,
             search = view.down('naturalpersonsearch');
 
-        if(store.getCount() == 1) {
-            return false;
-        }
+        //if(store.getCount() == 1) {
+        //    return false;
+        //}
 
         store.remove(record);
         store.sync({

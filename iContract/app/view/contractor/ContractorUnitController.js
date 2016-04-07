@@ -90,7 +90,8 @@ Ext.define( 'iContract.view.contractor.ContractorUnitController', {
 
         portrait.setUrl(me.url);
         portrait.beFileData(panel.xdata.get('filetype'));
-        panel.down('contractorsearch[name=parentname]').setReadColor(id.lenght != 0);
+        //panel.down('contractorsearch[name=parentname]').setReadColor(id.lenght != 0);
+        panel.down('contractorsearch[name=parentname]').setReadColor(false);
     },
 
     insertViewNew: function () {
@@ -113,7 +114,7 @@ Ext.define( 'iContract.view.contractor.ContractorUnitController', {
             if(action.result.crud == 'insert') {
                 view.down('hiddenfield[name=id]').setValue(record.get('id'));
             }
-            view.down('contractorsearch[name=parentname]').setReadColor(true);
+            view.down('contractorsearch[name=parentname]').setReadColor(false);
         }
 
         me.updateModule();

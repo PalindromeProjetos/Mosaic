@@ -25,6 +25,9 @@ use PHPExcel_CachedObjectStorage_Memory;
 use PHPExcel_Worksheet_PageSetup;
 use PHPExcel_Worksheet_PageMargins;
 use PHPExcel_Worksheet_HeaderFooter;
+use PHPExcel_Settings;
+use PHPExcel_Writer_PDF;
+use PHPExcel_Writer_PDF_DomPDF;
 
 //use PHPExcel_Worksheet_HeaderFooterDrawing;
 
@@ -220,10 +223,15 @@ class Schedule extends \Smart\Data\Proxy {
 
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, "Excel2007");
 
+//        PHPExcel_Settings::setPdfRenderer(PHPExcel_Settings::PDF_RENDERER_TCPDF,'../../../../vendor/tcpdf_6_2_12/tcpdf');
+//        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, "PDF");
+
         // $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, "OOCalc");
 
         header("Content-Type: application/vnd.ms-excel");
+        //header("Content-Type: application/pdf");
         header("Content-Disposition: attachment;filename=EscalaMensal.xlsx");
+        //header("Content-Disposition: attachment;filename=EscalaMensal.pdf");
         header("Cache-Control: max-age=0");
         header("Cache-Control: max-age=1");
         header("Expires: Mon, 11 Apr 1972 05:00:00 GMT");
@@ -232,12 +240,14 @@ class Schedule extends \Smart\Data\Proxy {
         header("Pragma: public");
 
         $objWriter->save("php://output");
+        //$objWriter->save('escala_tcpdf.pdf');
 
     }
 
     private function setScheduleWeek (&$objPHPExcel,$rows,$week,$dateof) {
         Start::setTimeZone();
-        $mesAno = strtoupper( strftime('%B/%Y',strtotime($dateof)) );
+
+        $mesAno = strtoupper( strftime('%Y/%m',strtotime($dateof)) );
 
         $featured = array('010','012','013','014');
         $daysname = $this->daysweek['daysname'];
@@ -547,6 +557,20 @@ class Schedule extends \Smart\Data\Proxy {
             }
 
             if($record['subunit'] == '005') {
+                $objDrawing = new PHPExcel_Worksheet_MemoryDrawing();
+                $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
+                $objDrawing->setImageResource($schedule_brain);
+                $objDrawing->setRenderingFunction(PHPExcel_Worksheet_MemoryDrawing::RENDERING_PNG);
+                $objDrawing->setMimeType(PHPExcel_Worksheet_MemoryDrawing::MIMETYPE_PNG);
+                $objDrawing->setHeight(13);
+                $objDrawing->getOffsetX(20);
+                $objDrawing->getOffsetY(20);
+                $objDrawing->setCoordinates("C$j");
+
+                unset($objDrawing);
+            }
+
+            if($record['subunit'] == '006') {
                 $objDrawing = new PHPExcel_Worksheet_MemoryDrawing();
                 $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
                 $objDrawing->setImageResource($schedule_brain);

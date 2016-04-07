@@ -124,7 +124,7 @@ class SheetFrequency extends Report {
         $this->Cell(190,24, utf8_decode('Folha de Frequência'),0,1,'C',false);
 
         $legalentityfiledata = $this->rows[0]['legalentityfiledata'];
-        $this->Image("../../../../resources/images/appanest/logo$legalentityfiledata.PNG",60,30,80,20,"PNG");
+        $this->Image("../../../../resources/images/appanest/logo$legalentityfiledata.png",60,30,80,20,"PNG");
 
         $periodof = new \DateTime($this->post->dateof);
         $periodto = new \DateTime($this->post->dateto);

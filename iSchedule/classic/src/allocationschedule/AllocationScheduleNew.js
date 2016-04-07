@@ -61,7 +61,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
                         anchor: '',
                         width: 150,
                         useMondaFont: true,
-                        useReadColor: true,
+                        useReadColor: false,
                         fieldStyle: {
                             textAlign: 'center',
                             color: 'blue;',
@@ -78,7 +78,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
                         defaults: {
                             allowBlank: false,
                             useMondaFont: true,
-                            useReadColor: true,
+                            //useReadColor: true,
                             fieldStyle: {
                                 color: 'blue;',
                                 fontSize: '16px;'
@@ -88,6 +88,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
                             {
                                 flex: 1,
                                 pageSize: 0,
+                                useReadColor: false,
                                 hiddenNameId: 'contractorunitid',
                                 name:  'contractorunit',
                                 fieldLabel: 'Unidade',
@@ -98,6 +99,7 @@ Ext.define( 'iSchedule.view.allocationschedule.AllocationScheduleNew', {
                                 width: 250,
                                 xtype: 'comboenum',
                                 fieldLabel: 'SubUnidade',
+                                useReadColor: false,
                                 name: 'subunitdescription',
                                 margin: '0 5 0 5'
                             }, {

@@ -177,7 +177,7 @@ class DirectorShip extends Report {
             $this->setDaysShift($y,$m,$d,$g);
 
             $legalentityfiledata = $item['legalentityfiledata'];
-            $this->Image("../../../../resources/images/appanest/logo$legalentityfiledata.PNG",5,5,30,"PNG");
+            $this->Image("../../../../resources/images/appanest/logo$legalentityfiledata.png",5,5,30,"PNG");
 
             if(count($data) > $q) {
                 $this->AddPage();
