@@ -7,6 +7,7 @@ Ext.define( 'iContract.view.person.PersonBank', {
     requires: [
         'Ext.grid.*',
         'Ext.grid.column.*',
+        'Smart.plugins.InsertRecordGrid',
         'iContract.view.person.PersonBankEdit'
     ],
 
@@ -18,10 +19,13 @@ Ext.define( 'iContract.view.person.PersonBank', {
 
     hideHeaders: false,
     multiSelect: false,
-    recordsRenderer: true,
 
     listeners: {
         insertrecord: 'insertBankRecord'
+    },
+
+    plugins: {
+        ptype: 'insertrecordgrid'
     },
 
     initComponent: function () {

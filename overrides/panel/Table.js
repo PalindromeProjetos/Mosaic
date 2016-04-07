@@ -5,30 +5,25 @@ Ext.define( 'Ext.overrides.panel.Table', {
     rowLines: false,
     hideHeaders: true,
     recordsRenderer: false,
-    columnsRenderer: false,
 
     initComponent: function () {
-        var me = this;
+        var me = this,
+            id = Ext.id();
+
+        me.insertRecordId = id;
 
         me.viewConfig = {
             deferEmptyText: false,
             loadMask: { msg: 'Carregando...!' },
-            emptyText:  [
+            emptyText: [
                 '<div style="text-align: center;">Nenhum dado disponível...</div>',
-                (me.recordsRenderer ? '<div style="text-align: center;"><i style="color: red; cursor: pointer;" onclick="Ext.panel.Table._insertRecord()">Inserir Registro</i></div>' : '')
+                Ext.String.format('<div style="text-align: center;"><h2><i id="{0}"></i></h2></div>',id)
             ]
         };
 
         me.callParent();
 
-        Ext.panel.Table._insertRecord = function () {
-            me.fireEvent('insertrecord', me, me.getStore(), {});
-        };
-
-        me.on({
-            beforerender: { fn: 'fnBeforeRender', scope: me }
-        });
-
+        me.onBefore( 'beforerender', me.fnBeforeRender, me);
     },
 
     fnBeforeRender: function (view, eOpts) {

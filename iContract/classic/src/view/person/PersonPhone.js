@@ -7,6 +7,7 @@ Ext.define( 'iContract.view.person.PersonPhone', {
     requires: [
         'Ext.grid.*',
         'Ext.grid.column.*',
+        'Smart.plugins.InsertRecordGrid',
         'iContract.view.person.PersonPhoneEdit'
     ],
 
@@ -18,10 +19,13 @@ Ext.define( 'iContract.view.person.PersonPhone', {
 
     hideHeaders: false,
     multiSelect: false,
-    recordsRenderer: true,
 
     listeners: {
         insertrecord: 'insertPhoneRecord'
+    },
+
+    plugins: {
+        ptype: 'insertrecordgrid'
     },
 
     initComponent: function () {

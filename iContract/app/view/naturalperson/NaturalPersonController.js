@@ -230,11 +230,9 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
     insertView: function () {
         var me = this,
             view = me.getView();
-            //model = Ext.create('iContract.model.naturalperson.NaturalPerson');
 
         me.callParent();
 
-        //view.down('form').loadRecord(model);
         view.down('tabpanel').setActiveTab(0);
 
         view.down('personbank').setDisabled(true);

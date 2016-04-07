@@ -146,6 +146,7 @@
     <file url="file://$PROJECT_DIR$/library/form/field/SmartDateField.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/form/field/SmartTimeField.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/plugins/FormEnter.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/library/plugins/InsertRecordGrid.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/plugins/SmartRegion.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/plugins/TreeFilter.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/library/ux/contractor/ContractorUnitSearch.js" charset="UTF-8" />
