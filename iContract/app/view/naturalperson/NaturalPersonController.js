@@ -107,7 +107,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
 
     selectContractorUnit: function(combo, record, eOpts) {
         var me = this,
-            sm = me.getView().down('gridpanel[name=distribution]').getSelectionModel(),
+            sm = me.getView().down('naturalpersondistribution').getSelectionModel(),
             rc = sm.getSelection()[0];
 
         rc.set(combo.updateField,record.get('id'));
@@ -115,7 +115,7 @@ Ext.define( 'iContract.view.naturalperson.NaturalPersonController', {
 
     changeContractorUnit: function ( field, newValue, oldValue, eOpts ) {
         var me = this,
-            sm = me.getView().down('gridpanel[name=distribution]').getSelectionModel(),
+            sm = me.getView().down('naturalpersondistribution').getSelectionModel(),
             rc = sm.getSelection()[0];
 
         if(newValue == null) {
