@@ -205,7 +205,7 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchemaController', {
             var store = Ext.getStore('contractorunitschema'),
                 model = Ext.create('iSchedule.model.allocationschema.ContractorUnitSchema');
 
-            values.id = null;
+            values.id = '';
 
             model.set(values);
             store.add(model);

@@ -111,6 +111,7 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchema', {
                                                         flex: 3,
                                                         allowBlank: false,
                                                         hideTrigger: true,
+                                                        margin: '0 5 0 0',
                                                         name: 'contractorunit',
                                                         fieldLabel: 'Unidade Contratante',
                                                         xtype: 'contractorunitschemasearch',
@@ -118,11 +119,10 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchema', {
                                                             select: 'onSelectSchedulingSchema'
                                                         }
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 2,
                                                         allowBlank: false,
                                                         useReadColor: true,
+                                                        margin: '0 0 0 5',
                                                         fieldLabel: 'SubUnidade',
                                                         xtype: 'textfield',
                                                         name: 'subunitdescription'
@@ -238,46 +238,42 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchema', {
                                                     {
                                                         flex: 1,
                                                         xtype: 'comboenum',
+                                                        margin: '0 5 0 0',
                                                         fieldLabel: 'Tipo de Atribuição',
                                                         name: 'allocationtypedescription'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         width: 80,
+                                                        margin: '0 5 0 5',
                                                         fieldLabel: 'Turno',
                                                         xtype: 'comboenum',
                                                         name: 'shiftdescription'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
+                                                        margin: '0 5 0 5',
                                                         fieldLabel: 'Dia',
                                                         xtype: 'comboenum',
                                                         name: 'weekdaydescription'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         width: 80,
                                                         minValue: 1,
                                                         maxValue: 10,
+                                                        margin: '0 5 0 5',
                                                         fieldLabel: 'Posicao',
                                                         name: 'position',
                                                         xtype: 'numberfield'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
                                                         pageSize: 0,
+                                                        margin: '0 10 0 5',
                                                         name: 'naturalpersonid',
                                                         fieldLabel: 'Plantonista',
                                                         xtype: 'naturalpersonsearch',
                                                         displayField: 'shortname'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         margin: '10 0 0 0',
                                                         scale: 'large',
-                                                        width: 110,
+                                                        width: 120,
+                                                        height: 52,
                                                         xtype: 'button',
                                                         glyph: 0xec48,
                                                         text: 'Inserir',
@@ -403,12 +399,12 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchema', {
                                                 items: [
                                                     {
                                                         width: 80,
+                                                        margin: '0 5 0 0',
                                                         fieldLabel: 'Turno',
                                                         xtype: 'comboenum',
                                                         name: 'shiftdescription'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
+                                                        margin: '0 5 0 0',
                                                         flex: 1,
                                                         pageSize: 0,
                                                         multiSelect: true,
@@ -416,31 +412,26 @@ Ext.define( 'iSchedule.view.allocationschema.ContractorUnitSchema', {
                                                         xtype: 'comboenum',
                                                         name: 'weekdaydescription'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
+                                                        margin: '0 5 0 0',
                                                         pageSize: 0,
                                                         name: 'naturalpersonidof',
                                                         fieldLabel: 'Plantonista: <b style="color: #0016b0;">DE</b>',
                                                         xtype: 'naturalpersonsearch'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
                                                         flex: 1,
                                                         pageSize: 0,
+                                                        margin: '0 5 0 0',
                                                         name: 'naturalpersonidto',
                                                         fieldLabel: 'Plantonista: <b style="color: #0016b0;">PARA</b>',
                                                         xtype: 'naturalpersonsearch'
                                                     }, {
-                                                        xtype: 'splitter'
-                                                    }, {
+                                                        margin: '0 5 0 0',
                                                         flex: 1,
                                                         allowBlank: true,
                                                         fieldLabel: 'Observação',
                                                         xtype: 'textfield',
                                                         name: 'observation'
-                                                    }, {
-                                                        xtype: 'splitter'
                                                     }, {
                                                         margin: '10 0 0 0',
                                                         scale: 'large',

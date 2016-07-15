@@ -89,6 +89,7 @@ class schema extends \Smart\Data\Proxy {
             set @naturalpersonid = :naturalpersonid;
             set @position = :position;
             set @dutydate = :dutydate;
+            set @subunit = :subunit;
             set @shift = :shift;
 
             update
@@ -100,6 +101,7 @@ class schema extends \Smart\Data\Proxy {
                     and tp.shift = @shift
                     and tp.schedulingmonthlyid = sm.id
                     -- and tp.allocationschema = @allocationschema
+                    and tp.subunit = @subunit
                     and tp.position = @position
                 )
             set tp.naturalpersonid = @naturalpersonid;
@@ -216,6 +218,7 @@ class schema extends \Smart\Data\Proxy {
                 sm.contractorunitid,
                 smp.naturalpersonid,
                 smp.allocationschema,
+                smp.subunit,
                 dayofweek(sm.dutydate) as dayofweek
             from
                 allocationschema a
@@ -319,15 +322,17 @@ class schema extends \Smart\Data\Proxy {
 
             $this->setSchema000($dayList);
 
+            $this->setSchema001($dayList,$dayofweek);
             if($dayofweek != 1 && $dayofweek != 7) {
-                $this->setSchema001($dayList,$dayofweek);
                 $this->setSchema002($dayList,$dayofweek);
                 $this->setSchema003($dayList,$dayofweek);
-                $this->setSchema013($dayList,$dayofweek);
-                $this->setCaptarAll($dayList,$dayofweek);
             }
 
             $this->setSchema011($dayList,$dayofweek);
+            $this->setSchema013($dayList,$dayofweek);
+
+            $this->setCaptarAll($dayList,$dayofweek);
+
         }
     }
 
@@ -352,6 +357,7 @@ class schema extends \Smart\Data\Proxy {
             $returns[$i]['position'] = $position;
             $returns[$i]['contractorunitid'] = intval($record['contractorunitid']);
             $returns[$i]['naturalpersonid'] = intval($partner[0]['naturalpersonid']);
+           // $returns[$i]['subunit'] = $record['subunit'];
 
             $i++;
             $position++;
@@ -395,6 +401,9 @@ class schema extends \Smart\Data\Proxy {
         }
 
         return self::uniqueArray($tmpDaysOfWeek);
+
+        //return self::uniqueArray( $tmpUnique );
+
     }
 
 
@@ -406,9 +415,12 @@ class schema extends \Smart\Data\Proxy {
      * @return mixed
      */
     private function setShiftUnit (array $unit, $dayofweek) {
+
         $shift = $unit['shift'];
         $naturalpersonid = $unit['naturalpersonid'];
         $contractorunitid = $unit['contractorunitid'];
+
+
         $daysname = $this->daysweek['daysname'][$dayofweek];
 
         $unitSchema = self::searchArray($this->schemaunitday,'contractorunitid',$contractorunitid);
@@ -417,9 +429,16 @@ class schema extends \Smart\Data\Proxy {
 
         $record = self::searchArray($unitSchema,'naturalpersonid',$naturalpersonid);
 
+        print_r('#record#');
+        print_r($record);
+
+        $allocationtype = $record[0]['allocationtype'];
+
         $position = $record[0]['position'];
 
-        $position = (($position+1) > count($unitSchema)) ? 1 : $position+1;
+        $i = intval($allocationtype);
+
+        $position = (($position+1+$i) > count($unitSchema)) ? 1+$i : $position+1+$i;
 
         $record = self::searchArray($unitSchema,'position',$position);
 
@@ -464,10 +483,14 @@ class schema extends \Smart\Data\Proxy {
     private function setSchema001 (array $dayList, $dayofweek) {
 //        $shiftdat = array('012','014');
         $shift001 = self::searchArray($this->schemaweekold,'allocationschema','001');
-        $shift012 = self::searchArray($this->schemaweekold,'allocationschema','012');
+        $shift010 = self::searchArray($this->schemaweekold,'allocationschema','010');
+//        $shift012 = self::searchArray($this->schemaweekold,'allocationschema','012');
         $shift014 = self::searchArray($this->schemaweekold,'allocationschema','014');
 
-        $shiftDay = array_merge($shift001,$shift012,$shift014);
+//        $shiftDay = array_merge($shift001,$shift012,$shift014);
+        $shiftDay = array_merge($shift001,$shift014);
+ //       $shiftDay = array_merge($shift001,$shift010);
+        //$shiftDay = array_merge($shift001);
 
         $lastWeek = self::searchArray($shiftDay,'dayofweek',$dayofweek);
 
@@ -476,16 +499,22 @@ class schema extends \Smart\Data\Proxy {
             $schedulingperiodid = $m['schedulingperiodid'];
             $dayWeek = $this->setTurningV($lastWeek);
 
+//            print_r($dayWeek);
+            print_r('sidney');
+
             foreach($dayWeek as $d) {
+                print_r($d);
                 $shift = $d['shift'];
                 $position = $d['position'];
                 $naturalpersonid = $d['naturalpersonid'];
                 $contractorunitid = $d['contractorunitid'];
                 $allocationschema = $d['allocationschema'];
+                $subunit = '000';
+                //$subunit = $d['subunit'];
 
-                if ($allocationschema == '012') {
-                    $naturalpersonid = $this->setShiftUnit($d,$dayofweek);
-                }
+//                if ($allocationschema == '012') {
+//                    $naturalpersonid = $this->setShiftUnit($d,$dayofweek);
+//                }
 
 //                if (in_array($allocationschema, $shiftdat) == true) {
 //                    $naturalpersonid = $this->setShiftUnit($d,$dayofweek);
@@ -499,6 +528,7 @@ class schema extends \Smart\Data\Proxy {
                 $pdo->bindValue(":dutydate", $dutydate, \PDO::PARAM_STR);
                 $pdo->bindValue(":position", $position, \PDO::PARAM_INT);
                 $pdo->bindValue(":shift", $shift, \PDO::PARAM_STR);
+                $pdo->bindParam(":subunit", $subunit, \PDO::PARAM_STR);
                 $pdo->execute();
             }
 
@@ -521,6 +551,8 @@ class schema extends \Smart\Data\Proxy {
                 $position = intval($d['position']);
                 $naturalpersonid = intval($d['naturalpersonid']);
                 $contractorunitid = intval($d['contractorunitid']);
+                $subunit = '000';
+                //$subunit = $d['subunit'];
 
                 $pdo = $this->prepare($this->sqlUpdate);
                 $pdo->bindValue(":schedulingperiodid", $schedulingperiodid, \PDO::PARAM_INT);
@@ -530,6 +562,7 @@ class schema extends \Smart\Data\Proxy {
                 $pdo->bindValue(":dutydate", $dutydate, \PDO::PARAM_STR);
                 $pdo->bindValue(":shift", 'N', \PDO::PARAM_STR);
                 $pdo->bindValue(":position", $position, \PDO::PARAM_INT);
+                $pdo->bindValue(":subunit", $subunit, \PDO::PARAM_STR);
                 $pdo->execute();
             }
             $week++;
@@ -538,12 +571,20 @@ class schema extends \Smart\Data\Proxy {
 
     private function setSchema003 (array $dayList, $dayofweek) {
         $shiftDay = self::searchArray($this->schemaweekold,'allocationschema','003');
+        $shiftDay = self::searchArray($shiftDay,'subunit','003');
         $lastWeek = self::searchArray($shiftDay,'dayofweek',$dayofweek);
+
+        print_r('#003#');
+        print_r($shiftDay);
 
         foreach($dayList as $m) {
             $dutydate = $m['dutydate'];
             $schedulingperiodid = $m['schedulingperiodid'];
             $dayWeek = $this->setTurningV($lastWeek);
+
+            print_r('#003-1#');
+            print_r($shiftDay);
+
 
             foreach($dayWeek as $d) {
                 $shift =$d['shift'];
@@ -551,6 +592,8 @@ class schema extends \Smart\Data\Proxy {
                 $naturalpersonid = $d['naturalpersonid'];
                 $contractorunitid = $d['contractorunitid'];
                 $allocationschema = $d['allocationschema'];
+                $subunit = '003';
+                //$subunit = $d['subunit'];
 
                 $pdo = $this->prepare($this->sqlUpdate);
                 $pdo->bindValue(":schedulingperiodid", $schedulingperiodid, \PDO::PARAM_INT);
@@ -560,9 +603,10 @@ class schema extends \Smart\Data\Proxy {
                 $pdo->bindValue(":dutydate", $dutydate, \PDO::PARAM_STR);
                 $pdo->bindValue(":shift", $shift, \PDO::PARAM_STR);
                 $pdo->bindValue(":position", $position, \PDO::PARAM_INT);
+                $pdo->bindValue(":subunit", $subunit, \PDO::PARAM_STR);
                 $pdo->execute();
             }
-            $lastWeek = $dayWeek;
+
         }
     }
 
@@ -574,6 +618,11 @@ class schema extends \Smart\Data\Proxy {
         $shift011 = self::searchArray($this->schemaweekold,'allocationschema','011');
 
         $shiftDay = array_merge($shift010,$shift011);
+      //  $shiftDay = array_merge($shift011);
+
+        print_r('#011#');
+        print_r($shiftDay);
+
         $lastWeek = self::searchArray($shiftDay,'dayofweek',$dayofweek);
 
         foreach($dayList as $m) {
@@ -586,6 +635,7 @@ class schema extends \Smart\Data\Proxy {
                 $naturalpersonid = $d['naturalpersonid'];
                 $contractorunitid = $d['contractorunitid'];
                 $allocationschema = $d['allocationschema'];
+                $subunit = $d['subunit'];
 
                 $pdo = $this->prepare($this->sqlUpdate);
                 $pdo->bindValue(":schedulingperiodid", $schedulingperiodid, \PDO::PARAM_INT);
@@ -595,26 +645,45 @@ class schema extends \Smart\Data\Proxy {
                 $pdo->bindValue(":dutydate", $dutydate, \PDO::PARAM_STR);
                 $pdo->bindValue(":position", $position, \PDO::PARAM_INT);
                 $pdo->bindValue(":shift", $shift, \PDO::PARAM_STR);
+                $pdo->bindValue(":subunit", $subunit, \PDO::PARAM_STR);
                 $pdo->execute();
             }
         }
     }
 
     private function setSchema013 (array $dayList, $dayofweek) {
-        $shiftDay = self::searchArray($this->schemaweekold,'allocationschema','013');
+        $shift012 = self::searchArray($this->schemaweekold,'allocationschema','012');
+        $shift013 = self::searchArray($this->schemaweekold,'allocationschema','013');
+
+        //$shiftDay = self::searchArray($this->schemaweekold,'allocationschema','013');
+
+        $shiftDay = array_merge($shift012,$shift013);
+
         $lastWeek = self::searchArray($shiftDay,'dayofweek',$dayofweek);
+
+        print_r('dayList');
+        print_r($dayList);
 
         foreach($dayList as $m) {
             $dutydate = $m['dutydate'];
             $schedulingperiodid = $m['schedulingperiodid'];
 
+            print_r('m');
+            print_r($m);
+
+            print_r('lastWeek');
+            print_r($lastWeek);
+
             foreach($lastWeek as $d) {
 
+                print_r('#013#');
+                print_r($d);
                 $shift = $d['shift'];
                 $position = $d['position'];
                 $contractorunitid = $d['contractorunitid'];
                 $allocationschema = $d['allocationschema'];
                 $naturalpersonid = $this->setShiftUnit($d,$dayofweek);
+                $subunit = $d['subunit'];
 
                 $pdo = $this->prepare($this->sqlUpdate);
                 $pdo->bindValue(":schedulingperiodid", $schedulingperiodid, \PDO::PARAM_INT);
@@ -624,8 +693,19 @@ class schema extends \Smart\Data\Proxy {
                 $pdo->bindValue(":dutydate", $dutydate, \PDO::PARAM_STR);
                 $pdo->bindValue(":position", $position, \PDO::PARAM_INT);
                 $pdo->bindValue(":shift", $shift, \PDO::PARAM_STR);
+                $pdo->bindValue(":subunit", $subunit, \PDO::PARAM_STR);
                 $pdo->execute();
+
+                $d['naturalpersonid'] = $naturalpersonid;
+
+                $dayWeek = [];
+
+                array_push($dayWeek,$d);
+
             }
+
+            $lastWeek = $dayWeek;
+
         }
     }
 
