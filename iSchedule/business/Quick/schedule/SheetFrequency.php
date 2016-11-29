@@ -190,6 +190,10 @@ class SheetFrequency extends Report {
             $this->SetCoverPage();
             $this->AddPage();
         } else {
+
+            $legalentityfiledata = $this->rows[0]['legalentityfiledata'];
+            $this->Image("../../../../resources/images/appanest/logo$legalentityfiledata.png",10,10,35,"PNG");
+
             $subunittext = $this->post->subunittext;
 
             switch ($this->rows[0]['unit_shortname']) {
