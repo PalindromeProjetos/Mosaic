@@ -341,7 +341,8 @@ class schema extends \Smart\Data\Proxy {
         $weekmax = intval($dayWeek['weekmax']);
         $weeknew = intval($dayWeek['weeknew']);
         $lastWeek = self::jsonToArray($dayWeek['schemamap']);
-        $weeks = (($weeknew + $week) > $weekmax) ? 1 : ($weeknew + $week);
+        #$weeks = (($weeknew + $week) > $weekmax) ? 1 : ($weeknew + $week);
+        $weeks = (($weeknew + $week) > $weekmax) ? ( ($weeknew + $week) - $weekmax ) : ($weeknew + $week);
         $weeknew = 'week' . str_pad($weeks,2,"0",STR_PAD_LEFT);
 
         $i = 0;
