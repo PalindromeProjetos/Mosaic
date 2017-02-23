@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'iContract' );
-$image-search-path: 'C:/Palindrome/Mosaic/build/production/iContract/classic/resources';
+$image-search-path: 'C:/Users/samuc/Documents/Palindrome/Mosaic/build/production/iContract/classic/resources';
 $theme-name:  dynamic( 'theme-triton' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
@@ -642,6 +642,7 @@ $include-ext-overrides-app-basecontroller: dynamic(true);;
 $include-ext-overrides-app-domain-component: dynamic(true);;
 $include-ext-overrides-button-button: dynamic(true);;
 $include-ext-overrides-container-container: dynamic(true);;
+$include-ext-overrides-data-connection: dynamic(true);;
 $include-ext-overrides-data-model: dynamic(true);;
 $include-ext-overrides-data-store: dynamic(true);;
 $include-ext-overrides-data-treestore: dynamic(true);;

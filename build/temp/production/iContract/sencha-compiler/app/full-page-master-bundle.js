@@ -1,2 +1,2 @@
 // @tag full-page
-// @require C:\Palindrome\Mosaic\iContract\app.js
+// @require C:\Users\samuc\Documents\Palindrome\Mosaic\iContract\app.js

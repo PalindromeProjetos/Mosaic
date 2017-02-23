@@ -341,7 +341,8 @@ class schema extends \Smart\Data\Proxy {
         $weekmax = intval($dayWeek['weekmax']);
         $weeknew = intval($dayWeek['weeknew']);
         $lastWeek = self::jsonToArray($dayWeek['schemamap']);
-        $weeks = (($weeknew + $week) > $weekmax) ? 1 : ($weeknew + $week);
+        #$weeks = (($weeknew + $week) > $weekmax) ? 1 : ($weeknew + $week);
+        $weeks = (($weeknew + $week) > $weekmax) ? ( ($weeknew + $week) - $weekmax ) : ($weeknew + $week);
         $weeknew = 'week' . str_pad($weeks,2,"0",STR_PAD_LEFT);
 
         $i = 0;
@@ -674,6 +675,8 @@ class schema extends \Smart\Data\Proxy {
             print_r('lastWeek');
             print_r($lastWeek);
 
+            $dayWeek = [];
+
             foreach($lastWeek as $d) {
 
                 print_r('#013#');
@@ -697,8 +700,6 @@ class schema extends \Smart\Data\Proxy {
                 $pdo->execute();
 
                 $d['naturalpersonid'] = $naturalpersonid;
-
-                $dayWeek = [];
 
                 array_push($dayWeek,$d);
 
