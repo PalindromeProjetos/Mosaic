@@ -158,7 +158,8 @@ class schema extends \Smart\Data\Proxy {
 
         parent::__construct( $link );
 
-        ini_set('max_execution_time', 600); // 10 minutos
+        //ini_set('max_execution_time', 600); // 10 minutos
+        ini_set('max_execution_time', 1200); // 20 minutos
 
         $this->setAllocationSchema();
     }
@@ -386,6 +387,12 @@ class schema extends \Smart\Data\Proxy {
             $position = 1;
             $crsDaysOfWeek = array();
             $list = self::searchArray($dayWeek,'contractorunitid',$unit['contractorunitid']);
+            //$list = self::searchArray($tmpUnique,'contractorunitid',$unit['contractorunitid']);
+
+            if ($unit['contractorunitid'] == 43) {
+                print_r('Antes de antes...');
+                print_r($list);
+            }
 
             foreach ($list as $record) {
                 $position = count($list) == $position ? 1 : ($position+1);
@@ -393,12 +400,28 @@ class schema extends \Smart\Data\Proxy {
                 $crsDaysOfWeek[] = $record;
             }
 
+            if ($unit['contractorunitid'] == 43) {
+                print_r('Antes...');
+                print_r($crsDaysOfWeek);
+            }
+
             // Ordenar Unidade pela Posição
             $sortedArray = self::sorterArray($crsDaysOfWeek,'position');
+
+            if ($unit['contractorunitid'] == 43) {
+                print_r('Depois...');
+                print_r($sortedArray);
+            }
 
             foreach($sortedArray as $item) {
                 array_push($tmpDaysOfWeek,$item);
             }
+
+            if ($unit['contractorunitid'] == 43) {
+                print_r('Depois de depois...');
+                print_r($tmpDaysOfWeek);
+            }
+
         }
 
         return self::uniqueArray($tmpDaysOfWeek);
@@ -430,8 +453,8 @@ class schema extends \Smart\Data\Proxy {
 
         $record = self::searchArray($unitSchema,'naturalpersonid',$naturalpersonid);
 
-        print_r('#record#');
-        print_r($record);
+        //print_r('#record#');
+        //print_r($record);
 
         $allocationtype = $record[0]['allocationtype'];
 
@@ -494,6 +517,7 @@ class schema extends \Smart\Data\Proxy {
         //$shiftDay = array_merge($shift001);
 
         $lastWeek = self::searchArray($shiftDay,'dayofweek',$dayofweek);
+        $lastWeek = self::searchArray($lastWeek,'shift','D'); // By Sdy 2017-11-20
 
         foreach($dayList as $m) {
             $dutydate = $m['dutydate'];
@@ -501,10 +525,10 @@ class schema extends \Smart\Data\Proxy {
             $dayWeek = $this->setTurningV($lastWeek);
 
 //            print_r($dayWeek);
-            print_r('sidney');
+            //print_r('sidney');
 
             foreach($dayWeek as $d) {
-                print_r($d);
+                //print_r($d);
                 $shift = $d['shift'];
                 $position = $d['position'];
                 $naturalpersonid = $d['naturalpersonid'];
@@ -575,17 +599,16 @@ class schema extends \Smart\Data\Proxy {
         $shiftDay = self::searchArray($shiftDay,'subunit','003');
         $lastWeek = self::searchArray($shiftDay,'dayofweek',$dayofweek);
 
-        print_r('#003#');
-        print_r($shiftDay);
+        //print_r('#003#');
+        //print_r($shiftDay);
 
         foreach($dayList as $m) {
             $dutydate = $m['dutydate'];
             $schedulingperiodid = $m['schedulingperiodid'];
             $dayWeek = $this->setTurningV($lastWeek);
 
-            print_r('#003-1#');
-            print_r($shiftDay);
-
+            //print_r('#003-1#');
+            //print_r($dayWeek);
 
             foreach($dayWeek as $d) {
                 $shift =$d['shift'];
@@ -607,7 +630,7 @@ class schema extends \Smart\Data\Proxy {
                 $pdo->bindValue(":subunit", $subunit, \PDO::PARAM_STR);
                 $pdo->execute();
             }
-
+            $lastWeek = $dayWeek; // Add by Sdy 2017-11-22
         }
     }
 
@@ -621,8 +644,8 @@ class schema extends \Smart\Data\Proxy {
         $shiftDay = array_merge($shift010,$shift011);
       //  $shiftDay = array_merge($shift011);
 
-        print_r('#011#');
-        print_r($shiftDay);
+        //print_r('#011#');
+        //print_r($shiftDay);
 
         $lastWeek = self::searchArray($shiftDay,'dayofweek',$dayofweek);
 
@@ -662,25 +685,25 @@ class schema extends \Smart\Data\Proxy {
 
         $lastWeek = self::searchArray($shiftDay,'dayofweek',$dayofweek);
 
-        print_r('dayList');
-        print_r($dayList);
+        //print_r('dayList');
+        //print_r($dayList);
 
         foreach($dayList as $m) {
             $dutydate = $m['dutydate'];
             $schedulingperiodid = $m['schedulingperiodid'];
 
-            print_r('m');
-            print_r($m);
+            //print_r('m');
+            //print_r($m);
 
-            print_r('lastWeek');
-            print_r($lastWeek);
+            //print_r('lastWeek');
+            //print_r($lastWeek);
 
             $dayWeek = [];
 
             foreach($lastWeek as $d) {
 
-                print_r('#013#');
-                print_r($d);
+                //print_r('#013#');
+                //print_r($d);
                 $shift = $d['shift'];
                 $position = $d['position'];
                 $contractorunitid = $d['contractorunitid'];
