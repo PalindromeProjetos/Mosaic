@@ -462,7 +462,8 @@ class schema extends \Smart\Data\Proxy {
 
         $i = intval($allocationtype);
 
-        $position = (($position+1+$i) > count($unitSchema)) ? 1+$i : $position+1+$i;
+        #$position = (($position+1+$i) > count($unitSchema)) ? 1+$i : $position+1+$i;
+        $position = (($position+1+$i) > count($unitSchema)) ? (($position+1+$i) - count($unitSchema)) : $position+1+$i;
 
         $record = self::searchArray($unitSchema,'position',$position);
 
